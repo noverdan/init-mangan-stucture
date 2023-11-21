@@ -1,11 +1,12 @@
-import Dashboard from "./seller/components/dashboard"
+
 import { Route, Routes } from "react-router-dom"
+import Sidebar from "./seller/components/sidebar"
 
 function App() {
   return (
     <div className="bg-[#D8DEDF]">
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Sidebar />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </div>
