@@ -1,21 +1,12 @@
-
-import { Route, Routes } from "react-router-dom"
-import Sidebar from "./seller/components/sidebar"
+import User from "./user/User"
+import Seller from "./seller/Seller"
 
 function App() {
   return (
     <div className="bg-[#D8DEDF]">
-      <Routes>
-        <Route path="/dashboard" element={<Sidebar />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <User />
+      <Seller />
     </div>
-  )
-}
-
-function Home() {
-  return (
-    <h1 className="font-bold text-2xl text-red-900 m-10">Welcome to Mangan</h1>
   )
 }
 
