@@ -3,7 +3,7 @@ import LandingPage from "./pages/LandingPage"
 
 function User() {
     return (
-        <div className="bg-[#D8DEDF]">
+        <div>
             <Routes>
                 <Route path="/" element={<LandingPage />} />
             </Routes>
