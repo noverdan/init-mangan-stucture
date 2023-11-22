@@ -3,7 +3,7 @@ import Seller from "./seller/Seller"
 
 function App() {
   return (
-    <div className="bg-[#D8DEDF]">
+    <div>
       <User />
       <Seller />
     </div>

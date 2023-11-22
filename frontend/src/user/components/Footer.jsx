@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 function Footer() {
     return (
         <>
-            <div className='px-20 bg-primary-100'>
+            <footer className='px-20 bg-primary-100'>
                 <div className="flex gap-20  py-14 ">
                     <div className='flex flex-col gap-4 w-1/2'>
                         <img src={LogoManganWhite} alt="Logo Mangan" width={180} />
@@ -69,10 +69,11 @@ function Footer() {
                         </div>
                     </div>
                 </div>
+                <hr className='border border-white border-opacity-50' />
                 <div>
-                    <p className='text-white text-sm pb-5 text-center'>Copyright© 2023 ManGan | All Right Reserved</p>
+                    <p className='text-white text-sm py-5 text-center'>Copyright© 2023 ManGan | All Right Reserved</p>
                 </div>
-            </div>
+            </footer>
 
         </>
     )
