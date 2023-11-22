@@ -37,6 +37,7 @@ function EaseOrdering() {
                     </div>
                 </div>
             </div>
+            <div id='about-us'></div>
         </section>
     )
 }

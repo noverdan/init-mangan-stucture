@@ -9,6 +9,7 @@ import TopCatering from '../components/landing-page/TopCatering';
 import Join from '../components/landing-page/Join';
 
 function LandingPage() {
+
     return (
         <>
             <Navbar />
