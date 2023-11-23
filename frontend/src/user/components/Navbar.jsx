@@ -26,8 +26,8 @@ function Navbar() {
                 </div>
             </nav>
             <div className='flex gap-4 items-center'>
-                <a href="" className='font-semibold text-primary-100 hover:text-opacity-75 active:text-primary-100'>Daftar</a>
-                <LocalButton name="Masuk" />
+                <a href="/register" className='font-semibold text-primary-100 hover:text-opacity-75 active:text-primary-100'>Daftar</a>
+                <button><a className='px-4 py-1 bg-primary-100 rounded text-white font-medium hover:bg-opacity-75 active:bg-primary-100' href="/login">Login</a></button>
             </div>
         </header>
     )
