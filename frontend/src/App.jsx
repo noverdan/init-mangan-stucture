@@ -1,8 +1,12 @@
+import Seller from "./seller/pages/Seller"
+import User from "./user/User"
+
 function App() {
   return (
-    <>
-      <h1 className="font-bold text-2xl text-red-900 m-10">Welcome to Mangan</h1>
-    </>
+    <div>
+      <User />
+      <Seller />
+    </div>
   )
 }
 
