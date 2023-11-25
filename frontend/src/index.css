@@ -7,6 +7,9 @@
 * {
   font-family: "Outfit", sans-serif;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 /* Add this to your CSS file */
 ::-webkit-scrollbar {
