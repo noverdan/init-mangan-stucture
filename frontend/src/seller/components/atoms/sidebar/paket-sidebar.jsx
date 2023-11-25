@@ -11,11 +11,11 @@ function PaketSidebar() {
     return (
         <div>
             <div className='py-1 text-white'>
-                <div id='profile' className='flex justify-between w-full py-4 flex-wrap items-center border-b-[1px] border-white transition-border duration-300'>
+                <div className='flex justify-between w-full py-3 md:gap-0  gap-4 md:flex-wrap  items-center border-b-[1px] border-white transition-border duration-300'>
                     <div className='flex items-center gap-3'>
-                        <Icon icon="line-md:edit-twotone-full" />
+                        <Icon className='text-[13px] md:text-base' icon="line-md:edit-twotone-full" />
                         <div className=''>
-                            <h1 className='font-bold text-base'>Kelola Paket/Produk</h1>
+                            <h1 className='font-bold text-xs md:text-base'>Kelola Paket</h1>
                         </div>
                     </div>
                     <button onClick={toggleDropdown}

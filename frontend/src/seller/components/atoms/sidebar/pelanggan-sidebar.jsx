@@ -10,11 +10,11 @@ function PelangganSidebar() {
     return (
         <div>
             <div className='py-1 text-white'>
-                <div id='' className='flex justify-between w-full py-4 flex-wrap items-center border-b-[1px] border-white transition-border duration-300'>
-                    <div className='flex items-center gap-3'>
-                        <Icon icon="line-md:person-twotone" />
+                <div id='' className='flex justify-between w-full py-3 md:gap-0 md:flex-wrap items-center border-b-[1px] border-white transition-border duration-300'>
+                    <div className='flex items-center gap-1 md:gap-3'>
+                        <Icon icon="line-md:person-twotone" className='text-xs' />
                         <div className=''>
-                            <h1 className='font-bold text-base'>Pelanggan</h1>
+                            <h1 className='font-bold text-xs md:text-base'>Pelanggan</h1>
                         </div>
                     </div>
                     <button onClick={toggleDropdown}
