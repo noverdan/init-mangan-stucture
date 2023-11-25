@@ -8,7 +8,6 @@ import Login from "./pages/Login"
 function User() {
     return (
         <div>
-            <Navbar />
             <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/register" element={<Register />} />

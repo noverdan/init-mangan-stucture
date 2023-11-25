@@ -12,6 +12,7 @@ function LandingPage() {
 
     return (
         <>
+            <Navbar />
             <main className='bg-[url("https://svgshare.com/i/xpr.svg")] w-full bg-repeat-y' style={{ backgroundPositionY: '76%' }}>
                 <Hero />
                 <hr className='mx-72 border border-bg-300 border-opacity-70' />
