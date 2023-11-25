@@ -1,5 +1,5 @@
+import Seller from "./seller/pages/Seller"
 import User from "./user/User"
-import Seller from "./seller/Seller"
 
 function App() {
   return (

@@ -9,7 +9,7 @@ function PaymentSidebar() {
                     <div className='flex items-center gap-3'>
                         <Icon icon="solar:card-2-bold-duotone" />
                         <div className=''>
-                            <h1 className='font-bold text-base '>Pembayaran/Keuangan</h1>
+                            <h1 className='font-bold text-xs md:text-base '>Keuangan</h1>
                         </div>
                     </div>
                 </div>
