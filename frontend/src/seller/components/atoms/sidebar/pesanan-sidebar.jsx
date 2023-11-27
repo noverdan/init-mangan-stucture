@@ -10,34 +10,35 @@ function PesananSidebar() {
     }
 
     return (
-        <div >
-            <div className='py-1 text-white'>
-                <div id='' className='flex justify-between w-full  py-3 md:gap-0 md:flex-wrap  items-center border-b-[1px] border-white transition-border duration-300'>
-                    <div className='flex items-center gap-3'>
-                        <Icon icon="line-md:text-box-multiple-twotone" className='text-xs md:text-base' />
-                        <div className=''>
-                            <h1 className='font-bold text-xs md:text-base'>Pesanan</h1>
-                        </div>
-                    </div>
-                    <button onClick={toggleDropdown}
-                        className={`transition-transform duration-300 transform ${isOpen ? 'rotate-90' : ''}`}>
-                        <Icon
-                            className="items-end"
-                            icon="line-md:chevron-down" rotate={3} hFlip={true}
-                        />
-                    </button>
-                    <div className={`ml-8 w-full transition-all duration-300 overflow-hidden 
-                ${isOpen ? 'opacity-100 py-4 max-h-[100vh] translate-y-2 ' : 'opacity-0 max-h-0 -translate-y-2'}`}>
-                        <p className='pb-2 transition-colors duration-300  hover:font-bold cursor-pointer border-b-[1px] border-white'>
-                            Pesanan Masuk</p>
-                        <p className='pb-2 transition-colors duration-300  hover:font-bold cursor-pointer border-b-[1px] border-white'>
-                            Pesanan Diproses</p>
-                        <p className='pb-2 transition-colors duration-300  hover:font-bold cursor-pointer border-b-[1px] border-white'>
-                            Pesanan Selesai</p>
-                    </div>
+        <div className='flex py-4 text-white flex-wrap  border-b-[1px] border-white transition-border duration-300'>
+            {/* icon ,button dan text */}
+            <div className='flex flex-grow gap-3  items-center justify-between'>
+                {/* icon dan text */}
+                <div className='flex items-center gap-1 md:gap-2'>
+                    <Icon className='text-[9px] md:text-base' icon="line-md:text-box-multiple-twotone" />
+                    <h1 className='font-bold text-[9px] md:text-base'>Pesanan</h1>
                 </div>
-
+                {/* icon dan text */}
+                <button onClick={toggleDropdown}
+                    className={`transition-transform -ml-1 duration-300 items-end transform ${isOpen ? 'rotate-90' : ''}`}>
+                    <Icon
+                        icon="line-md:chevron-down" rotate={3} hFlip={true}
+                    />
+                </button>
             </div>
+            {/* icon ,button dan text */}
+
+            {/* dropdown */}
+            <div className={`ml-3 w-full transition-all duration-300 overflow-hidden 
+                        ${isOpen ? 'opacity-100 py-4 max-h-[100vh] translate-y-1 ' : 'opacity-0 max-h-0 -translate-y-2'}`}>
+                <p className='py-2 text-[10px] md:text-base transition-colors duration-300  hover:font-bold cursor-pointer border-b-[1px] border-white'>
+                    Pesanan Masuk</p>
+                <p className='py-2 text-[10px] md:text-base transition-colors duration-300  hover:font-bold cursor-pointer border-b-[1px] border-white'>
+                    Pesanan Diproses</p>
+                <p className='py-2 text-[10px] md:text-base transition-colors duration-300  hover:font-bold cursor-pointer border-b-[1px] border-white'>
+                    Pesanan Selesai</p>
+            </div>
+            {/* dropdown */}
         </div>
     )
 }
