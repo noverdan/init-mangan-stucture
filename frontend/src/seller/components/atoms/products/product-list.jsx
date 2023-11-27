@@ -18,7 +18,7 @@ function ProductList() {
         }
     }
     return (
-        <motion.div className={`h-full flex pl-9 pt-24 gap-8 min-[500px]:gap-28 duration-200`}
+        <motion.div className={`h-full flex items-center pl-9 pt-24 gap-8 min-[500px]:gap-28 duration-200`}
             initial={{ opacity: 0, y: -500 }}
             animate={{ opacity: 1, y: -10 }}
             transition={{ delay: 0.2, type: 'spring', stiffness: 120 }} >
