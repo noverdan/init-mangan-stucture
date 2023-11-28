@@ -19,12 +19,12 @@ function ProductInput() {
             )}
             <div className='space-y-2'>
                 <h1 className='font-semibold md:text-base text-accent-200'>Nama Paket </h1>
-                <input className='w-36 md:w-[400px] font-bold px-3 py-3 md:py-6 h-7 rounded-lg shadow-[6px_6px_7px_-1px_rgba(0,0,0,0.15)]' />
+                <input className='w-56 md:w-[400px] font-bold px-3 py-3 md:py-6 h-7 rounded-lg shadow-[6px_6px_7px_-1px_rgba(0,0,0,0.15)]' />
             </div>
 
             <div className='space-y-2'>
                 <h1 className='font-semibold text-accent-200'>Variasi Menu</h1>
-                <div className='w-36 md:w-[400px] px-3 py-3 md:py-6 flex flex-col items-center rounded-lg shadow-[6px_6px_7px_-1px_rgba(0,0,0,0.15)] bg-white' >
+                <div className='w-56 md:w-[400px] px-3 py-3 md:py-6 flex flex-col items-center rounded-lg shadow-[6px_6px_7px_-1px_rgba(0,0,0,0.15)] bg-white' >
                     <motion.button
                         whileHover={{ scale: 1.1, textShadow: "0px 0px 8px rgb(255,255,255)", boxShadow: "0px 0px 8px #005461" }}
                         whileTap={{ scale: 0.5 }}
@@ -33,9 +33,10 @@ function ProductInput() {
                         {isFormVisible ? 'batalakan' : 'Tambah Menu'}
                     </motion.button>
                 </div>
-            </div>
 
+            </div>
         </div>
+
 
     )
 }
