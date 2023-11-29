@@ -3,18 +3,15 @@ import { Icon } from '@iconify/react';
 
 function PaymentSidebar() {
     return (
-        <div>
-            <div className='py-1 text-white'>
-                <div id='profile' className='flex justify-between w-full py-4  items-center border-b-[1px] border-white'>
-                    <div className='flex items-center gap-3'>
-                        <Icon icon="solar:card-2-bold-duotone" />
-                        <div className=''>
-                            <h1 className='font-bold text-base '>Pembayaran/Keuangan</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
+        <div className='flex text-white md:gap-2  py-4  border-b-[1px] border-white items-center gap-1 '>
+            <Icon className='text-[9px] md:text-base' icon="solar:card-2-bold-duotone" />
+            <h1 className='font-bold text-[9px] md:text-base'>Keuangan</h1>
+
         </div>
+
+
     )
 }
 
