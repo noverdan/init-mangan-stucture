@@ -7,14 +7,14 @@ import stars3 from '../../assets/stars3.svg'
 import stars4 from '../../assets/stars4.svg'
 import stars5 from '../../assets/stars5.svg'
 
-function Card(props) {
-    let packageImage = props.image
-    let packageTitle = props.title
-    let packagePriceRange = props.priceRange
-    let packageMenuTotal = props.menuTotal
-    let packageRating = props.rating
-    let packageSold = props.sold
-    let packageCity = props.city
+function Card({ image, title, priceRange, menuTotal, rating, sold, city }) {
+    let packageImage = image
+    let packageTitle = title
+    let packagePriceRange = priceRange
+    let packageMenuTotal = menuTotal
+    let packageRating = rating
+    let packageSold = sold
+    let packageCity = city
     let stars
     switch (Math.floor(packageRating)) {
         case 1:
@@ -38,7 +38,7 @@ function Card(props) {
     }
 
     return (
-        <div className='p-2 bg-white rounded border-[1.5px] border-primary-100 w-52 group cursor-pointer shadow-md transition-all duration-300 hover:-translate-y-1 active:translate-y-0'>
+        <div className='p-2 bg-white rounded border-[1.5px] border-primary-100 w-full group cursor-pointer shadow-md transition-all duration-300 hover:-translate-y-1 active:translate-y-0'>
             <div className='rounded overflow-hidden' style={{ backgroundImage: `url(${packageImage})` }}>
                 <div className='rounded aspect-square bg-cover group-hover:bg-scale-150 group-hover:scale-105 transition-all duration-300' style={{ backgroundImage: `url(${packageImage})` }}></div>
             </div>
