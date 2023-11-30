@@ -1,0 +1,819 @@
+{
+  "packages": [
+    {
+      "id": 1,
+      "idPenjual": 1,
+      "namaPaket": "Paket Hajatan Nasi Box Ayam Ayaman Bu Niem",
+      "paketTerjual": 10,
+      "lokasiPaket": "Jakarta",
+      "gambarPaket": "https://cdn.manisdansedap.com/img_thumb_list/16563794312714056.jpg",
+      "kategori": "Box",
+      "deskripsi": "'Paket Hajatan Nasi Box Ayam Bu Niem' adalah pilihan katering yang sempurna untuk merayakan momen spesial Anda dengan cita rasa autentik dan kualitas terbaik. Dirancang oleh Bu Niem, ahli kuliner berpengalaman, paket ini menawarkan nasi box yang lezat dengan olahan ayam berkualitas tinggi, disajikan dengan beragam hidangan pendamping yang menggugah selera. Setiap hidangan dipersiapkan dengan teliti, memastikan pengalaman makan yang memuaskan bagi semua tamu Anda. Dengan kombinasi cita rasa yang khas dan tampilan yang menarik, paket ini memberikan sentuhan istimewa pada setiap acara hajatan Anda"
+    },
+    {
+      "id": 2,
+      "idPenjual": 2,
+      "namaPaket": "Nasi Rempah pak Hartono",
+      "paketTerjual": 9,
+      "lokasiPaket": "Bekasi",
+      "gambarPaket": "https://tinyurl.com/4z9mwx8a",
+      "kategori": "Box",
+      "deskripsi": "Nasi Rempah pak Hartono adalah pilihan katering yang mengundang selera dengan kelezatan rempah-rempah khas Nusantara. Disajikan dengan nasi yang lembut dan wangi, setiap suapan memperkenalkan cita rasa autentik yang diolah dengan penuh dedikasi oleh pak Hartono, ahli katering berpengalaman. Hidangan ini memadukan harmoni rempah-rempah tradisional dengan teknik masak modern, menciptakan pengalaman kuliner yang menggugah selera dan memuaskan setiap tamu"
+    },
+    {
+      "id": 3,
+      "idPenjual": 3,
+      "namaPaket": "Nasi Berkat Kampung pak Eko",
+      "paketTerjual": 6,
+      "lokasiPaket": "Bandung",
+      "gambarPaket": "https://kindaracatering.com/wp-content/uploads/2022/09/Aneka-Nasi-Besek-harga-49k-per-porsi.jpg",
+      "kategori": "Box",
+      "deskripsi": "Nasi Berkat Kampung pak Eko adalah paket katering yang menghadirkan kelezatan cita rasa kampung dengan nasi berkat dan aneka hidangan khas. Dinilai dengan rating 4, paket ini telah terjual sebanyak 16 porsi di wilayah Depok."
+    },
+    {
+      "id": 4,
+      "idPenjual": 4,
+      "namaPaket": "Nasi Tumpeng 1 porsian cocok untuk hajatan",
+      "paketTerjual": 7,
+      "lokasiPaket": "Purwokerto",
+      "gambarPaket": "https://images.tokopedia.net/img/cache/700/VqbcmM/2021/11/26/8aa9c889-a344-415d-90ac-381159e5c68d.jpg",
+      "kategori": "Box",
+      "deskripsi": "Nasi Tumpeng 1 porsian cocok untuk hajatan adalah paket katering dengan rating 4.1. Dengan penjualan sebanyak 15 porsi, paket ini cocok untuk meriahkan acara hajatan di wilayah Tangerang."
+    },
+    {
+      "id": 5,
+      "idPenjual": 5,
+      "namaPaket": "Prasmanan Menu Rumahan - RM Sari Murni",
+      "paketTerjual": 2,
+      "lokasiPaket": "Semarang",
+      "gambarPaket": "https://tinyurl.com/3d6n76hn",
+      "kategori": "Prasmanan",
+      "deskripsi": "Prasmanan Menu Rumahan - RM Sari Murni adalah paket katering dengan rating tertinggi 4.6. Dengan 12 porsi terjual di wilayah Bekasi, paket ini menyajikan menu rumahan dengan cita rasa khas."
+    },
+    {
+      "id": 6,
+      "idPenjual": 6,
+      "namaPaket": "Paket Nasi Liwet Jawa - Katering Joko",
+      "paketTerjual": 11,
+      "lokasiPaket": "Yogyakarta",
+      "gambarPaket": "https://core.eatever.com/storage/product/premium-paket-nasi-liwet-1612122217/original.jpg",
+      "kategori": "Box",
+      "deskripsi": "Paket Nasi Liwet Jawa - Katering Joko menawarkan pengalaman kuliner dengan rating 4. Dengan 11 porsi terjual di Bekasi, nikmati kelezatan nasi liwet khas Jawa dari katering ini."
+    },
+    {
+      "id": 7,
+      "idPenjual": 7,
+      "namaPaket": "Paket Prasmanan menu khas kampung",
+      "paketTerjual": 4,
+      "lokasiPaket": "Surabaya",
+      "gambarPaket": "https://tinyurl.com/4r2xn8hc",
+      "kategori": "Prasmanan",
+      "deskripsi": "Paket Prasmanan menu khas kampung adalah pilihan sempurna untuk acara di Jakarta. Dengan rating maksimal 5 dan 5 porsi terjual, nikmati hidangan khas kampung yang lezat."
+    },
+    {
+      "id": 8,
+      "idPenjual": 8,
+      "namaPaket": "Nasi Box vegetarian menu sayur sayuran",
+      "paketTerjual": 0,
+      "lokasiPaket": "Jakarta",
+      "gambarPaket": "https://tinyurl.com/bdhccx7k",
+      "kategori": "Box",
+      "deskripsi": "Nasi Box vegetarian menu sayur sayuran adalah opsi katering sehat dengan rating 3.9. Terjual sebanyak 6 porsi di Bogor, nikmati kelezatan menu vegetarian yang segar."
+    },
+    {
+      "id": 9,
+      "idPenjual": 9,
+      "namaPaket": "Paket Menu sehat rendah kalori",
+      "paketTerjual": 8,
+      "lokasiPaket": "Yogyakarta",
+      "gambarPaket": "https://tinyurl.com/3yetfj2y",
+      "kategori": "Box",
+      "deskripsi": "Paket Menu sehat rendah kalori adalah solusi katering sehat dengan rating 4.5. Dengan hanya 3 porsi terjual di Tangerang, nikmati hidangan rendah kalori yang lezat dan bergizi."
+    },
+    {
+      "id": 10,
+      "idPenjual": 10,
+      "namaPaket": "Paket Menu makan khas masakan padang",
+      "paketTerjual": 15,
+      "lokasiPaket": "Surabaya",
+      "gambarPaket": "https://tinyurl.com/mr3dvh4m",
+      "kategori": "Prasmanan",
+      "deskripsi": "Paket Menu makan khas masakan padang adalah pilihan katering dengan rating maksimal 5. Dengan 15 porsi terjual di Depok, nikmati kekayaan rasa masakan Padang dalam setiap sajian."
+    }
+  ],
+  "menus": [
+    {
+      "id": 1,
+      "idPaket": 1,
+      "namaMenu": "Menu Ayam Goreng",
+      "hargaMenu": 20000,
+      "isiMenu": ["Nasi", "Ayam Goreng", "Lalapan", "Oseng Tempe", "Sambal"],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?buffet"
+    },
+    {
+      "id": 2,
+      "idPaket": 1,
+      "namaMenu": "Menu Ayam Bakar",
+      "hargaMenu": 25000,
+      "isiMenu": ["Nasi", "Ayam Bakar", "Lalapan", "Oseng Tempe", "Sambal"],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?food"
+    },
+    {
+      "id": 3,
+      "idPaket": 1,
+      "namaMenu": "Menu Gulai Ayam",
+      "hargaMenu": 22000,
+      "isiMenu": ["Nasi", "Ayam Gulai", "Capcay", "Oseng Tempe", "Kerupuk"],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
+    },
+    {
+      "id": 4,
+      "idPaket": 2,
+      "namaMenu": "Menu Rempah Ayam",
+      "hargaMenu": 25000,
+      "isiMenu": [
+        "Nasi Rempah Gurih",
+        "Ayam Kremes",
+        "Kering Tempe",
+        "Sambal",
+        "Kerupuk"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
+    },
+    {
+      "id": 5,
+      "idPaket": 2,
+      "namaMenu": "Menu Rempah Bebek",
+      "hargaMenu": 30000,
+      "isiMenu": [
+        "Nasi Rempah Gurih",
+        "Bebek Goreng",
+        "Kering Tempe",
+        "Sambal",
+        "Kerupuk"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?food"
+    },
+    {
+      "id": 6,
+      "idPaket": 2,
+      "namaMenu": "Menu Rempah Nila",
+      "hargaMenu": 20000,
+      "isiMenu": [
+        "Nasi Rempah Gurih",
+        "Nila Goreng",
+        "Kering Tempe",
+        "Sambal",
+        "Kerupuk"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?buffet"
+    },
+    {
+      "id": 7,
+      "idPaket": 3,
+      "namaMenu": "Berkat Ayam",
+      "hargaMenu": 20000,
+      "isiMenu": [
+        "Nasi",
+        "Ayam Serundeng",
+        "Oseng Buncis",
+        "Tempe Goreng",
+        "Sambal"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
+    },
+    {
+      "id": 8,
+      "idPaket": 3,
+      "namaMenu": "Berkat Nila",
+      "hargaMenu": 18000,
+      "isiMenu": [
+        "Nasi",
+        "Nila Goreng",
+        "Oseng Buncis",
+        "Tempe Goreng",
+        "Sambal"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?buffet"
+    },
+    {
+      "id": 10,
+      "idPaket": 3,
+      "namaMenu": "Berkat Ayam",
+      "hargaMenu": 15000,
+      "isiMenu": [
+        "Nasi",
+        "Telur Balado",
+        "Oseng Buncis",
+        "Tempe Goreng",
+        "Sambal"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?food"
+    },
+    {
+      "id": 11,
+      "idPaket": 4,
+      "namaMenu": "Menu Tumpeng 1",
+      "hargaMenu": 30000,
+      "isiMenu": [
+        "Nasi Kuning",
+        "Ayam Goreng Serundeng",
+        "Telur Puyuh",
+        "Oseng Kangkung"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?food"
+    },
+    {
+      "id": 12,
+      "idPaket": 4,
+      "namaMenu": "Menu Tumpeng 2",
+      "hargaMenu": 38000,
+      "isiMenu": ["Nasi Kuning", "Sate Ayam", "Telur Balado", "Oseng Kangkung"],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
+    },
+    {
+      "id": 13,
+      "idPaket": 4,
+      "namaMenu": "Menu Tumpeng 3",
+      "hargaMenu": 40000,
+      "isiMenu": [
+        "Nasi Kuning",
+        "Gurame Bakar",
+        "Telur dadar",
+        "Oseng Kangkung"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?buffet"
+    },
+    {
+      "id": 14,
+      "idPaket": 5,
+      "namaMenu": "Menu Prasmanan A",
+      "hargaMenu": 30000,
+      "isiMenu": [
+        "Nasi",
+        "Rendang",
+        "Kentang Balado",
+        "Tempe Kering",
+        "Kerupuk"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
+    },
+    {
+      "id": 15,
+      "idPaket": 5,
+      "namaMenu": "Menu Prasmanan B",
+      "hargaMenu": 25000,
+      "isiMenu": [
+        "Nasi",
+        "Ayam Gulai",
+        "Oseng Buncis",
+        "Tempe kering",
+        "Kerupuk"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?food"
+    },
+    {
+      "id": 16,
+      "idPaket": 5,
+      "namaMenu": "Menu Prasmanan C",
+      "hargaMenu": 40000,
+      "isiMenu": [
+        "Nasi",
+        "Nila Balado",
+        "Oseng Kangkung",
+        "Kering Kentang",
+        "Kerupuk"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?buffet"
+    },
+    {
+      "id": 17,
+      "idPaket": 6,
+      "namaMenu": "Liwet Ayam",
+      "hargaMenu": 23000,
+      "isiMenu": [
+        "Nasi Liwet",
+        "Ayam Goreng",
+        "Tempe Kering",
+        "Lalapan",
+        "Sambal"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
+    },
+    {
+      "id": 18,
+      "idPaket": 6,
+      "namaMenu": "Liwet Telur",
+      "hargaMenu": 18000,
+      "isiMenu": [
+        "Nasi Liwet",
+        "Telur Balado",
+        "Kering Kentang",
+        "Oseng Kangkung",
+        "Kerupuk"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?buffet"
+    },
+    {
+      "id": 19,
+      "idPaket": 6,
+      "namaMenu": "Liwet Nila",
+      "hargaMenu": 20000,
+      "isiMenu": [
+        "Nasi Liwet",
+        "Nila Goreng",
+        "Tempe Kering",
+        "Lalapan",
+        "Sambal"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?food"
+    },
+    {
+      "id": 20,
+      "idPaket": 7,
+      "namaMenu": "Pecel Ayam",
+      "hargaMenu": 17000,
+      "isiMenu": ["Ketupat", "Ayam Suwir", "Pecel", "Kerupuk"],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
+    },
+    {
+      "id": 21,
+      "idPaket": 7,
+      "namaMenu": "Ikan Kali",
+      "hargaMenu": 15000,
+      "isiMenu": ["Nasi", "Ikan Kali", "Kentang Balado", "Oseng Kangkung"],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?food"
+    },
+    {
+      "id": 22,
+      "idPaket": 7,
+      "namaMenu": "Ayam Kampung",
+      "hargaMenu": 25000,
+      "isiMenu": [
+        "Nasi",
+        "Ayam Kampung Goreng",
+        "Lalapan",
+        "Sambal",
+        "Kering Tempe"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?buffet"
+    },
+    {
+      "id": 23,
+      "idPaket": 8,
+      "namaMenu": "Vegan 1",
+      "hargaMenu": 20000,
+      "isiMenu": ["Nasi Merah", "Sayur Bayam", "Tumis Wortel", "Tempe Kering"],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
+    },
+    {
+      "id": 24,
+      "idPaket": 8,
+      "namaMenu": "Vegan 2",
+      "hargaMenu": 18000,
+      "isiMenu": ["Nasi", "Sop Sayur", "Kentang", "Tempe Kering"],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?buffet"
+    },
+    {
+      "id": 25,
+      "idPaket": 8,
+      "namaMenu": "Vegan 3",
+      "hargaMenu": 20000,
+      "isiMenu": [
+        "Kentang Rebus",
+        "Kol Rebus",
+        "Daun Singkong",
+        "Bumbu Kacang"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?food"
+    },
+    {
+      "id": 26,
+      "idPaket": 9,
+      "namaMenu": "Menu A",
+      "hargaMenu": 30000,
+      "isiMenu": [
+        "Nasi Merah",
+        "Dada Ayam panggang",
+        "Tumis Buncis",
+        "Kacang",
+        "Semangka"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
+    },
+    {
+      "id": 27,
+      "idPaket": 9,
+      "namaMenu": "Menu B",
+      "hargaMenu": 25000,
+      "isiMenu": [
+        "Nasi Merah",
+        "Dada Ayam Rebus",
+        "Tumis Kangkung",
+        "Kacang",
+        "Semangka"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?food"
+    },
+    {
+      "id": 28,
+      "idPaket": 9,
+      "namaMenu": "Menu C",
+      "hargaMenu": 40000,
+      "isiMenu": [
+        "Nasi Rendah Gula",
+        "Dada Ayam Bakar",
+        "Sayur Lalapan",
+        "Kacang",
+        "Sambal",
+        "Buah Jeruk"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?buffet"
+    },
+    {
+      "id": 29,
+      "idPaket": 10,
+      "namaMenu": "Ayam",
+      "hargaMenu": 20000,
+      "isiMenu": [
+        "Nasi",
+        "Ayam Kremes",
+        "Sayur Nangka",
+        "Daun Singkong",
+        "Aneka Bumbu"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
+    },
+    {
+      "id": 30,
+      "idPaket": 10,
+      "namaMenu": "Rendang",
+      "hargaMenu": 25000,
+      "isiMenu": [
+        "Nasi",
+        "Rendang",
+        "Sayur Nangka",
+        "Daun Singkong",
+        "Aneka Bumbu"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?buffet"
+    },
+    {
+      "id": 9,
+      "idPaket": 10,
+      "namaMenu": "Cumi",
+      "hargaMenu": 20000,
+      "isiMenu": [
+        "Nasi",
+        "Cumi Balado",
+        "Sayur Nangka",
+        "Daun Singkong",
+        "Aneka Bumbu"
+      ],
+      "gambarMenu": "https://source.unsplash.com/random/500x500/?food"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "idPaket": 1,
+      "ulasan": "Paket Hajatan Nasi Box Ayam Bu Niem sungguh luar biasa! Rasanya begitu autentik dan lezat. Ayamnya empuk dengan bumbu yang pas, dan nasi boxnya disajikan dengan cantik. Semua tamu puas dengan hidangan yang disiapkan dengan cermat oleh tim katering ini.",
+      "bintang": 5,
+      "tanggal": "10-11-2023"
+    },
+    {
+      "id": 2,
+      "idPaket": 1,
+      "ulasan": "Kami sangat senang memilih Paket Hajatan Nasi Box Ayam Bu Niem untuk acara spesial kami. Selain porsi yang cukup berlimpah, variasi hidangannya membuat setiap suapan begitu nikmat. Kualitas bahan baku yang digunakan juga terasa, memberikan pengalaman makan yang istimewa",
+      "bintang": 5,
+      "tanggal": "15-11-2023"
+    },
+    {
+      "id": 3,
+      "idPaket": 1,
+      "ulasan": "Katering ini benar-benar memberikan pengalaman hajatan yang tak terlupakan. Nasi box dengan ayam khas Bu Niem begitu menggoda selera dan disajikan dengan sangat rapi. Hidangan pendampingnya juga luar biasa. Layanan profesional dan ramah membuat acara kami semakin istimewa",
+      "bintang": 5,
+      "tanggal": "16-11-2023"
+    },
+    {
+      "id": 4,
+      "idPaket": 1,
+      "ulasan": "Paket Hajatan Nasi Box Ayam Bu Niem memberikan solusi katering yang sempurna untuk acara kami. Rasanya istimewa dan autentik, membuat setiap tamu kami kagum. Portionnya pas, dan penyajianya sangat menarik. Sangat direkomendasikan untuk yang ingin menyajikan hidangan berkualitas tinggi",
+      "bintang": 5,
+      "tanggal": "20-11-2023"
+    },
+    {
+      "id": 5,
+      "idPaket": 1,
+      "ulasan": "Saya tidak bisa berhenti memuji kelezatan Paket Hajatan Nasi Box Ayam Bu Niem. Ayamnya begitu juicy, dan nasi boxnya benar-benar istimewa. Seluruh tim katering memberikan layanan yang profesional, mulai dari persiapan hingga penyajian. Kami sangat senang dengan pilihan katering ini dan pasti akan menggunakannya lagi di masa depan",
+      "bintang": 5,
+      "tanggal": "25-11-2023"
+    },
+    {
+      "id": 6,
+      "idPaket": 2,
+      "ulasan": "Sungguh tak terlupakan! Paket katering Nasi Rempah Pak Hartono benar-benar memukau lidah kami. Rempah-rempahnya begitu terasa, memberikan sentuhan khas Nusantara yang autentik. Nasi lembut dan wanginya sungguh menggugah selera. Katering ini memberikan pengalaman kuliner yang luar biasa untuk setiap acara spesial.",
+      "bintang": 5,
+      "tanggal": "12-11-2023"
+    },
+    {
+      "id": 7,
+      "idPaket": 2,
+      "ulasan": "Nasi Rempah Pak Hartono adalah pilihan terbaik untuk penggemar rempah-rempah. Hidangan ini tidak hanya lezat tapi juga menghadirkan keunikan cita rasa. Paket katering ini sangat disarankan untuk mereka yang ingin memberikan sentuhan khusus pada acara mereka. Layanan dari Pak Hartono juga sangat profesional dan ramah.",
+      "bintang": 4,
+      "tanggal": "14-11-2023"
+    },
+    {
+      "id": 8,
+      "idPaket": 2,
+      "ulasan": "Kami sangat senang memilih Nasi Rempah Pak Hartono untuk acara kami. Hidangan rempah-rempahnya sungguh menggugah selera, dan penyajian nasi yang begitu apik. Setiap hidangan disiapkan dengan teliti, menciptakan harmoni rasa yang luar biasa. Paket katering ini tidak hanya memberikan makanan lezat tapi juga pengalaman kuliner yang istimewa.",
+      "bintang": 5,
+      "tanggal": "16-11-2023"
+    },
+    {
+      "id": 9,
+      "idPaket": 3,
+      "ulasan": "Nasi Berkat Kampung pak Eko tidak sesuai ekspektasi saya. Rasa rempah-rempahnya terlalu kuat dan dominan, sehingga mengalahkan citarasa nasi. Penyajian juga kurang rapi. Saya harap pihak katering dapat meningkatkan kualitasnya.",
+      "bintang": 2,
+      "tanggal": "18-11-2023"
+    },
+    {
+      "id": 10,
+      "idPaket": 3,
+      "ulasan": "Sungguh lezat! Nasi Berkat Kampung pak Eko memberikan pengalaman kuliner yang autentik. Rempah-rempahnya begitu terasa dan nasi lembutnya membuat kami ketagihan. Layak dicoba untuk acara spesial!",
+      "bintang": 4,
+      "tanggal": "20-11-2023"
+    },
+    {
+      "id": 11,
+      "idPaket": 3,
+      "ulasan": "Paket katering Nasi Berkat Kampung pak Eko sungguh menggugah selera. Rasa rempah-rempahnya pas, dan variasi hidangan pendampingnya melengkapi pengalaman makan. Layanan pengantaran juga tepat waktu dan ramah.",
+      "bintang": 5,
+      "tanggal": "22-11-2023"
+    },
+    {
+      "id": 12,
+      "idPaket": 3,
+      "ulasan": "Nasi Berkat Kampung pak Eko benar-benar sesuai dengan namanya! Rempah-rempahnya memberikan kelezatan khas kampung. Penyajian rapi dan porsi yang cukup membuat acara kami semakin istimewa. Sangat direkomendasikan!",
+      "bintang": 5,
+      "tanggal": "24-11-2023"
+    },
+    {
+      "id": 13,
+      "idPaket": 4,
+      "ulasan": "Nasi Tumpeng 1 porsian cocok untuk hajatan memiliki rasa yang kurang memuaskan. Beberapa hidangan terasa hambar, dan nasi tumpengnya agak keras. Saya harap katering dapat memperbaiki kualitasnya untuk pengalaman yang lebih baik.",
+      "bintang": 2,
+      "tanggal": "26-11-2023"
+    },
+    {
+      "id": 14,
+      "idPaket": 4,
+      "ulasan": "Nasi Tumpeng 1 porsian cocok untuk hajatan benar-benar pas untuk acara besar. Rasa makanannya luar biasa, dan tumpengnya disajikan dengan indah. Semua tamu sangat senang dengan pilihan katering ini!",
+      "bintang": 5,
+      "tanggal": "28-11-2023"
+    },
+    {
+      "id": 15,
+      "idPaket": 4,
+      "ulasan": "Paket katering Nasi Tumpeng 1 porsian cocok untuk hajatan sangat memuaskan! Rasa setiap hidangan begitu lezat, dan penyajian tumpengnya sangat menarik. Layanan pengantaran juga tepat waktu dan profesional.",
+      "bintang": 5,
+      "tanggal": "30-11-2023"
+    },
+    {
+      "id": 16,
+      "idPaket": 4,
+      "ulasan": "Nasi Tumpeng 1 porsian cocok untuk hajatan memberikan pengalaman makan yang istimewa. Rasa nasi tumpengnya autentik dan kaya rempah. Hidangan pendampingnya juga sangat enak. Saya pasti akan menggunakan katering ini lagi!",
+      "bintang": 4,
+      "tanggal": "02-12-2023"
+    },
+    {
+      "id": 17,
+      "idPaket": 4,
+      "ulasan": "Kami sangat puas dengan pilihan Nasi Tumpeng 1 porsian cocok untuk hajatan. Semua tamu menyukai rasa dan presentasi tumpengnya. Katering ini memberikan nilai tambah pada acara kami. Terima kasih!",
+      "bintang": 5,
+      "tanggal": "04-12-2023"
+    },
+    {
+      "id": 18,
+      "idPaket": 4,
+      "ulasan": "Sayangnya, Nasi Tumpeng 1 porsian cocok untuk hajatan kali ini tidak sesuai dengan harapan. Beberapa hidangan terlalu asin, dan tumpengnya agak kering. Saya berharap katering dapat meningkatkan kualitasnya di masa mendatang.",
+      "bintang": 2,
+      "tanggal": "06-12-2023"
+    },
+    {
+      "id": 19,
+      "idPaket": 6,
+      "ulasan": "Paket Nasi Liwet Jawa - Katering Joko memberikan pengalaman kuliner yang autentik. Rasa nasi liwetnya begitu lezat dan khas Jawa. Hidangan pendampingnya juga sangat cocok dengan lidah kami. Layanan katering yang memuaskan!",
+      "bintang": 5,
+      "tanggal": "08-12-2023"
+    },
+    {
+      "id": 20,
+      "idPaket": 6,
+      "ulasan": "Nasi Liwet Jawa dari Katering Joko sungguh istimewa! Rempah-rempahnya memberikan sentuhan khas, dan nasi liwetnya pulen. Pilihan katering yang tepat untuk acara dengan nuansa Jawa.",
+      "bintang": 5,
+      "tanggal": "10-12-2023"
+    },
+    {
+      "id": 21,
+      "idPaket": 6,
+      "ulasan": "Katering Joko memberikan Nasi Liwet Jawa yang sangat autentik. Rasanya pas, dan porsinya cukup berlimpah. Layanan pengantaran juga baik, tepat waktu dan ramah.",
+      "bintang": 4,
+      "tanggal": "12-12-2023"
+    },
+    {
+      "id": 22,
+      "idPaket": 6,
+      "ulasan": "Nasi Liwet Jawa dari Katering Joko benar-benar menggugah selera. Rasa rempahnya nikmat, dan hidangan pendampingnya sangat cocok. Satu lagi pilihan katering yang patut dipertimbangkan untuk acara Anda!",
+      "bintang": 5,
+      "tanggal": "14-12-2023"
+    },
+    {
+      "id": 23,
+      "idPaket": 6,
+      "ulasan": "Sayangnya, Nasi Liwet Jawa kali ini tidak sesuai dengan harapan. Rasa nasi terlalu basah dan rempah-rempahnya kurang terasa. Saya berharap katering dapat memperbaiki hal ini untuk pengalaman yang lebih baik di masa mendatang.",
+      "bintang": 2,
+      "tanggal": "16-12-2023"
+    },
+    {
+      "id": 24,
+      "idPaket": 7,
+      "ulasan": "Paket Prasmanan menu khas kampung adalah pilihan tepat! Rasa makanannya begitu autentik, mengingatkan kami pada masakan kampung halaman. Semua tamu sangat menyukai hidangan yang disajikan dengan apik. Terima kasih atas pengalaman kuliner yang luar biasa!",
+      "bintang": 5,
+      "tanggal": "08-12-2023"
+    },
+    {
+      "id": 25,
+      "idPaket": 7,
+      "ulasan": "Meskipun ada beberapa hidangan yang kurang memuaskan, Paket Prasmanan menu khas kampung tetap memberikan pengalaman makan yang baik. Hidangan khas kampungnya memberikan sentuhan nostalgia yang menyenangkan. Layanan pengantaran juga berjalan lancar.",
+      "bintang": 4,
+      "tanggal": "10-12-2023"
+    },
+    {
+      "id": 26,
+      "idPaket": 9,
+      "ulasan": "Paket Menu sehat rendah kalori memberikan pilihan makanan ringan yang lezat. Rasa makanannya sangat enak, dan porsi rendah kalorinya sempurna untuk menu sehat. Layanan pengantaran juga sangat baik.",
+      "bintang": 5,
+      "tanggal": "08-12-2023"
+    },
+    {
+      "id": 27,
+      "idPaket": 9,
+      "ulasan": "Sangat puas dengan pilihan Paket Menu sehat rendah kalori. Rasa hidangannya ringan namun memuaskan, sangat sesuai untuk orang yang peduli dengan pola makan sehat. Pelayanan katering ini patut diacungi jempol.",
+      "bintang": 4,
+      "tanggal": "10-12-2023"
+    },
+    {
+      "id": 28,
+      "idPaket": 9,
+      "ulasan": "Rasanya luar biasa! Paket Menu sehat rendah kalori tidak hanya lezat tapi juga menyajikan pilihan makanan bergizi. Porsi yang disajikan cukup memuaskan. Saya pasti akan memesan lagi untuk acara mendatang.",
+      "bintang": 5,
+      "tanggal": "12-12-2023"
+    },
+    {
+      "id": 29,
+      "idPaket": 9,
+      "ulasan": "Sayangnya, Paket Menu sehat rendah kalori kali ini tidak sesuai harapan. Rasa hidangan kurang bervariasi, dan beberapa hidangan terasa hambar. Saya berharap ada perbaikan pada variasi rasa di masa mendatang.",
+      "bintang": 2,
+      "tanggal": "14-12-2023"
+    },
+    {
+      "id": 30,
+      "idPaket": 10,
+      "ulasan": "Paket Menu makan khas masakan padang sungguh memikat lidah kami. Rasa masakan Padangnya autentik dan kuah rendangnya begitu lezat. Layanan katering ini sangat direkomendasikan!",
+      "bintang": 5,
+      "tanggal": "08-12-2023"
+    },
+    {
+      "id": 31,
+      "idPaket": 10,
+      "ulasan": "Sungguh nikmat! Paket Menu makan khas masakan padang memberikan pengalaman makan Padang yang sejati. Semua hidangan begitu lezat dan bumbunya pas. Layak dicoba untuk penggemar masakan Padang!",
+      "bintang": 5,
+      "tanggal": "10-12-2023"
+    },
+    {
+      "id": 32,
+      "idPaket": 10,
+      "ulasan": "Rasanya sungguh enak! Paket Menu makan khas masakan padang memberikan pilihan hidangan yang beragam dan lezat. Pengiriman tepat waktu dan layanan ramah membuat acara kami semakin sempurna.",
+      "bintang": 4,
+      "tanggal": "12-12-2023"
+    },
+    {
+      "id": 33,
+      "idPaket": 10,
+      "ulasan": "Paket Menu makan khas masakan padang memberikan cita rasa masakan Padang yang autentik. Sayur daun singkongnya segar, dan rendangnya begitu empuk. Kami sangat puas dengan pilihan katering ini.",
+      "bintang": 5,
+      "tanggal": "14-12-2023"
+    },
+    {
+      "id": 34,
+      "idPaket": 10,
+      "ulasan": "Rasa masakan Padangnya tak tertandingi! Paket Menu makan khas masakan padang sangat cocok untuk penggemar pedas. Semua hidangan memiliki keunikan dan rasa yang lezat. Layak dicoba!",
+      "bintang": 4,
+      "tanggal": "16-12-2023"
+    },
+    {
+      "id": 35,
+      "idPaket": 10,
+      "ulasan": "Sayangnya, beberapa hidangan dalam Paket Menu makan khas masakan padang kali ini terlalu pedas untuk selera kami. Namun, rendangnya masih enak dan nasi padangnya lezat.",
+      "bintang": 3,
+      "tanggal": "18-12-2023"
+    },
+    {
+      "id": 36,
+      "idPaket": 10,
+      "ulasan": "Paket Menu makan khas masakan padang memberikan pengalaman masakan Padang yang autentik. Semua hidangan disajikan dengan apik dan cita rasa yang khas. Kami sangat puas dengan pilihan katering ini.",
+      "bintang": 5,
+      "tanggal": "20-12-2023"
+    },
+    {
+      "id": 37,
+      "idPaket": 10,
+      "ulasan": "Kami sangat kecewa dengan Paket Menu makan khas masakan padang. Rasa masakan Padangnya kurang autentik, dan rendangnya terlalu keras. Kami harap kualitasnya bisa ditingkatkan di masa mendatang.",
+      "bintang": 2,
+      "tanggal": "22-12-2023"
+    }
+  ],
+  "sellers": [
+    {
+      "id": 1,
+      "nama": "Katering Bu Niem",
+      "alamat": "Jl Mangga Dua Raya Hotel Dusit Mangga Dua 8, DKI Jakarta 10730",
+      "foto": "https://source.unsplash.com/random/500x500/?food%20stall",
+      "hp": "087556722543",
+      "email": "niemkatering@mail.com"
+    },
+    {
+      "id": 2,
+      "nama": "Katering Pak Hartono",
+      "alamat": "Jatimulya, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510",
+      "foto": "https://source.unsplash.com/random/500x500/?food%20stall",
+      "hp": "087556432324",
+      "email": "hartonokatering@mymail.co.id"
+    },
+    {
+      "id": 3,
+      "nama": "Katering Pak Eko",
+      "alamat": "Jl. Surapati, Muararajeun Lama, pasar No.Depan, Cihaur Geulis, Kec. Cibeunying Kaler, Kota Bandung, Jawa Barat 40122",
+      "foto": "https://source.unsplash.com/random/500x500/?food%20stall",
+      "hp": "089765643245",
+      "email": "ekokurcorp@zmail.id"
+    },
+    {
+      "id": 4,
+      "nama": "Duo Bunga Katering",
+      "alamat": "Jl. Watusari, Watumas, Purwanegara, Kec. Purwokerto Utara, Kabupaten Banyumas, Jawa Tengah 53126",
+      "foto": "https://source.unsplash.com/random/500x500/?food%20stall",
+      "hp": "087656743213",
+      "email": "duobunga@yuhuu.com"
+    },
+    {
+      "id": 5,
+      "nama": "RM Sri Murni",
+      "alamat": "Jl. Simongan Raya No.10, Kalipancur, Kec. Ngaliyan, Kota Semarang, Jawa Tengah 50183",
+      "foto": "https://source.unsplash.com/random/500x500/?food%20stall",
+      "hp": "089756453421",
+      "email": "srimurnimakan@mangan.com"
+    },
+    {
+      "id": 6,
+      "nama": "Joko Katering",
+      "alamat": "Jalan Gowongan Kidul Blok JT3 No.416, Gowongan, Kec. Jetis, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55232",
+      "foto": "https://source.unsplash.com/random/500x500/?food%20stall",
+      "hp": "086724345671",
+      "email": "kateringjoko@mangan.com"
+    },
+    {
+      "id": 7,
+      "nama": "Madang Cak Kresna",
+      "alamat": "Jl. Sidodadi III, Sidodadi, Kec. Simokerto, Surabaya, Jawa Timur 60145",
+      "foto": "https://source.unsplash.com/random/500x500/?food%20stall",
+      "hp": "086724345671",
+      "email": "kresnamadang@mangan.com"
+    },
+    {
+      "id": 8,
+      "nama": "Eka Healthy Food",
+      "alamat": "Jl. Latuharhary No.4B, RT.1/RW.4, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310",
+      "foto": "https://source.unsplash.com/random/500x500/?food%20stall",
+      "hp": "089767543412",
+      "email": "ekafood@mangan.com"
+    },
+    {
+      "id": 9,
+      "nama": "Wong Sehat Katering",
+      "alamat": "Jl. Babaran No.103, Warungboto, Kec. Umbulharjo, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55164",
+      "foto": "https://source.unsplash.com/random/500x500/?food%20stall",
+      "hp": "087655675454",
+      "email": "mangansehat@mangan.com"
+    },
+    {
+      "id": 10,
+      "nama": "Bungo Minang",
+      "alamat": "Jl. Tenggilis Lama IV No.60, RT.07/RW.04, Tenggilis Mejoyo, Kec. Tenggilis Mejoyo, Surabaya, Jawa Timur 60292",
+      "foto": "https://source.unsplash.com/random/500x500/?food%20stall",
+      "hp": "089765431234",
+      "email": "bungominang@mangan.com"
+    }
+  ]
+}
