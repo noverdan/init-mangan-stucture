@@ -4,7 +4,7 @@ import Products from "./products"
 
 function Seller() {
     return (
-        <div className="h-[100vh] bg-bg-300">
+        <div>
             <Routes>
                 <Route path="/dashboard" element={<Sidebar />} />
                 <Route path="/products" element={<Products />} />
