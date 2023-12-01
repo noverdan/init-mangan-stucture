@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Icon } from '@iconify/react';
 import stars0 from '../../assets/stars0.svg'
 import stars1 from '../../assets/stars1.svg'
@@ -6,8 +6,13 @@ import stars2 from '../../assets/stars2.svg'
 import stars3 from '../../assets/stars3.svg'
 import stars4 from '../../assets/stars4.svg'
 import stars5 from '../../assets/stars5.svg'
+import { DataContext } from '../context/ContextProvider';
+import { useNavigate } from 'react-router-dom';
 
-function Card({ image, title, priceRange, menuTotal, rating, sold, city }) {
+function Card({ packageId, image, title, priceRange, menuTotal, rating, sold, city }) {
+    const { packageIdSelected, setPackageIdSelected } = useContext(DataContext)
+    const navigate = useNavigate()
+
     let packageImage = image
     let packageTitle = title
     let packagePriceRange = priceRange
@@ -37,10 +42,16 @@ function Card({ image, title, priceRange, menuTotal, rating, sold, city }) {
             break;
     }
 
+    function cardClick(id) {
+        setPackageIdSelected(id)
+        navigate(`/catering/${id}`)
+        window.scrollTo(0, 0);
+    }
+
     return (
-        <div className='p-2 bg-white rounded border-[1.5px] border-primary-100 w-full group cursor-pointer shadow-md transition-all duration-300 hover:-translate-y-1 active:translate-y-0'>
-            <div className='rounded overflow-hidden' style={{ backgroundImage: `url(${packageImage})` }}>
-                <div className='rounded aspect-square bg-cover group-hover:bg-scale-150 group-hover:scale-105 transition-all duration-300' style={{ backgroundImage: `url(${packageImage})` }}></div>
+        <div onClick={() => cardClick(packageId)} className='p-2 bg-white rounded border-[1.5px] border-primary-100 w-full group cursor-pointer shadow-md transition-all duration-300 hover:-translate-y-1 active:translate-y-0'>
+            <div className='rounded overflow-hidden'>
+                <div className='rounded aspect-square bg-gray-200 bg-cover group-hover:bg-scale-150 group-hover:scale-105 transition-all duration-300' style={{ backgroundImage: `url(${packageImage})` }}></div>
             </div>
             <div className='mt-2'>
                 <p className='h-[34px] line-clamp-2 font-semibold break-keep text-primary-100 leading-none overflow-hidden text-ellipsis whitespace-pre-wrap'>{packageTitle}</p>

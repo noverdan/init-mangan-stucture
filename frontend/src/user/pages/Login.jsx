@@ -1,9 +1,11 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 import Mascot from '../../assets/mascot-sip.png'
+import { useNavigate } from 'react-router-dom';
 function Login() {
+    const navigate = useNavigate()
     function goBack() {
-        window.history.back()
+        navigate(-1)
     }
     return (
         <main className="mx-auto w-[360px] py-5">
@@ -26,7 +28,7 @@ function Login() {
                             <input className="px-0 pl-2 w-full border-none focus:ring-0 placeholder:text-black placeholder:text-opacity-40" id="password" type="password" placeholder="Password" />
                         </div>
                         <a href="" className='font-medium text-sm text-primary-100 hover:text-primary-200 active:text-primary-100'>Lupa Password?</a>
-                        <button className="w-full py-2 rounded-md mt-4 font-medium bg-primary-100 text-white hover:bg-primary-200 active:bg-primary-100" type="submit">Login</button>
+                        <button onClick={() => navigate('/homepage')} className="w-full py-2 rounded-md mt-4 font-medium bg-primary-100 text-white hover:bg-primary-200 active:bg-primary-100" type="submit">Login</button>
                     </form>
                     <div className="flex gap-2 mt-4">
                         <p className="font-medium text-accent-200 text-sm">Belum punya akun?</p>

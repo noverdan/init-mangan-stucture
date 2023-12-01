@@ -59,9 +59,7 @@ export default function Homepage() {
                     <button onClick={terapkanFilter} className="font-semibold text-sm underline text-primary-100">Terapkan</button>
                 </section>
                 <hr className="w-[360px] mx-auto border border-primary-100 border-opacity-30 md:w-[70%]" />
-                <PackagesProvider>
-                    <ListPaket />
-                </PackagesProvider>
+                <ListPaket />
             </main>
             <Footer />
         </SearchProvider>
