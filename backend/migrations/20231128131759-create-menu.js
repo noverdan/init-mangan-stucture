@@ -19,7 +19,14 @@ module.exports = {
         type: Sequelize.STRING
       },
       id_paket: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'pakets'
+          },
+          key: 'id'
+        },
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

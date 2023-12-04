@@ -10,10 +10,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       id_menu: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'menus'
+          },
+          key: 'id'
+        },
+        allowNull: false
       },
       id_user: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'users'
+          },
+          key: 'id'
+        },
+        allowNull: false
       },
       jumlah: {
         type: Sequelize.STRING
@@ -22,7 +36,14 @@ module.exports = {
         type: Sequelize.DATE
       },
       id_pembayaran: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'pembayarans'
+          },
+          key: 'id'
+        },
+        allowNull: false
       },
       alamat: {
         type: Sequelize.STRING

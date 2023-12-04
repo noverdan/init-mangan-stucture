@@ -16,13 +16,27 @@ module.exports = {
         type: Sequelize.DATE
       },
       id_transaksi: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'transaksis'
+          },
+          key: 'id'
+        },
+        allowNull: false
       },
       total_harga: {
         type: Sequelize.STRING
       },
       id_status: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'status_pesanans'
+          },
+          key: 'id'
+        },
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
