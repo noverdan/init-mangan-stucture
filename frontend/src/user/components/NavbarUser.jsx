@@ -5,6 +5,7 @@ import Hamburger from 'hamburger-react'
 import { DataContext } from '../context/ContextProvider';
 import UserMenu from './modal/UserMenu';
 import { SearchContext } from '../context/SearchProvider';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 
 
 function NavbarUser() {
@@ -38,6 +39,9 @@ function NavbarUser() {
         }
     };
 
+    const navInActiveStyle = "font-bold text-primary-100 text-opacity-60 hover:text-opacity-100"
+    const navActiveStyle = "font-extrabold text-primary-100 "
+
     return (
         <>
             <header className='flex justify-center md:px-20 w-full shadow-md h-16 bg-white fixed top-0 z-20'>
@@ -45,36 +49,52 @@ function NavbarUser() {
                 <div className='flex items-center justify-between md:justify-normal w-[360px] md:w-full '>
                     <nav className='flex gap-24 h-full items-center'>
                         <img src={LogoMangan} alt="" className='w-24 lg:w-28' />
-                        <div className='hidden xl:flex gap-10 '>
-                            <span>
-                                <a href="/homepage"
-                                    className='font-bold text-primary-100 hover:text-opacity-50 active:text-primary-100'>Homepage</a>
-                            </span>
+                        <div className='hidden xl:flex gap-10'>
+                            <NavLink
+                                to={'/homepage'}
+                                className={({ isActive }) => (isActive ? navActiveStyle : navInActiveStyle)}
+                            >Homepage</NavLink>
+
                             <span>
                                 <div className='group'>
                                     <div className='flex gap-1 items-center cursor-pointer'>
-                                        <p className='font-bold text-primary-100 text-opacity-50 group-hover:text-opacity-100 active:text-primary-100'>Pesanan</p>
-                                        <Icon icon='mingcute:down-line' className='mt-1 text-primary-100 text-opacity-50 group-hover:text-opacity-100 group-hover:rotate-180 transition-all' width={19} />
+                                        <NavLink
+                                            to={'/pesanan'}
+                                            className={({ isActive }) => (isActive ? "pointer-events-none cursor-not-allowed group flex " + navActiveStyle : "pointer-events-none cursor-not-allowed group flex " + navInActiveStyle)}
+                                        >Pesanan <Icon icon='mingcute:down-line' className='mt-1 ml-2 group-hover:rotate-180 transition-all' width={19} />
+                                        </NavLink>
                                     </div>
                                     <div>
                                         <div className='hidden group-hover:block absolute py-2'>
                                             <div className='group-hover:flex group-hover:flex-col w-52 rounded shadow-xl border-primary-100 border border-opacity-30 bg-white'>
-                                                <a href="" className='text-primary-100 font-medium px-6 py-3 hover:font-semibold'>Belum Bayar</a>
+                                                <NavLink
+                                                    to={'/pesanan/belumbayar'}
+                                                    className={({ isActive }) => (isActive ? "text-primary-100 px-6 py-3 font-semibold" : "text-primary-100 text-opacity-75 font-medium px-6 py-3 hover:font-semibold hover:text-opacity-100")}
+                                                >Belum Bayar</NavLink>
                                                 {/* <hr className='border-primary-100 border-opacity-20 mx-2' /> */}
-                                                <a href="" className='text-primary-100 font-medium px-6 py-3 hover:font-semibold'>Diproses</a>
+                                                <NavLink
+                                                    to={'/pesanan/diproses'}
+                                                    className={({ isActive }) => (isActive ? "text-primary-100 px-6 py-3 font-semibold" : "text-primary-100 text-opacity-75 font-medium px-6 py-3 hover:font-semibold hover:text-opacity-100")}
+                                                >Diproses</NavLink>
                                                 {/* <hr className='border-primary-100 border-opacity-20 mx-2' /> */}
-                                                <a href="" className='text-primary-100 font-medium px-6 py-3 hover:font-semibold'>Selesai</a>
+                                                <NavLink
+                                                    to={'/pesanan/selesai'}
+                                                    className={({ isActive }) => (isActive ? "text-primary-100 px-6 py-3 font-semibold" : "text-primary-100 text-opacity-75 font-medium px-6 py-3 hover:font-semibold hover:text-opacity-100")}
+                                                >Selesai</NavLink>
                                                 {/* <hr className='border-primary-100 border-opacity-20 mx-2' /> */}
-                                                <a href="" className='text-primary-100 font-medium px-6 py-3 hover:font-semibold'>Dibatalkan</a>
+                                                <NavLink
+                                                    to={'/pesanan/dibatalkan'}
+                                                    className={({ isActive }) => (isActive ? "text-primary-100 px-6 py-3 font-semibold" : "text-primary-100 text-opacity-75 font-medium px-6 py-3 hover:font-semibold hover:text-opacity-100")}
+                                                >dibatalkan</NavLink>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </span>
-                            <span>
-                                <a href="/homepage"
-                                    className='font-bold text-primary-100 text-opacity-50 hover:text-opacity-100 active:text-primary-100'>Hubungi Kami</a>
-                            </span>
+                            <NavLink
+                                to={'/contact-us'}
+                                className={({ isActive }) => (isActive ? navActiveStyle : navInActiveStyle)}
+                            >Hubungi Kami</NavLink>
                         </div>
                     </nav>
                     <div className='hidden md:flex gap-8  items-center md:ml-auto'>
@@ -134,6 +154,8 @@ export default NavbarUser
 function SearchInput() {
     const { isSearch, setSearch, setSearchParam } = useContext(SearchContext)
     const [inputSearch, setInputSearch] = useState("")
+    const location = useLocation()
+    const navigate = useNavigate()
 
     function openSearch() {
         if (!isSearch) {
@@ -154,6 +176,10 @@ function SearchInput() {
     function goSearch() {
         setSearchParam(inputSearch)
         setSearch(false)
+        const isHomepage = location.pathname === "/homepage"
+        if (!isHomepage) {
+            navigate('/homepage')
+        }
     }
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
@@ -170,7 +196,9 @@ function SearchInput() {
                 <div className="flex bg-white w-full pl-2 items-center rounded-md border border-primary-100 ring-1 ring-primary-100">
                     <input onChange={(event) => { setInputSearch(event.target.value) }} onKeyDown={handleKeyPress} value={inputSearch}
                         className="px-2 w-full h-8 border-none focus:ring-0 placeholder:text-black placeholder:text-opacity-40 " id="search" type="search" placeholder="Cari..." />
-                    <button onClick={goSearch} className='bg-primary-100 px-2 h-8 text-white rounded-r-sm hover:bg-primary-200'><Icon icon="ion:search-sharp" className='text-white' /></button>
+                    <button onClick={goSearch} className='bg-primary-100 px-2 h-8 text-white rounded-r-sm hover:bg-primary-200'>
+                        <Icon icon="ion:search-sharp" className='text-white' />
+                    </button>
                 </div>
             </div>
         </header >

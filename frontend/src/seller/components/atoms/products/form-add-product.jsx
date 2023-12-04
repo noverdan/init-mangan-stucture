@@ -1,21 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import { Icon } from '@iconify/react';
+import AddMenuName from './add-menu-name';
+import InputMenu from './input-menu';
+import InputMenuTambahan from './input-menu-tambahan';
 
-function FromAdd() {
+function FormAdd() {
+    const [img, setImg] = useState(null);
+    const handleUploadImg = (event) => {
+        const file = event.target.files[0]
+
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            setImg(reader.result);
+        }
+        if (file) {
+            reader.readAsDataURL(file)
+        }
+
+    }
+
     return (
-        <motion.div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-full max-w-md p-6  text-accent-200 ' initial={{ y: -100 }} animate={{ y: 0 }} >
-            <form action="" className='flex justify-center md:flex-col flex-wrap gap-4 h-auto  p-2 my-5 rounded-lg bg-white'>
-                <div className=''>
-                    <label htmlFor="">nama Menu</label> <br />
-                    <input type="text" className='p-[0.1px]  rounded border-accent-200' />
+        <motion.div className='absolute md:left-12 top-[5%]  text-accent-200' initial={{ opacity: 0 }} animate={{ opacity: 1 }} >
+            <form action="" className='flex  border-[0.5px] border-accent-200 md:flex-col p-4 overflow-auto items-center flex-wrap gap-4 rounded-lg bg-white'>
+                <button className='md:ml-[650px]'>
+                    <Icon className='text-2xl md:text-[50px] cursor-pointer' icon="line-md:close-small" />
+                </button>
+                <h1 className='-mt-14 mx-20 md:text-xl  font-bold'>Edit Menu</h1>
+
+                <div className='md:flex md:gap-4' >
+                    <div className='flex flex-col items-center md:px-0 px-20 gap-2'>
+                        <div className='w-20 h-20 bg-white min-[500px]:w-40 min-[500px]:h-40 md:w-40 md:h-45 rounded-[10px] border-[0.5px] border-accent-200 overflow-hidden'>
+                            {img && <img src={img} alt="Uploaded" className="w-full h-full object-cover" />}
+                        </div>
+                        <input type="file" id='img' hidden onChange={handleUploadImg} />
+                        <label htmlFor="img"
+                            className="cursor-pointer md:text-base  md:w-full text-center w-14 text-xs bg-accent-200 text-white rounded-xl p-2 hover:bg-accent-100 hover:duration-300">
+                            Upload
+                        </label>
+                    </div>
+
+                    <div className=''>
+                        <AddMenuName />
+                        <h1 className='my-2 font-bold'>Isi Menu</h1>
+                        <div className='flex md:gap-4 md:flex-row flex-col gap-4'>
+                            <InputMenu />
+                            <InputMenuTambahan />
+                        </div>
+                    </div>
+
                 </div>
-                <div>
-                    <label htmlFor="">harga</label> <br />
-                    <input type="text" className='p-[0.1px]  rounded border-accent-200' />
-                </div>
+                <button className='bg-accent-200 md:px-4 md:py-2 rounded-xl   text-white m-auto md:mr-8  p-1'>Simpan</button>
             </form>
-        </motion.div>
+
+        </motion.div >
     )
 }
 
-export default FromAdd
+export default FormAdd

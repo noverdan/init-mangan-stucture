@@ -93,7 +93,7 @@ export default function ListPaket() {
                             }
 
                             return (
-                                <Card key={packageItem.id} image={packageItem.gambarPaket} title={packageItem.namaPaket} rangeHarga={rangeHarga()} menuTotal={totalMenu()} rating={rating()} sold={packageItem.paketTerjual} city={packageItem.lokasiPaket} />
+                                <Card key={packageItem.id} packageId={packageItem.id} image={packageItem.gambarPaket} title={packageItem.namaPaket} priceRange={rangeHarga()} menuTotal={totalMenu()} rating={rating()} sold={packageItem.paketTerjual} city={packageItem.lokasiPaket} />
                             )
                         })
                     }
@@ -108,7 +108,7 @@ export default function ListPaket() {
                     <div className='w-full py-10 '>
                         <Icon icon="tabler:mood-empty" className='text-primary-100 mx-auto' width={125} />
                         <p className='text-primary-100 text-xl font-bold text-center'>Ups..</p>
-                        <p className='text-primary-100 font-semibold text-center'>{status}</p>
+                        <p className='text-primary-100 font-semibold text-center'>{errStatus}</p>
                     </div>
                 </section>
             )
