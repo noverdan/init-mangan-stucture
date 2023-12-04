@@ -10,7 +10,7 @@ module.exports = {
         nohp: "08746864688",
         alamat: "indonesia",
         password: "123",
-        id_level: "1"
+        id_level: "10"
       },
       {
         Nama: "jalil",
@@ -18,7 +18,7 @@ module.exports = {
         nohp: "08746864688",
         alamat: "indonesia",
         password: "123",
-        id_level: "1"
+        id_level: "11"
       },
       {
         Nama: "galang",
@@ -26,13 +26,13 @@ module.exports = {
         nohp: "08746864688",
         alamat: "indonesia",
         password: "123",
-        id_level: "1"
+        id_level: "12"
       }
     ])
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('Users', null, {});
+    return queryInterface.bulkDelete('users', null, {});
 
   }
 };

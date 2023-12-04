@@ -13,21 +13,37 @@ module.exports = {
         type: Sequelize.STRING
       },
       id_kategori: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'kategori_menus'
+          },
+          key: 'id'
+        },
+        allowNull: false
       },
       id_ulasan: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'ulasans'
+          },
+          key: 'id'
+        },
+        allowNull: false
       },
       id_seller: {
         type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       }
     });
   },
