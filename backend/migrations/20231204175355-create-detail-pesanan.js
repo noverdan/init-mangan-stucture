@@ -2,54 +2,41 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('transaksis', {
+    await queryInterface.createTable('detail_pesanans', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_menu: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'menus'
-          },
-          key: 'id'
-        },
-        allowNull: false
-      },
-      id_user: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'users'
-          },
-          key: 'id'
-        },
-        allowNull: false
-      },
-      jumlah: {
-        type: Sequelize.STRING
-      },
-      tanggal_acara: {
+      tanggal_pembayaran: {
         type: Sequelize.DATE
       },
-      id_pembayaran: {
+      tanggal_pemesanan: {
+        type: Sequelize.DATE
+      },
+      id_transaksi: {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: 'pembayarans'
+            tableName: 'transaksis'
           },
           key: 'id'
         },
         allowNull: false
       },
-      alamat: {
+      total_harga: {
         type: Sequelize.STRING
       },
-      keterangan: {
-        type: Sequelize.STRING
+      id_status: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'status_pesanans'
+          },
+          key: 'id'
+        },
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -64,6 +51,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('transaksis');
+    await queryInterface.dropTable('detail_pesanans');
   }
 };

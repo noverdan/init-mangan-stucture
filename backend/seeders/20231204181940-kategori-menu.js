@@ -3,20 +3,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('level_users', [
+    return queryInterface.bulkInsert('kategori_menus', [
       {
-        level: "Admin"
+        kategori: "kitanan"
       },
       {
-        level: "Seller"
+        kategori: "rice box"
       },
       {
-        level: "Customer"
+        kategori: "pernikahan"
       }
     ])
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('level_users', null, {});
+    return queryInterface.bulkDelete('kategori_menus', null, {});
   }
 };
