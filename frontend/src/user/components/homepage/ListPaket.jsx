@@ -6,11 +6,6 @@ import { PackagesContext } from '../../context/PackagesProvider';
 import { Icon } from '@iconify/react';
 import { FilterContext } from '../../context/FilterProvider';
 
-const urlPackages = "http://localhost:3000/packages"
-const urlMenus = "http://localhost:3000/menus"
-const urlSellers = "http://localhost:3000/sellers"
-const urlReviews = "http://localhost:3000/reviews"
-
 export default function ListPaket() {
     const { packages, menus, reviews, errStatus } = useContext(PackagesContext);
     const { filter, setFilter } = useContext(FilterContext)
