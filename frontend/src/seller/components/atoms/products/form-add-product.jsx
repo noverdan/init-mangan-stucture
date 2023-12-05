@@ -1,12 +1,25 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Icon } from '@iconify/react';
 import AddMenuName from './add-menu-name';
 import InputMenu from './input-menu';
 import InputMenuTambahan from './input-menu-tambahan';
+import { ProductContext } from '../../../context/product-provider';
 
 function FormAdd() {
+    const { product, setProduct } = useContext(ProductContext);
+
     const [img, setImg] = useState(null);
+
+    const [isFormOpen, setIsFormOpen] = useState(true);
+
+    const [formData, setFormData] = useState({
+        makananPokok: '',
+        sayuran: '',
+        nameMenu: '',
+        price: '',
+    });
+
     const handleUploadImg = (event) => {
         const file = event.target.files[0]
 
@@ -20,11 +33,63 @@ function FormAdd() {
         }
 
     }
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+
+        const newMenu = {
+            id: new Date(),
+            image: img,
+            nameMenu: formData.nameMenu,
+            price: parseInt(formData.price),
+            makananPokok: formData.makananPokok,
+            sayuran: formData.sayuran,
+            lauk: formData.lauk,
+            tambahan1: formData.tambahan1,
+        };
+
+
+        setProduct((prevProduct) => {
+            const updatedProduct = [...prevProduct];
+            const updatedPaket = updatedProduct.find((paket) => paket.id === 1);
+
+            updatedPaket.menu.push(newMenu);
+
+            return updatedProduct;
+        });
+
+        setFormData({
+            makananPokok: '',
+            sayuran: '',
+            image: img,
+            nameMenu: '',
+            price: '',
+            lauk: '',
+            tambahan1: '',
+        });
+        setImg(null);
+    };
+    const handleCloseForm = () => {
+        // Menutup formulir tanpa menyimpan data
+        setIsFormOpen(false);
+    };
+
+    if (!isFormOpen) {
+        return null; // Return null jika formulir ditutup
+    }
+
 
     return (
         <motion.div className='absolute md:left-12 top-[5%]  text-accent-200' initial={{ opacity: 0 }} animate={{ opacity: 1 }} >
             <form action="" className='flex  border-[0.5px] border-accent-200 md:flex-col p-4 overflow-auto items-center flex-wrap gap-4 rounded-lg bg-white'>
-                <button className='md:ml-[650px]'>
+                <button onClick={handleCloseForm} className='md:ml-[650px]'>
                     <Icon className='text-2xl md:text-[50px] cursor-pointer' icon="line-md:close-small" />
                 </button>
                 <h1 className='-mt-14 mx-20 md:text-xl  font-bold'>Edit Menu</h1>
@@ -36,22 +101,23 @@ function FormAdd() {
                         </div>
                         <input type="file" id='img' hidden onChange={handleUploadImg} />
                         <label htmlFor="img"
+
                             className="cursor-pointer md:text-base  md:w-full text-center w-14 text-xs bg-accent-200 text-white rounded-xl p-2 hover:bg-accent-100 hover:duration-300">
                             Upload
                         </label>
                     </div>
 
                     <div className=''>
-                        <AddMenuName />
+                        <AddMenuName onChange={handleChange} menuData={formData} />
                         <h1 className='my-2 font-bold'>Isi Menu</h1>
                         <div className='flex md:gap-4 md:flex-row flex-col gap-4'>
-                            <InputMenu />
+                            <InputMenu onChange={handleChange} menuData={formData} />
                             <InputMenuTambahan />
                         </div>
                     </div>
 
                 </div>
-                <button className='bg-accent-200 md:px-4 md:py-2 rounded-xl   text-white m-auto md:mr-8  p-1'>Simpan</button>
+                <button onClick={handleSubmit} className='bg-accent-200 md:px-4 md:py-2 rounded-xl   text-white m-auto md:mr-8  p-1'>Simpan</button>
             </form>
 
         </motion.div >

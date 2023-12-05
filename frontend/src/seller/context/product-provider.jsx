@@ -8,9 +8,9 @@ function ProductProvider({ children }) {
             id: 1,
             image: 'https://picsum.photos/200/300',
             menu: [
-                { id: 1, nameMenu: 'menu 1', price: 10000, makananPokok: "pecel Lele", sayuran: "sayur lodeh", lauk: "ayam goreng", tambahan1: "kecap" },
-                { id: 2, nameMenu: 'menu 2', price: 10000, makananPokok: "pecel Lele", sayuran: "sayur lodeh", lauk: "ayam goreng", tambahan1: "kecap" },
-                { id: 3, nameMenu: 'menu 3', price: 10000, makananPokok: "pecel Lele", sayuran: "sayur lodeh", lauk: "ayam goreng", tambahan1: "kecap" },
+                { id: 1, image: 'https://picsum.photos/200/300', nameMenu: 'menu 1', price: 10000, makananPokok: "pecel Lele", sayuran: "sayur lodeh", lauk: "ayam goreng", tambahan1: "kecap" },
+                { id: 2, image: 'https://picsum.photos/200/300', nameMenu: 'menu 2', price: 100, makananPokok: "pecel Lele", sayuran: "sayur lodeh", lauk: "ayam goreng", tambahan1: "kecap" },
+                { id: 3, image: 'https://picsum.photos/200/300', nameMenu: 'menu 3', price: 100, makananPokok: "pecel Lee", sayuran: "sayur lodeh", lauk: "ayam goreng", tambahan1: "kecap" },
             ],
         }
     ]);

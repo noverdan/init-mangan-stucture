@@ -42,12 +42,11 @@ function ProductInput() {
             <div className='space-y-2 '>
                 <h1 className='font-semibold text-accent-200'>Variasi Menu</h1>
 
-                <div className='w-56 border-[0.5px] border-accent-200 px-3 py-3  flex flex-col  rounded-lg shadow-[6px_6px_7px_-1px_rgba(0,0,0,0.15)] bg-white
+                <div className='w-56 border-[0.5px] border-accent-200 px-3 py-3 h-80 overflow-auto flex flex-col  rounded-lg shadow-[6px_6px_7px_-1px_rgba(0,0,0,0.15)] bg-white
                     md:w-[700px] md:py-6' >
-
                     {product.map((products) => (
                         products.menu.map((menu) => (
-                            <MenuList key={menu.id} product={products} />
+                            <MenuList key={menu.id} menu={menu} />
                         ))
                     ))}
                     <motion.button

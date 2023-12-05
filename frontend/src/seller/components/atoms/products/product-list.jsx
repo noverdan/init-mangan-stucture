@@ -2,11 +2,8 @@ import React, { useContext, useState } from 'react'
 import { motion } from 'framer-motion'
 
 import ProductInput from './product-input';
-import { ProductContext } from '../../../context/product-provider';
 
 function ProductList() {
-    const paket = useContext(ProductContext)
-    console.log(paket)
 
     const [image, setImage] = useState(null);
     const handleUpload = (event) => {
@@ -30,7 +27,7 @@ function ProductList() {
             <div className='flex flex-col md:ml-16 items-center'>
 
                 <div className='w-40 h-40 min-[500px]:w-40 min-[500px]:h-40 md:w-56 md:h-56 shadow-xl bg-white rounded-[10px] border-[0.5px] border-accent-200 overflow-hidden'>
-                    {image && <img src={paket.image} alt="Uploaded" className="w-full h-full object-cover" />}
+                    {image && <img src={image} alt="Uploaded" className="w-full h-full object-cover" />}
                 </div>
 
                 <div className='mt-6' >

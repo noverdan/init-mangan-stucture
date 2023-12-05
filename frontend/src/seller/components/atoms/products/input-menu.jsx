@@ -1,34 +1,46 @@
 import React from 'react'
 
-function InputMenu() {
+function InputMenu({ onChange, menuData }) {
     return (
         <div className='md:flex  md:flex-col space-y-3  '>
             <div className=''>
                 <label htmlFor="">Makanan Pokok</label> <br />
                 <input type="text"
                     placeholder='Masukan Makanan Pokok'
-                    className='p-1 text-black  rounded border-accent-200' />
+                    className='p-1 text-black  rounded border-accent-200'
+                    name='makananPokok'
+                    onChange={onChange}
+                    value={menuData.makananPokok} />
             </div>
 
             <div>
                 <label htmlFor="">Sayuran</label> <br />
                 <input type="text"
                     placeholder='Masukan Sayuran'
-                    className='p-1  rounded border-accent-200' />
+                    name='sayuran'
+                    className='p-1  rounded border-accent-200'
+                    onChange={onChange}
+                    value={menuData.sayuran} />
             </div>
             <div>
                 <label htmlFor=""
-                >Nama Menu</label> <br />
-                <input type="text"
+                >Lauk</label> <br />
+                <input type='text'
+                    name='lauk'
                     placeholder='Masukan Nama Menu'
-                    className='p-1 text-black  rounded border-accent-200' />
+                    className='p-1 text-black rounded border-accent-200'
+                    onChange={onChange}
+                    value={menuData.lauk} />
             </div>
 
             <div>
-                <label htmlFor="">Harga</label> <br />
-                <input type="number"
+                <label htmlFor="">tamabahan 1</label> <br />
+                <input type='text'
+                    name='tambahan1'
                     placeholder='Masukan Harga'
-                    className='p-1 text-black   rounded border-accent-200' />
+                    className='p-1 text-black rounded border-accent-200'
+                    onChange={onChange}
+                    value={menuData.tambahan1} />
             </div>
 
         </div>
