@@ -1,28 +1,52 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ProductContext } from '../../../context/product-provider'
 
 function MenuList() {
-    return (
-        <div className='flex gap-2 bg-accent-200 rounded-[10px] text-white p-3  mb-6'>
-            <img src="" alt="" className='w-12 rounded-[10px] bg-white' />
-            <div className='flex flex-col p-4'>
-                <h1 className='font-semibold'>Nama Menu</h1>
-                <table>
-                    <tr>
-                        <th>Header Kolom 1</th>
-                        <th>Header Kolom 2</th>
-                    </tr>
-                    <tr>
-                        <td>Data Baris 1</td>
-                        <td>Data Baris 1</td>
-                    </tr>
-                    <tr>
-                        <td>Data Baris 2</td>
-                        <td>Data Baris 2</td>
-                    </tr>
-                </table>
+    const { product } = useContext(ProductContext)
 
-            </div>
-        </div>
+
+    return (
+        <div >
+            {product.map((products) => (
+                <div key={products.id} className='flex gap-2  bg-accent-200 rounded-[10px] text-white p-3  mb-6'>
+                    <img src={products.image} alt="" className='w-24 h-24 rounded-[10px] bg-white' />
+                    <div className='flex flex-col '>
+                        {products.menu.map((menu) => (
+                            <div><h1 className='font-bold' >{menu.nameMenu}</h1>
+                                <table className="border-collapse  border-white ...">
+                                    <thead>
+                                        <tr className=''>
+                                            <th className="font-normal border-r-[1px] text-left  pr-1 border-white ">
+                                                Makanan pokok</th>
+                                            <th className="font-normal border-r-[1px] text-left  border-white ...">
+                                                Sayur</th>
+                                            <th className="font-normal border-r-[1px] text-left  border-white ">
+                                                Lauk 1</th>
+                                            <th className="font-normal border-r-[1px] text-left  pr-3 border-white ...">
+                                                Tambahan 1</th>
+                                            <th className="font-normal text-left  pr-3 border-white ...">
+                                                harga</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td className="border-t-[1px] border-white ">{menu.nameMenu}</td>
+                                            <td className="border-t-[1px] border-x-[1px] pl-1 pr-8 border-white">{menu.price}</td>
+                                            <td className="border-t-[1px]  border-white pl-1 pr-8 ">{menu.makananPokok}</td>
+                                            <td className="border-t-[1px] border-l-[1px] pl-1 pr-4  border-white">{menu.lauk}</td>
+                                            <td className="border-t-[1px] border-l-[1px] pl-1 pr-4  border-white">{menu.nameMenu}</td>
+                                        </tr>
+                                    </tbody>
+                                </table></div>
+                        ))}
+
+
+                    </div>
+                </div>
+            ))}
+
+        </div >
     )
 }
 
