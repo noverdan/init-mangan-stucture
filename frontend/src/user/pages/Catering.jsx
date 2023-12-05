@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Carousel, Modal } from 'flowbite-react';
 import NavbarUser from '../components/NavbarUser';
 import { SearchProvider } from '../context/SearchProvider';
@@ -13,32 +13,30 @@ import stars5 from '../../assets/stars5.svg'
 import { useEffect } from 'react';
 import axios from 'axios';
 import Rp from '../../utils/Rupiah';
+import { DataContext } from '../context/ContextProvider';
+import { PopUpAlert } from '../components/PopUp';
 const urlPackages = "http://localhost:3000/packages"
 const urlMenus = "http://localhost:3000/menus"
 const urlReviews = "http://localhost:3000/reviews"
 const urlSellers = "http://localhost:3000/sellers"
 
 export default function Catering() {
-    const [selectedMenu, setSelectedMenu] = useState({
-        id: 0,
-        nama: ""
-    })
     const { packageId } = useParams()
     const [packageItem, setPackageItem] = useState({})
     const [menuItems, setMenuItems] = useState([])
     const [reviewItems, setReviewItems] = useState([])
     const [sellerItem, setSellerItem] = useState({})
+
+    const [selectedMenu, setSelectedMenu] = useState({
+        id: null,
+        nama: ""
+    })
     const [hargaMenu, setHargaMenu] = useState("")
     const [isiMenu, setIsiMenu] = useState([])
     const [openModal, setOpenModal] = useState(false);
+    const [openAlert, setOpenAlert] = useState(false)
 
     const navigate = useNavigate()
-
-    // console.log(isiMenu);
-    // console.log(packageItem);
-    // console.log(menuItems);
-    // console.log(reviewItems);
-    // console.log(sellerItem);
 
     useEffect(() => {
         getPackageById()
@@ -68,20 +66,20 @@ export default function Catering() {
                 console.log(errMessage);
             });
     }
-    async function getReviews() {
-        await axios.get(`${urlReviews}?idPaket=${packageId}`)
+    async function getSeller(idSeller) {
+        await axios.get(`${urlSellers}/${idSeller}`)
             .then(function (res) {
-                setReviewItems(res.data)
+                setSellerItem(res.data)
             })
             .catch(function (err) {
                 const errMessage = err.message
                 console.log(errMessage);
             });
     }
-    async function getSeller(idSeller) {
-        await axios.get(`${urlSellers}/${idSeller}`)
+    async function getReviews() {
+        await axios.get(`${urlReviews}?idPaket=${packageId}`)
             .then(function (res) {
-                setSellerItem(res.data)
+                setReviewItems(res.data)
             })
             .catch(function (err) {
                 const errMessage = err.message
@@ -115,6 +113,26 @@ export default function Catering() {
         setSelectedMenu(menu)
         setHargaMenu(Rp(harga))
         setIsiMenu(isiMenu)
+    }
+
+    function isChooseMenu() {
+        if (selectedMenu.id) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    function toCheckout(idPackage, idMenu, idUser) {
+        if (isChooseMenu()) {
+            const data = { idPackage: idPackage, idMenu: idMenu, idUser: idUser }
+            const dataString = JSON.stringify(data)
+            sessionStorage.setItem("stateCheckout", dataString)
+            navigate('/checkout')
+            window.scrollTo(0, 0)
+        } else {
+            setOpenAlert(true)
+        }
     }
 
     function Ulasan() {
@@ -213,10 +231,11 @@ export default function Catering() {
                 <div className='w-full h-16 bg-white shadow-[0px_0px_10px_-5px_#000000] fixed bottom-0 z-[20]'>
                     <div className='w-[360px] h-full mx-auto flex gap-4 items-center'>
                         <button className='w-full bg-white text-primary-100 border border-primary-100 py-1 font-medium rounded hover:bg-gray-100 active:bg-white'>Hubungi Penjual</button>
-                        <button className='w-full bg-primary-100 border-primary-100 border text-white py-1 font-medium rounded hover:bg-opacity-70 active:bg-opacity-100 '>Beli</button>
+                        <button onClick={() => toCheckout(packageId, selectedMenu.id, 2)} className='w-full bg-primary-100 border-primary-100 border text-white py-1 font-medium rounded hover:bg-opacity-70 active:bg-opacity-100 '>Beli</button>
                     </div>
                 </div>
             </footer>
+            <PopUpAlert isOpen={openAlert} message={"Pilih menu terlebih dahulu."} onClose={() => setOpenAlert(false)} onProcess={() => setOpenAlert(false)} />
         </>
     )
 }

@@ -69,9 +69,9 @@ function PopUpQuestion({ isOpen, message, onClose, onProcess, onCancel }) {
                 <Modal.Body>
                     <div className="text-center">
                         <Icon icon="octicon:question-16" className="text-primary-100 mx-auto mb-2" width={80} />
-                        <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                        <div className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
                             {message}
-                        </h3>
+                        </div>
                         <div className="flex justify-center gap-4">
                             <button className='bg-white text-gray-500 font-semibold border-[1.5px] border-gray-300 px-4 py-2 rounded-md hover:bg-opacity-75 active:bg-opacity-100'
                                 onClick={onCancel}>
