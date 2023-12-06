@@ -1,8 +1,8 @@
 
 export default function getPaymentLink(param) {
 
-    const SECRET = import.meta.env.VITE_SECRET_PAYMENT
     const API_URL = import.meta.env.VITE_PAYMENT_API
+    const SECRET = import.meta.env.VITE_SECRET_PAYMENT
     const encodeSecret = btoa(SECRET)
     const paramString = JSON.stringify(param)
     async function postData() {
