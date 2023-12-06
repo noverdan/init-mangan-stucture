@@ -18,7 +18,7 @@ const urlPackages = "http://localhost:3000/packages"
 const urlMenus = "http://localhost:3000/menus"
 const urlUser = "http://localhost:3000/user"
 const urlSellers = "http://localhost:3000/sellers"
-const urlBelumBayar = "http://localhost:3000/belum-bayar"
+const urlPesanan = "http://localhost:3000/pesanan"
 
 export default function Checkout() {
     const stateCheckout = JSON.parse(sessionStorage.getItem("stateCheckout"))
@@ -157,24 +157,26 @@ export default function Checkout() {
         const batasBayarFormated = batasBayar.replace(/(\d{2}\.\d{2})\.\d{2}$/, '$1');
         const post = {
             method: 'POST',
-            url: urlBelumBayar,
+            url: urlPesanan,
             data: {
                 id: orderId,
-                idUser: userData.id,
-                idPaket: packageData.id,
-                idMenu: menuData.id,
-                porsi: porsi,
-                totalHarga: menuData.hargaMenu * porsi,
-                waktuAcara: `${inputUser.tanggal}, ${inputUser.jam}`,
-                catatan: inputUser.catatan,
+                namaPemesan: inputUser.nama,
                 hp: inputUser.hp,
                 alamat: inputUser.alamat,
                 tanggalPesan: date,
+                waktuAcara: `${inputUser.tanggal}, ${inputUser.jam}`,
+                porsi: porsi,
+                totalHarga: menuData.hargaMenu * porsi,
+                catatan: inputUser.catatan,
                 linkPembayaran: paymentLink,
+                statusBayar: null,
                 batasBayar: batasBayarFormated,
-                statusBayar: "belum-dibayar",
                 tanggalBayar: null,
-                statusPesanan: "belum-dibayar"
+                idUser: userData.id,
+                idPaket: packageData.id,
+                idMenu: menuData.id,
+                statusCode: 0,
+                status: "Belum Bayar",
             }
         }
         axios.request(post)
@@ -261,7 +263,7 @@ export default function Checkout() {
             </SearchProvider>
             <main className='pt-16 pb-20 w-[360px]  mx-auto'>
                 <header className='flex items-center my-4'>
-                    <button >
+                    <button onClick={() => navigate(-1)} >
                         <Icon className='text-primary-100' icon="ic:baseline-arrow-back" width={25} />
                     </button>
                     <h1 className='mx-auto text-primary-100 font-bold'>Checkout</h1>

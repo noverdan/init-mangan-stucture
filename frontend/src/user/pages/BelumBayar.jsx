@@ -2,54 +2,90 @@ import React, { useEffect, useState } from 'react';
 import { SearchProvider } from '../context/SearchProvider';
 import NavbarUser from '../components/NavbarUser';
 import { Icon } from '@iconify/react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Loader from '../components/Loader';
 import mascotError from "../../assets/mascot-murka.png";
 import copy from 'clipboard-copy'
 import Rp from '../../utils/Rupiah';
 import { QRCodeSVG } from 'qrcode.react';
+import { PopUpQuestion } from '../components/PopUp';
 
-const urlBelumBayar = "http://localhost:3000/belum-bayar"
+const urlPesanan = "http://localhost:3000/pesanan"
+const urlDiproses = "http://localhost:3000/diproses"
 const urlPackages = "http://localhost:3000/packages"
 const urlMenus = "http://localhost:3000/menus"
 const urlUser = "http://localhost:3000/user"
 const urlSeller = "http://localhost:3000/sellers"
+const urlPaymentStatus = "https://api.sandbox.midtrans.com/v1/payment-links"
 
 export default function BelumBayar() {
+    const SECRET = import.meta.env.VITE_SECRET_PAYMENT
+    const encodeSecret = btoa(SECRET)
     const { idPesanan } = useParams()
     const [dataPesanan, setDataPesanan] = useState({})
+    const [settlements, setSettlements] = useState([{}])
     const [packageData, setPackageData] = useState({})
     const [menuData, setMenuData] = useState({})
     const [isiMenu, setIsiMenu] = useState([])
     const [userData, setUserData] = useState({})
     const [sellerData, setSellerData] = useState({})
     const [statusCode, setStatusCode] = useState({ code: 0, statusText: "" })
-    console.log(dataPesanan);
-    console.log(packageData);
-    console.log(sellerData);
-    console.log(menuData);
-    console.log(isiMenu);
-    console.log(userData);
 
     const [isLoading, setIsLoading] = useState(true)
     const [isHowPayment, setIsHowPayment] = useState(false)
+    const [isPopUpQuestion, setPopUpQuestion] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
-
-        axios.get(`${urlBelumBayar}/${idPesanan}`)
+        const getPaymentStatus = {
+            method: 'GET',
+            url: `${urlPaymentStatus}/${idPesanan}`,
+            headers: {
+                accept: 'application/json',
+                authorization: `Basic ${encodeSecret}`
+            }
+        };
+        axios.request(getPaymentStatus)
             .then((res) => {
-                setStatusCode({ code: res.status, statusText: res.statusText })
-                setDataPesanan(res.data)
-                fetchData(res.data.idPaket, res.data.idMenu, res.data.idUser)
-                setIsLoading(false)
-                // console.log(res);
-            })
-            .catch((err) => {
+                // console.log(res.data);
+                const data = res.data
+                const dataSettlements = data.purchases.filter((purchase) => purchase.payment_status === "SETTLEMENT");
+                if (dataSettlements.length != 0) {
+                    setSettlements(dataSettlements)
+                    setPesananDiproses(dataSettlements[0].createdAt)
+                    fetchDataPesanan(1)
+                    console.log("sudah bayar");
+                } else {
+                    console.log("Belum Bayar");
+                    fetchDataPesanan(0)
+                }
+            }).catch((err) => {
+                console.log(err);
                 setStatusCode({ code: err.response.status, statusText: err.response.statusText })
                 setIsLoading(false)
-                // console.log(err);
             })
+        function fetchDataPesanan(code) {
+            axios.get(`${urlPesanan}/?id=${idPesanan}&statusCode=${code}`)
+                .then((res) => {
+                    setStatusCode({ code: res.status, statusText: res.statusText })
+                    if (res.data.length != 0) {
+                        setDataPesanan(res.data[0])
+                        fetchData(res.data[0].idPaket, res.data[0].idMenu, res.data[0].idUser)
+                        setIsLoading(false)
+                    } else {
+                        setStatusCode({ code: 404, statusText: "Tidak Ditemukan" })
+                        setIsLoading(false)
+                    }
+                })
+                .catch((err) => {
+                    setStatusCode({ code: err.response.status, statusText: err.response.statusText })
+                    console.log(err);
+                    setIsLoading(false)
+                    // console.log(err);
+                })
+        }
+
         function fetchData(idPaket, idMenu, idUser) {
             axios.get(`${urlPackages}/${idPaket}`)
                 .then((resPaket) => {
@@ -86,6 +122,59 @@ export default function BelumBayar() {
     const handleCopyClick = () => {
         copy(dataPesanan.linkPembayaran);
     };
+    function formatDate(inputDate) {
+        // Buat objek Date dari string input
+        const dateObj = new Date(inputDate);
+
+        const options = {
+            timeZone: "Asia/Jakarta",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+        };
+
+        // Mendapatkan string dengan format yang diinginkan
+        const formattedDate = dateObj.toLocaleString("id-ID", options);
+        return formattedDate + " WIB"
+    }
+
+    function setPesananDiproses(date) {
+        const dataUpdate = {
+            statusBayar: "Dibayar",
+            tanggalBayar: formatDate(date),
+            statusCode: 1,
+            status: "Diproses"
+        }
+        axios.patch(`${urlPesanan}/${idPesanan}`, dataUpdate)
+            .then((res) => {
+                console.log(res.status);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+    function batalkanPesanan() {
+        setIsLoading(true)
+        const dataUpdate = {
+            linkPembayaran: null,
+            statusCode: -1,
+            status: "Dibatalkan"
+        }
+        axios.patch(`${urlPesanan}/${idPesanan}`, dataUpdate)
+            .then((res) => {
+                console.log(res);
+                setIsLoading(false)
+            })
+            .catch((err) => {
+                console.log(err);
+                setIsLoading(false)
+            })
+        setPopUpQuestion(false)
+        console.log("Pesanan Dibatalkan");
+        navigate(-1)
+    }
 
     if (statusCode.code !== 200) {
         return (
@@ -104,7 +193,28 @@ export default function BelumBayar() {
         <SearchProvider>
             <NavbarUser />
             <main className='pt-16 pb-5 w-[360px] mx-auto'>
-                <section className='mt-4 text-center w-full'>
+                <section className={settlements[0].payment_status ? "flex flex-col mt-7" : "hidden"}>
+                    <Icon icon="icon-park-outline:success" className='text-green-500 mx-auto' width={100} />
+                    <h1 className='font-bold text-accent-200 text-lg text-center'>Pembayaran Berhasil</h1>
+                    <h3 className='text-accent-200 mt-4'>Detail :</h3>
+                    <div className='grid grid-cols-2 mt-1 gap-1'>
+                        <div>
+                            <h3 className='text-accent-200 font-medium'>Metode Pembayaran</h3>
+                            <h3 className='text-accent-200 font-bold'>{settlements[0].payment_method}</h3>
+                        </div>
+                        <div>
+                            <h3 className='text-accent-200 font-medium'>ID Pembayaran</h3>
+                            <h3 className='text-accent-200 font-bold text-sm'>{settlements[0].order_id}</h3>
+                        </div>
+
+                        <div>
+                            <h3 className='text-accent-200 font-medium'>Waktu Bayar</h3>
+                            <h3 className='text-accent-200 font-bold'>{formatDate(settlements[0].createdAt)}</h3>
+                        </div>
+
+                    </div>
+                </section>
+                <section className={settlements[0].payment_status ? "hidden" : "mt-4 text-center w-full"}>
                     <h1 className='font-bold text-accent-200'>Menunggu Pembayaran</h1>
                     <h3 className='text-accent-200'>Selesaikan pembayaran sebelum :</h3>
                     <h1 className='font-extrabold text-primary-100 text-xl'>{dataPesanan.batasBayar}</h1>
@@ -144,9 +254,10 @@ export default function BelumBayar() {
                         </div>
                     </div>
                     <h1 onClick={() => setIsHowPayment(!isHowPayment)} className='flex items-center w-fit text-start mt-4 underline text-accent-200 cursor-pointer'><Icon icon="ic:round-play-arrow" /> Cara Bayar</h1>
-                    <ul className={isHowPayment ? 'mt-2 text-start list-disc ml-5 text-accent-200' : "hidden"}>
-                        <li>Scan QR Code diatas atau Klik Link pembayaran diatas atau klik tombol bayar diatas. Maka akan diarahkan ke halaman penyedia pembayaran.</li>
-                        <li>Kemudian ikuti intruksi yang ada pada halaman penyedia pembayaran.</li>
+                    <ul className={isHowPayment ? 'flex flex-col gap-1 mt-2 text-start list-disc ml-5 text-accent-200' : "hidden"}>
+                        <li className='leading-5'>Scan QR Code diatas atau Klik Link pembayaran diatas atau klik tombol bayar diatas. Maka akan diarahkan ke halaman penyedia pembayaran.</li>
+                        <li className='leading-5'>Kemudian ikuti intruksi yang ada pada halaman penyedia pembayaran.</li>
+                        <li className='leading-5'>Jika sudah melakukan pembayaran, kembali ke halaman ini maka akan ada pemberitahuan pembayaran berhasil. Jika belum ada coba refresh halaman ini.</li>
                     </ul>
                 </section>
                 <hr className='my-4 border-gray-300' />
@@ -161,15 +272,11 @@ export default function BelumBayar() {
                             <h1 className='font-bold text-primary-100'>Nomor Pesanan</h1>
                             <p className='text-accent-200 font-semibold'>{dataPesanan.id}</p>
                         </div>
-                        <div>
-                            <h1 className='font-bold text-primary-100'>Pembayaran</h1>
-                            <p className='text-accent-200 font-semibold'>{dataPesanan.statusBayar}</p>
-                        </div>
                     </div>
                     <div className='mt-4 flex flex-col gap-2 w-full p-4 border-2 rounded border-primary-100'>
                         <div className='flex gap-2'>
                             <div className='relative w-28 h-28 aspect-square rounded bg-gray-300 bg-cover bg-center border border-gray-200 shadow' style={{ backgroundImage: `url(${menuData.gambarMenu})` }}>
-                                <p className='bg-white shadow w-fit max-w-[100px] px-2 py-1 rounded text-[8px] select-none absolute right-1 top-1 overflow-hidden text-ellipsis whitespace-nowrap'>Menu A</p>
+                                <p className='bg-white shadow w-fit max-w-[100px] px-2 py-1 rounded text-[8px] select-none absolute right-1 top-1 overflow-hidden text-ellipsis whitespace-nowrap'>{menuData.namaMenu}</p>
                             </div>
                             <div>
                                 <h1 className='max-h-10 text-primary-100 leading-5 font-medium overflow-hidden text-ellipsis whitespace-pre-wrap line-clamp-2 cursor-default'>{packageData.namaPaket}</h1>
@@ -192,7 +299,7 @@ export default function BelumBayar() {
                     <div className='grid grid-cols-2 gap-y-2 mt-4 w-full p-4 border-2 rounded border-primary-100'>
                         <div className='col-span-2'>
                             <h1 className='font-bold text-primary-100'>Pemesan</h1>
-                            <p className='text-accent-200 font-semibold'>{userData.nama}</p>
+                            <p className='text-accent-200 font-semibold'>{dataPesanan.namaPemesan}</p>
                         </div>
                         <div>
                             <h1 className='font-bold text-primary-100'>Nomor HP</h1>
@@ -227,7 +334,8 @@ export default function BelumBayar() {
                     </div>
                 </section>
                 <section className='flex items-center gap-2 mt-4'>
-                    <button className='w-1/2 ml-auto bg-gray-200 rounded border border-primary-200 py-2 font-semibold text-primary-100 hover:bg-white transition-all active:bg-gray-200'>Batalkan Pesanan</button>
+                    <button onClick={() => setPopUpQuestion(true)} className={settlements[0].payment_status ? 'hidden' : 'w-1/2 ml-auto bg-gray-200 rounded border border-primary-200 py-2 font-semibold text-primary-100 hover:bg-white transition-all active:bg-gray-200'}>Batalkan Pesanan</button>
+                    <button className={settlements[0].payment_status ? 'w-1/2 ml-auto bg-gray-200 rounded border border-primary-200 py-2 font-semibold text-primary-100 hover:bg-white transition-all active:bg-gray-200' : 'hidden'}>Halaman Pesanan</button>
                 </section>
                 <hr className='my-4 border-gray-300' />
                 <section className='flex flex-col gap-2 mt-4 w-full p-4 border-2 rounded border-primary-100'>
@@ -237,6 +345,7 @@ export default function BelumBayar() {
                 </section>
             </main>
             <Loader show={isLoading} />
+            <PopUpQuestion isOpen={isPopUpQuestion} message={"Apakah anda yakin akan membatalkan pesanan ini?"} onProcess={() => batalkanPesanan()} onClose={() => setPopUpQuestion(false)} onCancel={() => setPopUpQuestion(false)} />
         </SearchProvider>
     )
 }
