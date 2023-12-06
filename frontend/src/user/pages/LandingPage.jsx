@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Hero from '../components/landing-page/Hero';
@@ -7,8 +7,17 @@ import EaseOrdering from '../components/landing-page/EaseOrdering';
 import Area from '../components/landing-page/Area';
 import TopCatering from '../components/landing-page/TopCatering';
 import Join from '../components/landing-page/Join';
+import { DataContext } from '../context/ContextProvider';
+import { useNavigate } from 'react-router-dom';
 
 function LandingPage() {
+    const { isLoggedIn, setIsLoggedIn } = useContext(DataContext)
+    const navigate = useNavigate()
+
+    if (isLoggedIn) {
+        navigate("/homepage", { replace: true })
+        return
+    }
 
     return (
         <>
