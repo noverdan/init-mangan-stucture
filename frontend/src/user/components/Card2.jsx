@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import Rp from "../../utils/Rupiah";
 
-export default function Card2({ onClick, image, menuName, sellerName, menuPrice, totalPrice, orderDate, qty }) {
+export default function Card2({ onClick, image, packageName, menuName, sellerName, menuPrice, totalPrice, orderDate, qty }) {
     return (
         <>
             <div onClick={onClick}
@@ -11,7 +11,7 @@ export default function Card2({ onClick, image, menuName, sellerName, menuPrice,
                         <p className='bg-white shadow w-fit max-w-[100px] px-2 py-1 rounded text-[8px] select-none absolute right-1 top-1 overflow-hidden text-ellipsis whitespace-nowrap'>{menuName}</p>
                     </div>
                     <div>
-                        <h1 className='max-h-10 text-primary-100 leading-5 font-medium overflow-hidden text-ellipsis whitespace-pre-wrap line-clamp-2 cursor-default'>Roti Jala Mak Limah Biadap Khas Malaysia</h1>
+                        <h1 className='max-h-10 text-primary-100 leading-5 font-medium overflow-hidden text-ellipsis whitespace-pre-wrap line-clamp-2 cursor-default'>{packageName}</h1>
                         <div className='flex items-center gap-1 text-sm font-medium text-accent-200 mt-1'>
                             <Icon icon="entypo:shop" width={14} />
                             <h4 id='seller' >{sellerName}</h4>
