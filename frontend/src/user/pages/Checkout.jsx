@@ -22,6 +22,13 @@ const urlPesanan = "http://localhost:3000/pesanan"
 
 export default function Checkout() {
     const stateCheckout = JSON.parse(sessionStorage.getItem("stateCheckout"))
+    if (!stateCheckout) {
+        return (
+            <>
+                <h1>NOT Found</h1>
+            </>
+        )
+    }
     const [porsi, setPorsi] = useState(1)
     registerLocale('id', id)
     const navigate = useNavigate()
@@ -182,6 +189,7 @@ export default function Checkout() {
         axios.request(post)
             .then((res) => {
                 const idPesanan = res.data.id
+                sessionStorage.removeItem("stateCheckout")
                 navigate(`/pesanan/belumbayar/${idPesanan}`, { replace: true })
                 setIsLoading(false)
             })
@@ -254,6 +262,7 @@ export default function Checkout() {
             setInputUser((prev) => ({ ...prev, [prop]: value }))
         }
     }
+
 
 
     return (

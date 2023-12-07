@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import Rp from '../../utils/Rupiah';
 import { DataContext } from '../context/ContextProvider';
-import { PopUpAlert } from '../components/PopUp';
+import { PopUpAlert, PopUpQuestion } from '../components/PopUp';
 const urlPackages = "http://localhost:3000/packages"
 const urlMenus = "http://localhost:3000/menus"
 const urlReviews = "http://localhost:3000/reviews"
@@ -22,10 +22,12 @@ const urlSellers = "http://localhost:3000/sellers"
 
 export default function Catering() {
     const { packageId } = useParams()
+    const { isLoggedIn } = useContext(DataContext)
     const [packageItem, setPackageItem] = useState({})
     const [menuItems, setMenuItems] = useState([])
     const [reviewItems, setReviewItems] = useState([])
     const [sellerItem, setSellerItem] = useState({})
+    const token = JSON.parse(localStorage.getItem("token"))
 
     const [selectedMenu, setSelectedMenu] = useState({
         id: null,
@@ -35,6 +37,7 @@ export default function Catering() {
     const [isiMenu, setIsiMenu] = useState([])
     const [openModal, setOpenModal] = useState(false);
     const [openAlert, setOpenAlert] = useState(false)
+    const [openQuestion, setOpenQuestion] = useState(false)
 
     const navigate = useNavigate()
 
@@ -124,6 +127,10 @@ export default function Catering() {
     }
 
     function toCheckout(idPackage, idMenu, idUser) {
+        if (!isLoggedIn) {
+            setOpenQuestion(true)
+            return
+        }
         if (isChooseMenu()) {
             const data = { idPackage: idPackage, idMenu: idMenu, idUser: idUser }
             const dataString = JSON.stringify(data)
@@ -231,11 +238,12 @@ export default function Catering() {
                 <div className='w-full h-16 bg-white shadow-[0px_0px_10px_-5px_#000000] fixed bottom-0 z-[20]'>
                     <div className='w-[360px] h-full mx-auto flex gap-4 items-center'>
                         <button className='w-full bg-white text-primary-100 border border-primary-100 py-1 font-medium rounded hover:bg-gray-100 active:bg-white'>Hubungi Penjual</button>
-                        <button onClick={() => toCheckout(packageId, selectedMenu.id, 2)} className='w-full bg-primary-100 border-primary-100 border text-white py-1 font-medium rounded hover:bg-opacity-70 active:bg-opacity-100 '>Beli</button>
+                        <button onClick={() => toCheckout(packageId, selectedMenu.id, token.id)} className='w-full bg-primary-100 border-primary-100 border text-white py-1 font-medium rounded hover:bg-opacity-70 active:bg-opacity-100 '>Beli</button>
                     </div>
                 </div>
             </footer>
             <PopUpAlert isOpen={openAlert} message={"Pilih menu terlebih dahulu."} onClose={() => setOpenAlert(false)} onProcess={() => setOpenAlert(false)} />
+            <PopUpQuestion isOpen={openQuestion} message={"Login Terlebih Dahulu."} onProcess={() => navigate("/login")} onCancel={() => setOpenQuestion(false)} onClose={() => setOpenQuestion(false)} />
         </>
     )
 }
