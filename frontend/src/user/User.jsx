@@ -12,6 +12,13 @@ import Catering from "./pages/Catering"
 import { PackagesProvider } from "./context/PackagesProvider"
 import Checkout from "./pages/Checkout"
 import ListBelumBayar from "./pages/ListBelumBayar"
+import ListDiproses from "./pages/ListDiproses"
+import ListDibatalkan from "./pages/ListDibatalkan"
+import ListSelesai from "./pages/ListSelesai"
+import NotFound from "./pages/NotFound"
+import PesananBatal from "./pages/PesananBatal"
+import PesananDiproses from "./pages/PesananDiproses"
+import PesananSelesai from "./pages/PesananSelesai"
 
 function User() {
     return (
@@ -26,8 +33,15 @@ function User() {
                     <Route path="/checkout/" element={<Checkout />} />
                     <Route path="/contact-us" element={<ContactUs />} />
                     <Route path="/pesanan/belumbayar" element={<ListBelumBayar />} />
+                    <Route path="/pesanan/diproses" element={<ListDiproses />} />
+                    <Route path="/pesanan/dibatalkan" element={<ListDibatalkan />} />
+                    <Route path="/pesanan/selesai" element={<ListSelesai />} />
                     <Route path="/pesanan/belumbayar/:idPesanan" element={<BelumBayar />} />
+                    <Route path="/pesanan/diproses/:idPesanan" element={<PesananDiproses />} />
+                    <Route path="/pesanan/selesai/:idPesanan" element={<PesananSelesai />} />
+                    <Route path="/pesanan/dibatalkan/:idPesanan" element={<PesananBatal />} />
                     <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </PackagesProvider>
         </ContextProvider>

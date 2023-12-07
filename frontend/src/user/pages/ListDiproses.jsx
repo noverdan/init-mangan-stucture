@@ -1,13 +1,13 @@
-import axios from "axios";
-import Rp from "../../utils/Rupiah";
-import Card2 from "../components/Card2";
-import NavbarUser from "../components/NavbarUser";
-import { SearchProvider } from "../context/SearchProvider";
-import { Icon } from "@iconify/react";
-import { useEffect, useState } from "react";
-import { Divide } from "hamburger-react";
-import { useNavigate } from "react-router-dom";
-import Loader from "../components/Loader";
+import React, { useContext, useState, useEffect } from 'react';
+import NavbarUser from '../components/NavbarUser';
+import { SearchProvider } from '../context/SearchProvider';
+import { useNavigate } from 'react-router-dom';
+import { Icon } from '@iconify/react';
+import { DataContext } from '../context/ContextProvider';
+import { PopUpQuestion } from '../components/PopUp';
+import Loader from '../components/Loader';
+import axios from 'axios';
+import Card2 from '../components/Card2';
 
 const urlPesanan = import.meta.env.VITE_URL_ORDERS
 const urlPackages = import.meta.env.VITE_URL_PACKAGES
@@ -15,7 +15,8 @@ const urlMenus = import.meta.env.VITE_URL_MENUS
 const urlSeller = import.meta.env.VITE_URL_SELLERS
 const urlUser = import.meta.env.VITE_URL_USER
 
-export default function ListBelumBayar() {
+export default function ListDiproses() {
+    const { isLoggedIn, setIsLoggedIn } = useContext(DataContext)
     const token = JSON.parse(localStorage.getItem("token"))
     const [dataPesanan, setDataPesanan] = useState([])
     const [dataPaket, setDataPaket] = useState([])
@@ -33,10 +34,9 @@ export default function ListBelumBayar() {
         })
     }, [dataPesanan])
 
-
     function fetchPesanan() {
         setLoading(true)
-        axios.get(`${urlPesanan}?idUser=${token.id}&statusCode=0`)
+        axios.get(`${urlPesanan}?idUser=${token.id}&statusCode=1`)
             .then((res) => {
                 setDataPesanan(res.data)
                 setLoading(false)
@@ -69,6 +69,16 @@ export default function ListBelumBayar() {
         }
     }
 
+    if (!isLoggedIn) {
+        return (
+            <>
+                <SearchProvider>
+                    <NavbarUser />
+                </SearchProvider>
+                <PopUpQuestion isOpen={true} message={"Login Terlebih Dahulu."} onCancel={() => navigate(-1, { replace: true })} onClose={() => navigate(-1)} onProcess={() => navigate("/login", { replace: true })} />
+            </>
+        )
+    }
 
     return (
         <>
@@ -80,7 +90,7 @@ export default function ListBelumBayar() {
                     <button onClick={() => navigate(-1)} className="text-primary-100 absolute left-0">
                         <Icon icon="material-symbols:arrow-back" width={27} />
                     </button>
-                    <h1 className="mx-auto text-primary-100 font-bold">Pesanan Belum Bayar</h1>
+                    <h1 className="mx-auto text-primary-100 font-bold">Pesanan Diproses</h1>
                 </section>
                 <hr className="my-4" />
                 <section className={dataPesanan.length ? "hidden" : "flex flex-col"}>
