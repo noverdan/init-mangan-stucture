@@ -4,8 +4,8 @@ import { Icon } from '@iconify/react';
 import { useNavigate } from 'react-router-dom';
 import { PopUpQuestion } from '../PopUp';
 
-function UserMenu() {
-    const { isModalOpen, setModalOpen, isLoggedIn, setIsLoggedIn } = useContext(DataContext)
+function UserMenu({ isOpen }) {
+    const { isLoggedIn, setIsLoggedIn } = useContext(DataContext)
     const [isSubPesanan, setSubPesanan] = useState(false)
     const [isPopUp, setPopUp] = useState(false)
     const navigate = useNavigate()
@@ -24,7 +24,7 @@ function UserMenu() {
 
     return (
         <>
-            <div className={isModalOpen ? 'flex h-screen w-full bg-black bg-opacity-20 overflow-y-hidden fixed top-0 z-[19]' : 'hidden'}>
+            <div className={isOpen ? 'flex h-screen w-full bg-black bg-opacity-20 overflow-y-hidden fixed top-0 z-[19]' : 'hidden'}>
                 <div className='w-[360px] mx-auto md:w-full md:px-20'>
                     <div className='w-72 h-fit bg-white p-6 mt-20 ml-auto rounded-md z-[21]'>{/* Container Menu */}
                         <div className={isLoggedIn ? 'hidden' : 'flex gap-4'}>
@@ -42,7 +42,7 @@ function UserMenu() {
                             </div>
                         </div>
                         <hr className='my-2 border-primary-100 border-opacity-30' />
-                        <div className='cursor-pointer'>{/* Hubungi Kami */}
+                        <div onClick={() => navigate("/homepage")} className='cursor-pointer'>{/* Hubungi Kami */}
                             <div className='flex items-center gap-4'>
                                 <Icon icon="majesticons:home-line" className='text-primary-100' width={19} />
                                 <p className='select-none text-primary-100 font-medium'>Homepage</p>
@@ -58,14 +58,14 @@ function UserMenu() {
                         </div>
                         <SubPesanan isClick={isSubPesanan} />
                         <hr className={isLoggedIn ? 'block my-2 border-primary-100 border-opacity-30' : 'hidden'} />
-                        <div className={isLoggedIn ? 'block cursor-pointer' : 'hidden'}>{/* Chat */}
+                        <div onClick={() => console.log("Chat")} className={isLoggedIn ? 'block cursor-pointer' : 'hidden'}>{/* Chat */}
                             <div className='flex items-center gap-4'>
                                 <Icon icon="bx:chat" className='text-primary-100' width={19} />
                                 <p className='select-none text-primary-100 font-medium'>Chat</p>
                             </div>
                         </div>
                         <hr className={isLoggedIn ? 'block my-2 border-primary-100 border-opacity-30' : 'hidden'} />
-                        <div className='cursor-pointer'>{/* Hubungi Kami */}
+                        <div onClick={() => console.log("Contact Us")} className='cursor-pointer'>{/* Hubungi Kami */}
                             <div className='flex items-center gap-4'>
                                 <Icon icon="tdesign:service" className='text-primary-100' width={18} />
                                 <p className='select-none text-primary-100 font-medium'>Hubungi Kami</p>
@@ -88,23 +88,25 @@ function UserMenu() {
 
 function SubPesanan({ isClick }) {
     // const [isClick, setClick] = useState(false)
+    const navigate = useNavigate()
+
     if (isClick) {
         return (
             <div className='cursor-pointer'>{/* Sub Pesanan */}
                 <hr className='my-2 ml-8 border-primary-100 border-opacity-30' />
-                <div className='flex ml-12 items-center '>
+                <div onClick={() => navigate("/pesanan/belumbayar")} className='flex ml-12 items-center '>
                     <p className='select-none text-primary-100 font-medium'>Belum Bayar</p>
                 </div>
                 <hr className='my-2 ml-8 border-primary-100 border-opacity-30' />
-                <div className='flex ml-12 items-center '>
+                <div onClick={() => console.log("Diproses")} className='flex ml-12 items-center '>
                     <p className='select-none text-primary-100 font-medium'>Diproses</p>
                 </div>
                 <hr className='my-2 ml-8 border-primary-100 border-opacity-30' />
-                <div className='flex ml-12 items-center '>
+                <div onClick={() => console.log("Selesai")} className='flex ml-12 items-center '>
                     <p className='select-none text-primary-100 font-medium'>Selesai</p>
                 </div>
                 <hr className='my-2 ml-8 border-primary-100 border-opacity-30' />
-                <div className='flex ml-12 items-center '>
+                <div onClick={() => console.log("Dibatalkan")} className='flex ml-12 items-center '>
                     <p className='select-none text-primary-100 font-medium'>Dibatalkan</p>
                 </div>
             </div>

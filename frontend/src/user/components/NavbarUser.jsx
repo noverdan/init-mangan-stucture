@@ -10,7 +10,8 @@ import { PopUpQuestion } from './PopUp';
 
 
 function NavbarUser() {
-    const { isModalOpen, setModalOpen, isLoggedIn, setIsLoggedIn } = useContext(DataContext)
+    const { isLoggedIn, setIsLoggedIn } = useContext(DataContext)
+    const [isOpenMenu, setOpenMenu] = useState(false)
     const { isSearch, setSearch, setSearchParam } = useContext(SearchContext)
     const [isPopUp, setPopUp] = useState(false)
 
@@ -18,10 +19,10 @@ function NavbarUser() {
     const navigate = useNavigate()
 
     function openMenu() {
-        if (isModalOpen) {
-            setModalOpen(false)
-        } else if (!isModalOpen) {
-            setModalOpen(true)
+        if (isOpenMenu) {
+            setOpenMenu(false)
+        } else if (!isOpenMenu) {
+            setOpenMenu(true)
         }
     }
 
@@ -146,7 +147,7 @@ function NavbarUser() {
                                 </div>
                             </div>
                         </div>
-                        <div className={isLoggedIn ? "hidden" : "flex gap-2 w-40"}>
+                        <div className={isLoggedIn ? "hidden" : "gap-2 w-40 hidden xl:flex"}>
                             <button onClick={() => navigate("/register")} className=' bg-white text-primary-100 font-semibold border border-primary-100 w-full py-1 rounded hover:bg-gray-200'>Daftar</button>
                             <button onClick={() => navigate("/login")} className=' bg-primary-100 text-white w-full py-1 rounded hover:bg-opacity-75'>Login</button>
                         </div>
@@ -157,7 +158,7 @@ function NavbarUser() {
                     </div>
                 </div>
             </header>
-            <UserMenu />
+            <UserMenu isOpen={isOpenMenu} />
             <PopUpQuestion isOpen={isPopUp} message={"Apakah anda yakin ingin logout?"} onProcess={() => loggedOut()} onCancel={() => setPopUp(false)} onClose={() => setPopUp(false)} />
         </>
 
