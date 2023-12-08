@@ -18,9 +18,9 @@ function Sidebar() {
                 <NavLink to="/dashboard">
                     <HomeSidebar />
                 </NavLink>
-                <NavLink to="/products">
+                <div>
                     <PaketSidebar />
-                </NavLink>
+                </div>
                 <NavLink to="/products">
                     <PesananSidebar />
                 </NavLink>
