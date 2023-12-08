@@ -98,7 +98,6 @@ function FormAdd() {
                     <Icon className='text-2xl md:text-[50px] cursor-pointer' icon="line-md:close-small" />
                 </button>
                 <h1 className='-mt-14 mx-20 md:text-xl  font-bold'>Edit Menu</h1>
-
                 <div className='md:flex md:gap-4' >
                     <div className='flex flex-col items-center md:px-0 px-20 gap-2'>
                         <div className='w-20 h-20 bg-white min-[500px]:w-40 min-[500px]:h-40 md:w-40 md:h-45 rounded-[10px] border-[0.5px] border-accent-200 overflow-hidden'>

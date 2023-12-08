@@ -28,6 +28,7 @@ function ProductInput() {
     const { product } = useContext(ProductContext)
 
 
+
     return (
         <div className="space-y-3" >
             <div className='space-y-2 flex flex-col '>
