@@ -8,9 +8,16 @@ import Footer from "../components/Footer";
 import ListPaket from "../components/homepage/ListPaket";
 import { PackagesProvider } from "../context/PackagesProvider";
 import HomepageImage from '../../assets/homepage-image.jpg'
+import axios from "axios";
+import { useAsyncError } from "react-router-dom";
+import { DataContext } from "../context/ContextProvider";
+import Loader from "../components/Loader";
 
 
 export default function Homepage() {
+    const { isLoggedIn, setIsLoggedIn, loadData, setLoadData } = useContext(DataContext)
+    console.log("Load : " + loadData);
+    console.log("isLoggedIn : " + isLoggedIn);
     const { filter, setFilter } = useContext(FilterContext)
     const image = "https://source.unsplash.com/random/500x500/?food"
 
@@ -24,7 +31,6 @@ export default function Homepage() {
         })
 
     }
-
     return (
         <SearchProvider>
             <NavbarUser />
@@ -62,6 +68,7 @@ export default function Homepage() {
                 <ListPaket />
             </main>
             <Footer />
+            <Loader show={loadData} />
         </SearchProvider>
     )
 }

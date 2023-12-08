@@ -10,6 +10,8 @@ import ContactUs from "./pages/ContactUs"
 import BelumBayar from "./pages/BelumBayar"
 import Catering from "./pages/Catering"
 import { PackagesProvider } from "./context/PackagesProvider"
+import Checkout from "./pages/Checkout"
+import ListBelumBayar from "./pages/ListBelumBayar"
 
 function User() {
     return (
@@ -21,8 +23,10 @@ function User() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/homepage" element={<FilterProvider><Homepage /></FilterProvider>} />
                     <Route path="/catering/:packageId" element={<Catering />} />
+                    <Route path="/checkout/" element={<Checkout />} />
                     <Route path="/contact-us" element={<ContactUs />} />
-                    <Route path="/pesanan/belumbayar" element={<BelumBayar />} />
+                    <Route path="/pesanan/belumbayar" element={<ListBelumBayar />} />
+                    <Route path="/pesanan/belumbayar/:idPesanan" element={<BelumBayar />} />
                     <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
                 </Routes>
             </PackagesProvider>
