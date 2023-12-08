@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Icon } from '@iconify/react';
 import { NavLink } from 'react-router-dom';
 
+
 function PaketSidebar() {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -31,7 +32,9 @@ function PaketSidebar() {
             <div className={`ml-3 flex flex-col w-full transition-all duration-300 
                     ${isOpen ? ' translate-y-1 py-4 opacity-100  max-h-[100vh]' : 'opacity-0 max-h-0 -translate-y-2'}`}>
                 <NavLink to="/products" className='py-2 text-[10px] md:text-base transition-colors duration-300  hover:font-bold cursor-pointer border-b-[1px] border-white'>Tambah Produk</NavLink>
-                <NavLink to="" className='py-2 text-[10px] md:text-base transition-colors duration-300  hover:font-bold cursor-pointer'>List Produk</NavLink>
+                <NavLink to="/list-products" className='py-2 text-[10px] md:text-base transition-colors duration-300  hover:font-bold cursor-pointer'>
+                    List Produk
+                </NavLink>
             </div>
         </div>
 

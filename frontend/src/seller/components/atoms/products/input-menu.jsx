@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function InputMenu({ onChange, menuData }) {
+
+
+
     return (
         <div className='md:flex  md:flex-col space-y-3  '>
             <div className=''>
@@ -18,7 +21,7 @@ function InputMenu({ onChange, menuData }) {
                 <input type="text"
                     placeholder='Masukan Sayuran'
                     name='sayuran'
-                    className='p-1  rounded border-accent-200'
+                    className='p-1 text-black    rounded border-accent-200'
                     onChange={onChange}
                     value={menuData.sayuran} />
             </div>
@@ -34,7 +37,7 @@ function InputMenu({ onChange, menuData }) {
             </div>
 
             <div>
-                <label htmlFor="">tamabahan 1</label> <br />
+                <label htmlFor="">tambahan 1</label> <br />
                 <input type='text'
                     name='tambahan1'
                     placeholder='Masukan Harga'
@@ -42,7 +45,6 @@ function InputMenu({ onChange, menuData }) {
                     onChange={onChange}
                     value={menuData.tambahan1} />
             </div>
-
         </div>
     )
 }

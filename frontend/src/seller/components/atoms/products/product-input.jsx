@@ -36,7 +36,6 @@ function ProductInput() {
                     value={inputPaket}
                     onChange={(e) => setInputPaket(e.target.value)}
                     className='w-56  border-[0.5px] md:w-[700px]  border-accent-200  px-3 py-3 md:py-6 h-7 rounded-lg shadow-[6px_6px_7px_-1px_rgba(0,0,0,0.15)]' />
-
             </div>
 
             <div className='space-y-2 '>

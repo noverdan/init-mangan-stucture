@@ -18,6 +18,8 @@ function FormAdd() {
         sayuran: '',
         nameMenu: '',
         price: '',
+        lauk: '',
+        tambahan1: '',
     });
 
     const handleUploadImg = (event) => {
@@ -43,7 +45,6 @@ function FormAdd() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-
         const newMenu = {
             id: new Date(),
             image: img,
@@ -65,6 +66,11 @@ function FormAdd() {
             return updatedProduct;
         });
 
+        const storedData = JSON.parse(localStorage.getItem('menuData')) || {};
+        storedData[`${newMenu.id}`] = newMenu;
+        localStorage.setItem('menuData', JSON.stringify(storedData));
+
+
         setFormData({
             makananPokok: '',
             sayuran: '',
@@ -77,18 +83,17 @@ function FormAdd() {
         setImg(null);
     };
     const handleCloseForm = () => {
-        // Menutup formulir tanpa menyimpan data
         setIsFormOpen(false);
     };
 
     if (!isFormOpen) {
-        return null; // Return null jika formulir ditutup
+        return null;
     }
 
 
     return (
         <motion.div className='absolute md:left-12 top-[5%]  text-accent-200' initial={{ opacity: 0 }} animate={{ opacity: 1 }} >
-            <form action="" className='flex  border-[0.5px] border-accent-200 md:flex-col p-4 overflow-auto items-center flex-wrap gap-4 rounded-lg bg-white'>
+            <form action="" onSubmit={handleSubmit} className='flex  border-[0.5px] border-accent-200 md:flex-col p-4 overflow-auto items-center flex-wrap gap-4 rounded-lg bg-white'>
                 <button onClick={handleCloseForm} className='md:ml-[650px]'>
                     <Icon className='text-2xl md:text-[50px] cursor-pointer' icon="line-md:close-small" />
                 </button>
