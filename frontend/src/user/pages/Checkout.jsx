@@ -93,19 +93,12 @@ export default function Checkout() {
             .then(function (res) {
                 const data = res.data
                 setUserData(data)
-                setInitialInput(data.nama, data.hp)
+                setInputUser({ ...inputUser, nama: data.nama, hp: data.hp, alamat: data.alamat })
             })
             .catch(function (err) {
                 const errMessage = err.message
                 console.log(errMessage);
             });
-    }
-    function setInitialInput(nama, hp) {
-        setInputUser((prev) => ({
-            ...prev,
-            nama: nama,
-            hp: hp
-        }))
     }
 
     function validateInput() {
