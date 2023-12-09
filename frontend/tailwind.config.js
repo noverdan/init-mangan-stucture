@@ -14,7 +14,7 @@ export default {
         'accent-100': '#25b1bf',
         'accent-200': '#005461',
         'text-100': '#1a1a1a',
-        'texr-200': '#404040',
+        'text-200': '#404040',
         'bg-100': '#ffffff',
         'bg-200': '#f5f5f5',
         'bg-300': '#cccccc',
@@ -22,7 +22,7 @@ export default {
     },
   },
   plugins: [
-    require('flowbite/plugin'),
+    require('flowbite/plugin')
   ],
 }
 
