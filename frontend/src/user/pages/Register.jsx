@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { PopUpAlert, PopUpSucces } from "../components/PopUp";
-const urlUser = 'http://localhost:3000/user'
+const urlUser = import.meta.env.VITE_URL_USER
 
 function Register() {
     const [dataForm, setDataForm] = useState({
@@ -162,7 +162,7 @@ function Register() {
                 <button onClick={validationData} className="w-full py-2 rounded-md mt-4 font-medium bg-primary-100 text-white hover:bg-primary-200 active:bg-primary-100">Daftar</button>
                 <div className="flex gap-2 mt-4">
                     <p className="font-medium text-accent-200">Sudah punya akun?</p>
-                    <button className="font-bold text-primary-100 hover:text-primary-200 active:text-primary-100">Login</button>
+                    <button onClick={() => navigate("/login")} className="font-bold text-primary-100 hover:text-primary-200 active:text-primary-100">Login</button>
                 </div>
             </div>
             <PopUpAlert isOpen={openAlert} onClose={() => setOpenAlert(false)} message={alertMessage} onProcess={() => setOpenAlert(false)} />

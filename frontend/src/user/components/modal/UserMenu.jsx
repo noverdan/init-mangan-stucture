@@ -98,15 +98,15 @@ function SubPesanan({ isClick }) {
                     <p className='select-none text-primary-100 font-medium'>Belum Bayar</p>
                 </div>
                 <hr className='my-2 ml-8 border-primary-100 border-opacity-30' />
-                <div onClick={() => console.log("Diproses")} className='flex ml-12 items-center '>
+                <div onClick={() => navigate("/pesanan/diproses")} className='flex ml-12 items-center '>
                     <p className='select-none text-primary-100 font-medium'>Diproses</p>
                 </div>
                 <hr className='my-2 ml-8 border-primary-100 border-opacity-30' />
-                <div onClick={() => console.log("Selesai")} className='flex ml-12 items-center '>
+                <div onClick={() => navigate("/pesanan/selesai")} className='flex ml-12 items-center '>
                     <p className='select-none text-primary-100 font-medium'>Selesai</p>
                 </div>
                 <hr className='my-2 ml-8 border-primary-100 border-opacity-30' />
-                <div onClick={() => console.log("Dibatalkan")} className='flex ml-12 items-center '>
+                <div onClick={() => navigate("/pesanan/dibatalkan")} className='flex ml-12 items-center '>
                     <p className='select-none text-primary-100 font-medium'>Dibatalkan</p>
                 </div>
             </div>

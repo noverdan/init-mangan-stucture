@@ -16,9 +16,9 @@ const urlMenus = import.meta.env.VITE_URL_MENUS
 const urlUser = import.meta.env.VITE_URL_USER
 const urlSeller = import.meta.env.VITE_URL_SELLERS
 const urlPesanan = import.meta.env.VITE_URL_ORDERS
-const urlPaymentStatus = import.meta.env.VITE_PAYMENT_API
+const urlPaymentStatus = "https://api.sandbox.midtrans.com/v1/payment-links"
 
-export default function BelumBayar() {
+export default function PesananSelesai() {
     const SECRET = import.meta.env.VITE_SECRET_PAYMENT
     const encodeSecret = btoa(SECRET)
     const { idPesanan } = useParams()
@@ -44,15 +44,14 @@ export default function BelumBayar() {
                 accept: 'application/json',
                 authorization: `Basic ${encodeSecret}`
             }
-        };
+        }
         axios.request(getPaymentStatus)
             .then((res) => {
                 const data = res.data
                 const dataSettlements = data.purchases.filter((purchase) => purchase.payment_status === "SETTLEMENT");
                 if (dataSettlements.length != 0) {
                     setSettlements(dataSettlements)
-                    setPesananDiproses(dataSettlements[0].createdAt)
-                    fetchDataPesanan(1)
+                    fetchDataPesanan(2)
                     console.log("sudah bayar");
                 } else {
                     console.log("Belum Bayar");
@@ -137,21 +136,6 @@ export default function BelumBayar() {
         return formattedDate + " WIB"
     }
 
-    function setPesananDiproses(date) {
-        const dataUpdate = {
-            statusBayar: "Dibayar",
-            tanggalBayar: formatDate(date),
-            statusCode: 1,
-            status: "Diproses"
-        }
-        axios.patch(`${urlPesanan}/${idPesanan}`, dataUpdate)
-            .then((res) => {
-                console.log(res.status);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }
     function batalkanPesanan() {
         setIsLoading(true)
         const dataUpdate = {
@@ -162,15 +146,15 @@ export default function BelumBayar() {
         axios.patch(`${urlPesanan}/${idPesanan}`, dataUpdate)
             .then((res) => {
                 console.log(res);
-                navigate(-1)
                 setIsLoading(false)
-                setPopUpQuestion(false)
             })
             .catch((err) => {
                 console.log(err);
-                setPopUpQuestion(false)
                 setIsLoading(false)
             })
+        setPopUpQuestion(false)
+        console.log("Pesanan Dibatalkan");
+        navigate(-1)
     }
 
     if (statusCode.code !== 200) {
@@ -190,73 +174,16 @@ export default function BelumBayar() {
         <SearchProvider>
             <NavbarUser />
             <main className='pt-16 pb-5 w-[360px] mx-auto'>
-                <section className={settlements[0].payment_status ? "flex flex-col mt-7" : "hidden"}>
-                    <Icon icon="icon-park-outline:success" className='text-green-500 mx-auto' width={100} />
-                    <h1 className='font-bold text-accent-200 text-lg text-center'>Pembayaran Berhasil</h1>
-                    <h3 className='text-accent-200 mt-4'>Detail :</h3>
-                    <div className='grid grid-cols-2 mt-1 gap-1'>
-                        <div>
-                            <h3 className='text-accent-200 font-medium'>Metode Pembayaran</h3>
-                            <h3 className='text-accent-200 font-bold'>{settlements[0].payment_method}</h3>
-                        </div>
-                        <div>
-                            <h3 className='text-accent-200 font-medium'>ID Pembayaran</h3>
-                            <h3 className='text-accent-200 font-bold text-sm'>{settlements[0].order_id}</h3>
-                        </div>
-
-                        <div>
-                            <h3 className='text-accent-200 font-medium'>Waktu Bayar</h3>
-                            <h3 className='text-accent-200 font-bold'>{formatDate(settlements[0].createdAt)}</h3>
-                        </div>
-
-                    </div>
+                <section className="flex items-center mt-5 relative">
+                    <button onClick={() => navigate(-1)} className="text-primary-100 absolute left-0">
+                        <Icon icon="material-symbols:arrow-back" width={27} />
+                    </button>
+                    <h1 className="mx-auto text-primary-100 font-bold">Pesanan Selesai</h1>
                 </section>
-                <section className={settlements[0].payment_status ? "hidden" : "mt-4 text-center w-full"}>
-                    <h1 className='font-bold text-accent-200'>Menunggu Pembayaran</h1>
-                    <h3 className='text-accent-200'>Selesaikan pembayaran sebelum :</h3>
-                    <h1 className='font-extrabold text-primary-100 text-xl'>{dataPesanan.batasBayar}</h1>
-                    <h3 className='text-accent-200'>Untuk menghindari pembatalan otomatis.</h3>
-                    <div className='flex justify-center py-4'>
-                        <QRCodeSVG
-                            value={dataPesanan.linkPembayaran}
-                            size={180}
-                            bgColor={"#ffffff"}
-                            fgColor={"#000000"}
-                            level={"L"}
-                            includeMargin={false}
-                            imageSettings={{
-                                src: 'https://i.imgur.com/o361WeZ.png',
-                                x: undefined,
-                                y: undefined,
-                                height: 24,
-                                width: 24,
-                                excavate: true,
-                            }}
-                        />
-                    </div>
-                    <div className='text-start w-full flex flex-col'>
-                        <h4 className='text-accent-200 mt-2'>Link Pembayaran :</h4>
-                        <a href={dataPesanan.linkPembayaran} target='_blank'
-                            className="underline italic text-primary-100 text-sm overflow-hidden text-ellipsis whitespace-nowrap">{dataPesanan.linkPembayaran}</a>
-                        <div className='flex items-center mt-2 gap-2'>
-                            <div className='w-full group relative'>
-                                <button onClick={(e) => handleCopyClick()} className='text-primary-100 text-sm w-full bg-white border border-primary-100 p-1 rounded mt-2 transition-all hover:bg-gray-200 active:bg-white'>Copy Link</button>
-                                <div className='hidden bg-gray-100 right-0 select-none shadow border border-gray-200 mt-1 p-1 rounded absolute group-focus-within:flex'>
-                                    <p className='text-primary-100'>Link dicopy</p>
-                                </div>
-                            </div>
-                            <a className='w-full' href={dataPesanan.linkPembayaran} target='_blank'>
-                                <button className='text-white text-sm w-full bg-primary-100 p-1 rounded mt-2 hover:bg-opacity-75 active:bg-opacity-100'>Bayar</button>
-                            </a>
-                        </div>
-                    </div>
-                    <h1 onClick={() => setIsHowPayment(!isHowPayment)} className='flex items-center w-fit text-start mt-4 underline text-accent-200 cursor-pointer'><Icon icon="ic:round-play-arrow" /> Cara Bayar</h1>
-                    <ul className={isHowPayment ? 'flex flex-col gap-1 mt-2 text-start list-disc ml-5 text-accent-200' : "hidden"}>
-                        <li className='leading-5'>Scan QR Code diatas atau Klik Link pembayaran diatas atau klik tombol bayar diatas. Maka akan diarahkan ke halaman penyedia pembayaran.</li>
-                        <li className='leading-5'>Kemudian ikuti intruksi yang ada pada halaman penyedia pembayaran.</li>
-                        <li className='leading-5'>Jika sudah melakukan pembayaran, kembali ke halaman ini maka akan ada pemberitahuan pembayaran berhasil. Jika belum ada coba refresh halaman ini.</li>
-                    </ul>
-                </section>
+                <hr className='my-4 border-gray-300' />
+                <div>
+                    <Icon icon="mdi:archive-success-outline" className='text-green-500 mx-auto' width={90} />
+                </div>
                 <hr className='my-4 border-gray-300' />
                 <section>
                     <h1 className='mx-auto mb-2 text-lg text-accent-200 font-bold text-center'>Informasi Pesanan</h1>
@@ -324,25 +251,46 @@ export default function BelumBayar() {
                         </div>
                     </div>
                     <div className='flex flex-col gap-2 mt-4 w-full p-4 border-2 rounded border-primary-100'>
+                        <div className='flex flex-col justify-between'>
+                            <h1 className='font-bold text-primary-100'>Rincian Pembayaran</h1>
+                            <div className='grid grid-cols-2 gap-2 mt-1'>
+                                <div className='col-span-2'>
+                                    <p className='text-accent-200 h-4 text-sm'>Id Pembayaran</p>
+                                    <p className='text-accent-200 font-bold mt-1'>{settlements[0].order_id}</p>
+                                </div>
+                                <div className=''>
+                                    <p className='text-accent-200 h-4 text-sm'>Metode</p>
+                                    <p className='text-accent-200 font-bold text-lg'>{settlements[0].payment_method}</p>
+                                </div>
+                                <div className=''>
+                                    <p className='text-accent-200 h-4 text-sm'>Waktu</p>
+                                    <p className='text-accent-200 font-bold '>{formatDate(settlements[0].createdAt)}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr className='my-2 border-gray-300' />
                         <div className='flex items-center justify-between'>
                             <h1 className='font-bold text-primary-100'>Total Pembayaran</h1>
-                            <p className='text-accent-200 font-bold text-lg'>{Rp(dataPesanan.totalHarga)}</p>
+                            <p className='text-accent-200 font-bold text-lg'>{Rp(settlements[0].amount_value)}</p>
+                        </div>
+                    </div>
+                    <div className='flex flex-col gap-2 mt-4 w-full p-4 border-2 rounded border-primary-100'>
+                        <div className='flex flex-col justify-center gap-2'>
+                            <div className='flex items-center gap-2'>
+                                <h1 className='font-bold text-primary-100'>Status Pesanan</h1>
+                                <Icon icon="akar-icons:info-fill" className='text-primary-100' />
+                            </div>
+                            <div>
+                                <h1 className='font-bold text-accent-200'>{dataPesanan.status}</h1>
+                            </div>
                         </div>
                     </div>
                 </section>
                 <section className='flex items-center gap-2 mt-4'>
-                    <button onClick={() => setPopUpQuestion(true)} className={settlements[0].payment_status ? 'hidden' : 'w-1/2 ml-auto bg-gray-200 rounded border border-primary-200 py-2 font-semibold text-primary-100 hover:bg-white transition-all active:bg-gray-200'}>Batalkan Pesanan</button>
-                    <button onClick={() => navigate("/pesanan/diproses")} className={settlements[0].payment_status ? 'w-1/2 ml-auto bg-gray-200 rounded border border-primary-200 py-2 font-semibold text-primary-100 hover:bg-white transition-all active:bg-gray-200' : 'hidden'}>Halaman Pesanan</button>
-                </section>
-                <hr className='my-4 border-gray-300' />
-                <section className='flex flex-col gap-2 mt-4 w-full p-4 border-2 rounded border-primary-100'>
-                    <h1 className='text-primary-100 font-semibold'>Mengalami kendala saat pembayaran?</h1>
-                    <p className='leading-5 text-accent-200'>Hubungi kami untuk mendapatkan bantuan terkait permasalahan anda.</p>
-                    <button className='w-full py-2 bg-primary-100 text-white rounded hover:bg-opacity-75 active:bg-opacity-100'>Hubungi Kami</button>
+                    <button onClick={() => ""} className={'w-1/2 ml-auto bg-primary-100 rounded border border-primary-200 py-2 font-semibold text-white hover:bg-gray-200 transition-all hover:text-primary-100 active:bg-white'}>Ulas Pesanan</button>
                 </section>
             </main>
             <Loader show={isLoading} />
-            <PopUpQuestion isOpen={isPopUpQuestion} message={"Apakah anda yakin akan membatalkan pesanan ini?"} onProcess={() => batalkanPesanan()} onClose={() => setPopUpQuestion(false)} onCancel={() => setPopUpQuestion(false)} />
         </SearchProvider>
     )
 }

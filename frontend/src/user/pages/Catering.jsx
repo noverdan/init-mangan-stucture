@@ -15,19 +15,20 @@ import axios from 'axios';
 import Rp from '../../utils/Rupiah';
 import { DataContext } from '../context/ContextProvider';
 import { PopUpAlert, PopUpQuestion } from '../components/PopUp';
-const urlPackages = "http://localhost:3000/packages"
-const urlMenus = "http://localhost:3000/menus"
-const urlReviews = "http://localhost:3000/reviews"
-const urlSellers = "http://localhost:3000/sellers"
+const urlPackages = import.meta.env.VITE_URL_PACKAGES
+const urlMenus = import.meta.env.VITE_URL_MENUS
+const urlReviews = import.meta.env.VITE_URL_REVIEWS
+const urlSellers = import.meta.env.VITE_URL_USER
 
 export default function Catering() {
     const { packageId } = useParams()
     const { isLoggedIn } = useContext(DataContext)
+    console.log(isLoggedIn);
     const [packageItem, setPackageItem] = useState({})
     const [menuItems, setMenuItems] = useState([])
     const [reviewItems, setReviewItems] = useState([])
     const [sellerItem, setSellerItem] = useState({})
-    const token = JSON.parse(localStorage.getItem("token"))
+    const [token, setToken] = useState({})
 
     const [selectedMenu, setSelectedMenu] = useState({
         id: null,
@@ -45,6 +46,7 @@ export default function Catering() {
         getPackageById()
         getMenus()
         getReviews()
+        setToken(JSON.parse(localStorage.getItem("token")))
     }, [])
 
     async function getPackageById() {
@@ -126,7 +128,7 @@ export default function Catering() {
         }
     }
 
-    function toCheckout(idPackage, idMenu, idUser) {
+    function toCheckout(idPackage, idMenu, idUser = 0) {
         if (!isLoggedIn) {
             setOpenQuestion(true)
             return
@@ -238,7 +240,7 @@ export default function Catering() {
                 <div className='w-full h-16 bg-white shadow-[0px_0px_10px_-5px_#000000] fixed bottom-0 z-[20]'>
                     <div className='w-[360px] h-full mx-auto flex gap-4 items-center'>
                         <button className='w-full bg-white text-primary-100 border border-primary-100 py-1 font-medium rounded hover:bg-gray-100 active:bg-white'>Hubungi Penjual</button>
-                        <button onClick={() => toCheckout(packageId, selectedMenu.id, token.id)} className='w-full bg-primary-100 border-primary-100 border text-white py-1 font-medium rounded hover:bg-opacity-70 active:bg-opacity-100 '>Beli</button>
+                        <button onClick={() => toCheckout(packageId, selectedMenu.id, token ? token.id : 0)} className='w-full bg-primary-100 border-primary-100 border text-white py-1 font-medium rounded hover:bg-opacity-70 active:bg-opacity-100 '>Beli</button>
                     </div>
                 </div>
             </footer>
