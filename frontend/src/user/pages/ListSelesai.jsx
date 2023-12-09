@@ -103,7 +103,7 @@ export default function ListSelesai() {
                             const paket = dataPaket.filter(item => item.id == pesanan.idPaket);
                             const menu = dataMenu.filter(item => item.id == pesanan.idMenu);
                             return (
-                                <Card2 onClick={() => navigate(`/pesanan/belumbayar/${pesanan.id}`)} key={pesanan.id} image={menu.length ? menu[0].gambarMenu : ""}
+                                <Card2 onClick={() => navigate(`/pesanan/selesai/${pesanan.id}`)} key={pesanan.id} image={menu.length ? menu[0].gambarMenu : ""}
                                     packageName={paket.length ? paket[0].namaPaket : ""} menuName={menu.length ? menu[0].namaMenu : ""} sellerName={"Katering Mak Limah"} menuPrice={menu.length ? menu[0].hargaMenu : ""} totalPrice={pesanan.totalHarga} orderDate={pesanan.tanggalPesan} qty={pesanan.porsi} />
                             )
                         })

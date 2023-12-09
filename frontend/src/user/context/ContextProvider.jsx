@@ -8,17 +8,19 @@ function ContextProvider({ children }) {
     const [packageIdSelected, setPackageIdSelected] = useState()
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [loadData, setLoadData] = useState(true)
+    const [token, setToken] = useState()
     const userData = localStorage.getItem("token")
 
     useEffect(() => {
         if (userData) {
+            setIsLoggedIn(true)
             simulateAuth()
+            setToken(JSON.parse(userData))
         }
         setLoadData(false)
     }, [userData])
 
     function simulateAuth() {
-        setIsLoggedIn(true)
         const data = JSON.parse(userData)
         const urlUser = import.meta.env.VITE_URL_USER
         axios.get(`${urlUser}/${data.id}`)
@@ -40,7 +42,8 @@ function ContextProvider({ children }) {
             isModalOpen, setModalOpen,
             packageIdSelected, setPackageIdSelected,
             isLoggedIn, setIsLoggedIn,
-            loadData, setLoadData
+            loadData, setLoadData,
+            token, setToken
         }}>
             {children}
         </DataContext.Provider>

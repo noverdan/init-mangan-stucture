@@ -14,11 +14,11 @@ import getPaymentLink from '../../utils/getPaymentLink';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../components/Loader';
 
-const urlPackages = "http://localhost:3000/packages"
-const urlMenus = "http://localhost:3000/menus"
-const urlUser = "http://localhost:3000/user"
-const urlSellers = "http://localhost:3000/sellers"
-const urlPesanan = "http://localhost:3000/pesanan"
+const urlPackages = import.meta.env.VITE_URL_PACKAGES
+const urlMenus = import.meta.env.VITE_URL_MENUS
+const urlUser = import.meta.env.VITE_URL_USER
+const urlSellers = import.meta.env.VITE_URL_SELLERS
+const urlPesanan = import.meta.env.VITE_URL_ORDERS
 
 export default function Checkout() {
     const stateCheckout = JSON.parse(sessionStorage.getItem("stateCheckout"))

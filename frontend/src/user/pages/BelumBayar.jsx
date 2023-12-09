@@ -11,13 +11,12 @@ import Rp from '../../utils/Rupiah';
 import { QRCodeSVG } from 'qrcode.react';
 import { PopUpQuestion } from '../components/PopUp';
 
-const urlPesanan = "http://localhost:3000/pesanan"
-const urlDiproses = "http://localhost:3000/diproses"
-const urlPackages = "http://localhost:3000/packages"
-const urlMenus = "http://localhost:3000/menus"
-const urlUser = "http://localhost:3000/user"
-const urlSeller = "http://localhost:3000/sellers"
-const urlPaymentStatus = "https://api.sandbox.midtrans.com/v1/payment-links"
+const urlPackages = import.meta.env.VITE_URL_PACKAGES
+const urlMenus = import.meta.env.VITE_URL_MENUS
+const urlUser = import.meta.env.VITE_URL_USER
+const urlSeller = import.meta.env.VITE_URL_SELLERS
+const urlPesanan = import.meta.env.VITE_URL_ORDERS
+const urlPaymentStatus = import.meta.env.VITE_PAYMENT_API
 
 export default function BelumBayar() {
     const SECRET = import.meta.env.VITE_SECRET_PAYMENT
@@ -48,7 +47,6 @@ export default function BelumBayar() {
         };
         axios.request(getPaymentStatus)
             .then((res) => {
-                // console.log(res.data);
                 const data = res.data
                 const dataSettlements = data.purchases.filter((purchase) => purchase.payment_status === "SETTLEMENT");
                 if (dataSettlements.length != 0) {
@@ -74,8 +72,7 @@ export default function BelumBayar() {
                         fetchData(res.data[0].idPaket, res.data[0].idMenu, res.data[0].idUser)
                         setIsLoading(false)
                     } else {
-                        setStatusCode({ code: 404, statusText: "Tidak Ditemukan" })
-                        setIsLoading(false)
+                        fetchDataPesanan(1)
                     }
                 })
                 .catch((err) => {
@@ -165,15 +162,15 @@ export default function BelumBayar() {
         axios.patch(`${urlPesanan}/${idPesanan}`, dataUpdate)
             .then((res) => {
                 console.log(res);
+                navigate(-1)
                 setIsLoading(false)
+                setPopUpQuestion(false)
             })
             .catch((err) => {
                 console.log(err);
+                setPopUpQuestion(false)
                 setIsLoading(false)
             })
-        setPopUpQuestion(false)
-        console.log("Pesanan Dibatalkan");
-        navigate(-1)
     }
 
     if (statusCode.code !== 200) {
@@ -335,7 +332,7 @@ export default function BelumBayar() {
                 </section>
                 <section className='flex items-center gap-2 mt-4'>
                     <button onClick={() => setPopUpQuestion(true)} className={settlements[0].payment_status ? 'hidden' : 'w-1/2 ml-auto bg-gray-200 rounded border border-primary-200 py-2 font-semibold text-primary-100 hover:bg-white transition-all active:bg-gray-200'}>Batalkan Pesanan</button>
-                    <button className={settlements[0].payment_status ? 'w-1/2 ml-auto bg-gray-200 rounded border border-primary-200 py-2 font-semibold text-primary-100 hover:bg-white transition-all active:bg-gray-200' : 'hidden'}>Halaman Pesanan</button>
+                    <button onClick={() => navigate("/pesanan/diproses")} className={settlements[0].payment_status ? 'w-1/2 ml-auto bg-gray-200 rounded border border-primary-200 py-2 font-semibold text-primary-100 hover:bg-white transition-all active:bg-gray-200' : 'hidden'}>Halaman Pesanan</button>
                 </section>
                 <hr className='my-4 border-gray-300' />
                 <section className='flex flex-col gap-2 mt-4 w-full p-4 border-2 rounded border-primary-100'>

@@ -4,10 +4,11 @@ import Card2 from "../components/Card2";
 import NavbarUser from "../components/NavbarUser";
 import { SearchProvider } from "../context/SearchProvider";
 import { Icon } from "@iconify/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Divide } from "hamburger-react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
+import { DataContext } from "../context/ContextProvider";
 
 const urlPesanan = import.meta.env.VITE_URL_ORDERS
 const urlPackages = import.meta.env.VITE_URL_PACKAGES
@@ -16,7 +17,9 @@ const urlSeller = import.meta.env.VITE_URL_SELLERS
 const urlUser = import.meta.env.VITE_URL_USER
 
 export default function ListBelumBayar() {
-    const token = JSON.parse(localStorage.getItem("token"))
+    const { isLoggedIn, token, setToken } = useContext(DataContext)
+    console.log("Login: ", isLoggedIn);
+    // const token = JSON.parse(localStorage.getItem("token"))
     const [dataPesanan, setDataPesanan] = useState([])
     const [dataPaket, setDataPaket] = useState([])
     const [dataMenu, setDataMenu] = useState([])
@@ -24,15 +27,17 @@ export default function ListBelumBayar() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetchPesanan()
-    }, [])
+        console.log(token);
+        if (token) {
+            fetchPesanan()
+        }
+    }, [isLoggedIn])
     useEffect(() => {
         dataPesanan.map(item => {
             fetchPaket(item.idPaket).then((res) => setDataPaket(prev => [...prev, res]))
             fetchMenu(item.idMenu).then((res) => setDataMenu(prev => [...prev, res]))
         })
     }, [dataPesanan])
-
 
     function fetchPesanan() {
         setLoading(true)
@@ -69,12 +74,23 @@ export default function ListBelumBayar() {
         }
     }
 
+    // if (!isLoggedIn) {
+    //     return (
+    //         <>
+    //             <SearchProvider>
+    //                 <NavbarUser />
+    //             </SearchProvider>
+    //             <h1 className="mt-16">Kosong</h1>
+    //         </>
+    //     )
+    // }
 
     return (
         <>
             <SearchProvider>
                 <NavbarUser />
             </SearchProvider>
+            {isLoggedIn ? <h1>mati</h1> : <h1>p</h1>}
             <main className="pt-16 pb-5 w-[360px] mx-auto">
                 <section className="flex items-center mt-5 relative">
                     <button onClick={() => navigate(-1)} className="text-primary-100 absolute left-0">

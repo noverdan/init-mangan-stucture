@@ -2,9 +2,9 @@ import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
 const PackagesContext = createContext()
-const urlPackages = "http://localhost:3000/packages"
-const urlMenus = "http://localhost:3000/menus"
-const urlReviews = "http://localhost:3000/reviews"
+const urlPackages = import.meta.env.VITE_URL_PACKAGES
+const urlMenus = import.meta.env.VITE_URL_MENUS
+const urlReviews = import.meta.env.VITE_URL_REVIEWS
 
 function PackagesProvider({ children }) {
     const [packages, setPackages] = useState([])

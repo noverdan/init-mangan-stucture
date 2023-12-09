@@ -11,12 +11,11 @@ import Rp from '../../utils/Rupiah';
 import { QRCodeSVG } from 'qrcode.react';
 import { PopUpQuestion } from '../components/PopUp';
 
-const urlPesanan = "http://localhost:3000/pesanan"
-const urlDiproses = "http://localhost:3000/diproses"
-const urlPackages = "http://localhost:3000/packages"
-const urlMenus = "http://localhost:3000/menus"
-const urlUser = "http://localhost:3000/user"
-const urlSeller = "http://localhost:3000/sellers"
+const urlPackages = import.meta.env.VITE_URL_PACKAGES
+const urlMenus = import.meta.env.VITE_URL_MENUS
+const urlUser = import.meta.env.VITE_URL_USER
+const urlSeller = import.meta.env.VITE_URL_SELLERS
+const urlPesanan = import.meta.env.VITE_URL_ORDERS
 const urlPaymentStatus = "https://api.sandbox.midtrans.com/v1/payment-links"
 
 export default function PesananSelesai() {
@@ -38,9 +37,33 @@ export default function PesananSelesai() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetchDataPesanan()
-        function fetchDataPesanan() {
-            axios.get(`${urlPesanan}/?id=${idPesanan}&statusCode=${-1}`)
+        const getPaymentStatus = {
+            method: 'GET',
+            url: `${urlPaymentStatus}/${idPesanan}`,
+            headers: {
+                accept: 'application/json',
+                authorization: `Basic ${encodeSecret}`
+            }
+        }
+        axios.request(getPaymentStatus)
+            .then((res) => {
+                const data = res.data
+                const dataSettlements = data.purchases.filter((purchase) => purchase.payment_status === "SETTLEMENT");
+                if (dataSettlements.length != 0) {
+                    setSettlements(dataSettlements)
+                    fetchDataPesanan(2)
+                    console.log("sudah bayar");
+                } else {
+                    console.log("Belum Bayar");
+                    fetchDataPesanan(0)
+                }
+            }).catch((err) => {
+                console.log(err);
+                setStatusCode({ code: err.response.status, statusText: err.response.statusText })
+                setIsLoading(false)
+            })
+        function fetchDataPesanan(code) {
+            axios.get(`${urlPesanan}/?id=${idPesanan}&statusCode=${code}`)
                 .then((res) => {
                     setStatusCode({ code: res.status, statusText: res.statusText })
                     if (res.data.length != 0) {
@@ -48,8 +71,7 @@ export default function PesananSelesai() {
                         fetchData(res.data[0].idPaket, res.data[0].idMenu, res.data[0].idUser)
                         setIsLoading(false)
                     } else {
-                        setStatusCode({ code: 404, statusText: "Tidak Ditemukan" })
-                        setIsLoading(false)
+                        fetchDataPesanan(1)
                     }
                 })
                 .catch((err) => {
@@ -152,6 +174,17 @@ export default function PesananSelesai() {
         <SearchProvider>
             <NavbarUser />
             <main className='pt-16 pb-5 w-[360px] mx-auto'>
+                <section className="flex items-center mt-5 relative">
+                    <button onClick={() => navigate(-1)} className="text-primary-100 absolute left-0">
+                        <Icon icon="material-symbols:arrow-back" width={27} />
+                    </button>
+                    <h1 className="mx-auto text-primary-100 font-bold">Pesanan Selesai</h1>
+                </section>
+                <hr className='my-4 border-gray-300' />
+                <div>
+                    <Icon icon="mdi:archive-success-outline" className='text-green-500 mx-auto' width={90} />
+                </div>
+                <hr className='my-4 border-gray-300' />
                 <section>
                     <h1 className='mx-auto mb-2 text-lg text-accent-200 font-bold text-center'>Informasi Pesanan</h1>
                     <div className='grid grid-cols-2 gap-2 w-full p-4 border-2 rounded border-primary-100'>
@@ -218,20 +251,43 @@ export default function PesananSelesai() {
                         </div>
                     </div>
                     <div className='flex flex-col gap-2 mt-4 w-full p-4 border-2 rounded border-primary-100'>
+                        <div className='flex flex-col justify-between'>
+                            <h1 className='font-bold text-primary-100'>Rincian Pembayaran</h1>
+                            <div className='grid grid-cols-2 gap-2 mt-1'>
+                                <div className='col-span-2'>
+                                    <p className='text-accent-200 h-4 text-sm'>Id Pembayaran</p>
+                                    <p className='text-accent-200 font-bold mt-1'>{settlements[0].order_id}</p>
+                                </div>
+                                <div className=''>
+                                    <p className='text-accent-200 h-4 text-sm'>Metode</p>
+                                    <p className='text-accent-200 font-bold text-lg'>{settlements[0].payment_method}</p>
+                                </div>
+                                <div className=''>
+                                    <p className='text-accent-200 h-4 text-sm'>Waktu</p>
+                                    <p className='text-accent-200 font-bold '>{formatDate(settlements[0].createdAt)}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr className='my-2 border-gray-300' />
                         <div className='flex items-center justify-between'>
                             <h1 className='font-bold text-primary-100'>Total Pembayaran</h1>
-                            <p className='text-accent-200 font-bold text-lg'>{Rp(dataPesanan.totalHarga)}</p>
+                            <p className='text-accent-200 font-bold text-lg'>{Rp(settlements[0].amount_value)}</p>
+                        </div>
+                    </div>
+                    <div className='flex flex-col gap-2 mt-4 w-full p-4 border-2 rounded border-primary-100'>
+                        <div className='flex flex-col justify-center gap-2'>
+                            <div className='flex items-center gap-2'>
+                                <h1 className='font-bold text-primary-100'>Status Pesanan</h1>
+                                <Icon icon="akar-icons:info-fill" className='text-primary-100' />
+                            </div>
+                            <div>
+                                <h1 className='font-bold text-accent-200'>{dataPesanan.status}</h1>
+                            </div>
                         </div>
                     </div>
                 </section>
                 <section className='flex items-center gap-2 mt-4'>
-                    <button className={'w-1/2 ml-auto bg-gray-200 rounded border border-primary-200 py-2 font-semibold text-primary-100 hover:bg-white transition-all active:bg-gray-200'}>Halaman Pesanan</button>
-                </section>
-                <hr className='my-4 border-gray-300' />
-                <section className='flex flex-col gap-2 mt-4 w-full p-4 border-2 rounded border-primary-100'>
-                    <h1 className='text-primary-100 font-semibold'>Mengalami kendala saat pembayaran?</h1>
-                    <p className='leading-5 text-accent-200'>Hubungi kami untuk mendapatkan bantuan terkait permasalahan anda.</p>
-                    <button className='w-full py-2 bg-primary-100 text-white rounded hover:bg-opacity-75 active:bg-opacity-100'>Hubungi Kami</button>
+                    <button onClick={() => ""} className={'w-1/2 ml-auto bg-primary-100 rounded border border-primary-200 py-2 font-semibold text-white hover:bg-gray-200 transition-all hover:text-primary-100 active:bg-white'}>Ulas Pesanan</button>
                 </section>
             </main>
             <Loader show={isLoading} />
