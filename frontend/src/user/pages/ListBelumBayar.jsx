@@ -92,7 +92,7 @@ export default function ListBelumBayar() {
             </SearchProvider>
             {isLoggedIn ? <h1>mati</h1> : <h1>p</h1>}
             <main className="pt-16 pb-5 w-[360px] mx-auto">
-                <section className="flex items-center mt-5 relative">
+                <section className="flex items-center relative">
                     <button onClick={() => navigate(-1)} className="text-primary-100 absolute left-0">
                         <Icon icon="material-symbols:arrow-back" width={27} />
                     </button>

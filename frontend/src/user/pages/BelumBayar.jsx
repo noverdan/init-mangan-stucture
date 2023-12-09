@@ -338,7 +338,7 @@ export default function BelumBayar() {
                 <section className='flex flex-col gap-2 mt-4 w-full p-4 border-2 rounded border-primary-100'>
                     <h1 className='text-primary-100 font-semibold'>Mengalami kendala saat pembayaran?</h1>
                     <p className='leading-5 text-accent-200'>Hubungi kami untuk mendapatkan bantuan terkait permasalahan anda.</p>
-                    <button className='w-full py-2 bg-primary-100 text-white rounded hover:bg-opacity-75 active:bg-opacity-100'>Hubungi Kami</button>
+                    <button onClick={() => navigate("/contact-us")} className='w-full py-2 bg-primary-100 text-white rounded hover:bg-opacity-75 active:bg-opacity-100'>Hubungi Kami</button>
                 </section>
             </main>
             <Loader show={isLoading} />

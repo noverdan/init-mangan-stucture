@@ -82,7 +82,7 @@ function UserMenu({ isOpen }) {
                             </div>
                         </div>
                         <hr className={isLoggedIn ? 'block my-2 border-primary-100 border-opacity-30' : 'hidden'} />
-                        <div onClick={() => console.log("Contact Us")} className='cursor-pointer'>{/* Hubungi Kami */}
+                        <div onClick={() => navigate("/contact-us")} className='cursor-pointer'>{/* Hubungi Kami */}
                             <div className='flex items-center gap-4'>
                                 <Icon icon="tdesign:service" className='text-primary-100' width={18} />
                                 <p className='select-none text-primary-100 font-medium'>Hubungi Kami</p>
