@@ -14,10 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   paket.init({
-    nama_paket: DataTypes.STRING,
-    id_kategori: DataTypes.STRING,
-    id_ulasan: DataTypes.STRING,
-    id_seller: DataTypes.STRING
+    nama_produk: DataTypes.STRING,
+    id_kategori: DataTypes.INTEGER,
+    id_usaha: DataTypes.INTEGER,
+    id_kota: DataTypes.INTEGER,
+    image_url: DataTypes.STRING,
+    deskripsi: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'paket',
