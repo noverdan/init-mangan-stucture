@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Hero from '../components/landing-page/Hero';
@@ -9,9 +9,11 @@ import TopCatering from '../components/landing-page/TopCatering';
 import Join from '../components/landing-page/Join';
 import { DataContext } from '../context/ContextProvider';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+const urlPackages = import.meta.env.VITE_URL_PACKAGES
 
 function LandingPage() {
-    const { isLoggedIn, setIsLoggedIn } = useContext(DataContext)
+    const { isLoggedIn } = useContext(DataContext)
     const navigate = useNavigate()
 
     if (isLoggedIn) {
