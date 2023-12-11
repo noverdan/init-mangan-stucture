@@ -14,12 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   transaksi.init({
-    id_menu: DataTypes.STRING,
-    id_user: DataTypes.STRING,
-    jumlah: DataTypes.STRING,
-    tanggal_acara: DataTypes.DATE,
-    id_pembayaran: DataTypes.STRING,
-    alamat: DataTypes.STRING,
+    id_menu: DataTypes.INTEGER,
+    id_paket: DataTypes.INTEGER,
+    id_usaha: DataTypes.INTEGER,
+    id_user: DataTypes.INTEGER,
+    id_status: DataTypes.INTEGER,
+    id_pembayaran: DataTypes.INTEGER,
+    id_detail_transaksi: DataTypes.INTEGER,
     keterangan: DataTypes.STRING
   }, {
     sequelize,

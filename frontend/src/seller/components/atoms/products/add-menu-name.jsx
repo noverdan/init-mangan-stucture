@@ -9,7 +9,7 @@ function AddMenuName({ onChange, menuData }) {
                 <label htmlFor="">Nama Menu</label> <br />
                 <input type="text"
                     placeholder='Masukan Makanan Pokok'
-                    className='p-1 text-black  rounded border-accent-200'
+                    className='p-1 placeholder:italic placeholder:text-slate-400 text-black  rounded border-accent-200'
                     name='nameMenu'
                     onChange={onChange}
                     value={menuData.nameMenu} />
@@ -23,7 +23,7 @@ function AddMenuName({ onChange, menuData }) {
                     name='price'
                     onChange={onChange}
                     value={menuData.price}
-                    className='p-1 text-black   rounded border-accent-200' />
+                    className='p-1 text-black placeholder:italic  placeholder:opacity-60  rounded border-accent-200' />
             </div>
         </div>
     )
