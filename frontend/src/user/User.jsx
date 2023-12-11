@@ -48,7 +48,7 @@ function User() {
                 <Route path="/pesanan/ulas/:idPesanan" element={<Ulas />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
-                <Route path="*" element={<NotFound />} />
+                {/* <Route path="*" element={<NotFound />} /> */}
             </Routes>
         </PackagesProvider>
     )

@@ -18,6 +18,7 @@ function NavbarUser() {
     const { isSearch, setSearch, setSearchParam } = useContext(SearchContext)
     const [isPopUp, setPopUp] = useState(false)
     const [dataUser, setDataUser] = useState({})
+    const [isLogin, setIslogin] = useState()
 
     const [inputSearch, setInputSearch] = useState("")
     const navigate = useNavigate()
@@ -27,6 +28,7 @@ function NavbarUser() {
             .then((res) => {
                 console.log(res);
                 setDataUser(res.data)
+                setIslogin(true)
             })
             .catch((err) => {
                 console.log(err);
@@ -78,7 +80,7 @@ function NavbarUser() {
                                 className={({ isActive }) => (isActive ? navActiveStyle : navInActiveStyle)}
                             >Homepage</NavLink>
 
-                            <span className={isLoggedIn ? "block" : "hidden"}>
+                            <span className={isLogin ? "block" : "hidden"}>
                                 <div className='group'>
                                     <div className='flex gap-1 items-center cursor-pointer'>
                                         <NavLink
@@ -130,7 +132,7 @@ function NavbarUser() {
                             <button onClick={goSearch}
                                 className='bg-primary-100 h-9 rounded-r-md px-2 hover:bg-primary-200 active:bg-primary-100'><Icon icon="ooui:next-ltr" className='text-white' /></button>
                         </div>
-                        <div className={isLoggedIn ? "block" : "hidden"}>
+                        <div className={isLogin ? "block" : "hidden"}>
                             <div className='hidden group xl:flex bg-cover bg-center w-10 aspect-square rounded-full cursor-pointer group hover:ring-2 hover:ring-primary-100 hover:ring-opacity-75' style={{ backgroundImage: `url(${dataUser.foto ? dataUser.foto : emptyProfile})` }}>
                                 <div className='hidden group-hover:block absolute py-11 right-20'>
                                     <div className='w-64 bg-white border border-primary-200 shadow-lg p-4 rounded-md'>
@@ -162,7 +164,7 @@ function NavbarUser() {
                                 </div>
                             </div>
                         </div>
-                        <div className={isLoggedIn ? "hidden" : "gap-2 w-40 hidden xl:flex"}>
+                        <div className={isLogin ? "hidden" : "gap-2 w-40 hidden xl:flex"}>
                             <button onClick={() => navigate("/register")} className=' bg-white text-primary-100 font-semibold border border-primary-100 w-full py-1 rounded hover:bg-gray-200'>Daftar</button>
                             <button onClick={() => navigate("/login")} className=' bg-primary-100 text-white w-full py-1 rounded hover:bg-opacity-75'>Login</button>
                         </div>

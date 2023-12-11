@@ -17,9 +17,9 @@ function TopCatering() {
     }, [packages])
 
     return (
-        <section className='flex flex-col justify-center items-center px-20 py-10'>
+        <section className='flex flex-col justify-center items-center w-[360px] lg:w-full mx-auto lg:px-20 py-10'>
             <header className='font-semibold text-xl text-center text-primary-100'>Paket Katering Teratas</header>
-            <div className='flex gap-4 mt-7'>
+            <div className='grid grid-cols-2 lg:flex gap-2 lg:gap-4 mt-7'>
                 {topPackages.map(item => {
                     const rangeHarga = () => {
                         const menu = menus.filter(packageMenu => packageMenu.idPaket == item.id);

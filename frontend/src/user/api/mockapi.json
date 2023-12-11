@@ -107,13 +107,7 @@
       "idPaket": 1,
       "namaMenu": "Menu Ayam Goreng",
       "hargaMenu": 20000,
-      "isiMenu": [
-        "Nasi",
-        "Ayam Goreng",
-        "Lalapan",
-        "Oseng Tempe",
-        "Sambal"
-      ],
+      "isiMenu": ["Nasi", "Ayam Goreng", "Lalapan", "Oseng Tempe", "Sambal"],
       "gambarMenu": "https://source.unsplash.com/random/500x500/?buffet"
     },
     {
@@ -121,13 +115,7 @@
       "idPaket": 1,
       "namaMenu": "Menu Ayam Bakar",
       "hargaMenu": 25000,
-      "isiMenu": [
-        "Nasi",
-        "Ayam Bakar",
-        "Lalapan",
-        "Oseng Tempe",
-        "Sambal"
-      ],
+      "isiMenu": ["Nasi", "Ayam Bakar", "Lalapan", "Oseng Tempe", "Sambal"],
       "gambarMenu": "https://source.unsplash.com/random/500x500/?food"
     },
     {
@@ -135,13 +123,7 @@
       "idPaket": 1,
       "namaMenu": "Menu Gulai Ayam",
       "hargaMenu": 22000,
-      "isiMenu": [
-        "Nasi",
-        "Ayam Gulai",
-        "Capcay",
-        "Oseng Tempe",
-        "Kerupuk"
-      ],
+      "isiMenu": ["Nasi", "Ayam Gulai", "Capcay", "Oseng Tempe", "Kerupuk"],
       "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
     },
     {
@@ -246,12 +228,7 @@
       "idPaket": 4,
       "namaMenu": "Menu Tumpeng 2",
       "hargaMenu": 38000,
-      "isiMenu": [
-        "Nasi Kuning",
-        "Sate Ayam",
-        "Telur Balado",
-        "Oseng Kangkung"
-      ],
+      "isiMenu": ["Nasi Kuning", "Sate Ayam", "Telur Balado", "Oseng Kangkung"],
       "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
     },
     {
@@ -356,12 +333,7 @@
       "idPaket": 7,
       "namaMenu": "Pecel Ayam",
       "hargaMenu": 17000,
-      "isiMenu": [
-        "Ketupat",
-        "Ayam Suwir",
-        "Pecel",
-        "Kerupuk"
-      ],
+      "isiMenu": ["Ketupat", "Ayam Suwir", "Pecel", "Kerupuk"],
       "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
     },
     {
@@ -369,12 +341,7 @@
       "idPaket": 7,
       "namaMenu": "Ikan Kali",
       "hargaMenu": 15000,
-      "isiMenu": [
-        "Nasi",
-        "Ikan Kali",
-        "Kentang Balado",
-        "Oseng Kangkung"
-      ],
+      "isiMenu": ["Nasi", "Ikan Kali", "Kentang Balado", "Oseng Kangkung"],
       "gambarMenu": "https://source.unsplash.com/random/500x500/?food"
     },
     {
@@ -396,12 +363,7 @@
       "idPaket": 8,
       "namaMenu": "Vegan 1",
       "hargaMenu": 20000,
-      "isiMenu": [
-        "Nasi Merah",
-        "Sayur Bayam",
-        "Tumis Wortel",
-        "Tempe Kering"
-      ],
+      "isiMenu": ["Nasi Merah", "Sayur Bayam", "Tumis Wortel", "Tempe Kering"],
       "gambarMenu": "https://source.unsplash.com/random/500x500/?breakfast"
     },
     {
@@ -409,12 +371,7 @@
       "idPaket": 8,
       "namaMenu": "Vegan 2",
       "hargaMenu": 18000,
-      "isiMenu": [
-        "Nasi",
-        "Sop Sayur",
-        "Kentang",
-        "Tempe Kering"
-      ],
+      "isiMenu": ["Nasi", "Sop Sayur", "Kentang", "Tempe Kering"],
       "gambarMenu": "https://source.unsplash.com/random/500x500/?buffet"
     },
     {
@@ -1023,7 +980,7 @@
     },
     {
       "nama": "Noverdan Putra Arsandy",
-      "email": "verdangalang@mail.com",
+      "email": "verdan@mail.com",
       "hp": "6285157994646",
       "password": "qwerty123",
       "foto": "https://hardrockfm.com/wp-content/uploads/2022/06/attachment-billie_joe_armstrong_green_day_live_2022.jpeg",
