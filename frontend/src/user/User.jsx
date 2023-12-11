@@ -21,6 +21,7 @@ import PesananDiproses from "./pages/PesananDiproses"
 import PesananSelesai from "./pages/PesananSelesai"
 import { useContext } from "react"
 import Profile from "./pages/Profile"
+import Ulas from "./pages/Ulas"
 
 
 
@@ -44,6 +45,7 @@ function User() {
                 <Route path="/pesanan/diproses/:idPesanan" element={<PesananDiproses />} />
                 <Route path="/pesanan/selesai/:idPesanan" element={<PesananSelesai />} />
                 <Route path="/pesanan/dibatalkan/:idPesanan" element={<PesananBatal />} />
+                <Route path="/pesanan/ulas/:idPesanan" element={<Ulas />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
                 <Route path="*" element={<NotFound />} />

@@ -192,27 +192,16 @@ export default function Checkout() {
     }
 
     function getDateNow() {
-        // Membuat objek Date yang merepresentasikan waktu saat ini
         const sekarang = new Date();
-
-        // Mengambil tanggal, bulan, dan tahun
         const tanggal = sekarang.getDate();
-        const bulan = sekarang.getMonth() + 1; // Bulan dimulai dari 0, sehingga perlu ditambahkan 1
+        const bulan = sekarang.getMonth() + 1;
         const tahun = sekarang.getFullYear();
-
-        // Mengambil jam, menit, dan detik
         const jam = sekarang.getHours();
         const menit = sekarang.getMinutes();
-        const detik = sekarang.getSeconds();
-
-        // Membuat string untuk menampilkan tanggal dan jam
         const tanggalJamString = tahun + "-" + padZero(bulan) + "-" + padZero(tanggal) + " " + padZero(jam) + ":" + padZero(menit) + " +0700";
-
-        // Fungsi untuk menambahkan nol pada angka tunggal (1 digit)
         function padZero(n) {
             return (n < 10) ? "0" + n : n;
         }
-
         return tanggalJamString
     }
 

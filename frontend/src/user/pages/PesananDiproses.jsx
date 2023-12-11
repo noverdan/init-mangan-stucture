@@ -34,6 +34,7 @@ export default function PesananDiproses() {
     const [popUpQuestion, setPopUpQuestion] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const navigate = useNavigate()
+    console.log("terjual:" + packageData.paketTerjual);
 
     console.log(settlements[0]);
 
@@ -142,6 +143,7 @@ export default function PesananDiproses() {
                 console.log(res.status);
                 setIsLoading(false)
                 setPopUpQuestion(false)
+                axios.patch(`${urlPackages}/${packageData.id}`, { paketTerjual: packageData.paketTerjual + 1 })
                 navigate("/pesanan/selesai")
             })
             .catch((err) => {
