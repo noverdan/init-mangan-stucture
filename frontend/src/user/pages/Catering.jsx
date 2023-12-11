@@ -18,12 +18,11 @@ import { PopUpAlert, PopUpQuestion } from '../components/PopUp';
 const urlPackages = import.meta.env.VITE_URL_PACKAGES
 const urlMenus = import.meta.env.VITE_URL_MENUS
 const urlReviews = import.meta.env.VITE_URL_REVIEWS
-const urlSellers = import.meta.env.VITE_URL_USER
+const urlSellers = import.meta.env.VITE_URL_SELLERS
 
 export default function Catering() {
     const { packageId } = useParams()
     const { isLoggedIn } = useContext(DataContext)
-    console.log(isLoggedIn);
     const [packageItem, setPackageItem] = useState({})
     const [menuItems, setMenuItems] = useState([])
     const [reviewItems, setReviewItems] = useState([])
@@ -91,7 +90,6 @@ export default function Catering() {
                 console.log(errMessage);
             });
     }
-
     function rangeHarga(menus) {
         const hargaTertinggi = Math.max(...menus.map(menu => menu.hargaMenu));
         const hargaTerendah = Math.min(...menus.map(menu => menu.hargaMenu));
@@ -112,14 +110,12 @@ export default function Catering() {
             return ""
         }
     }
-
     function setListMenu(id, nama, harga, isiMenu) {
         const menu = { id: id, nama: nama }
         setSelectedMenu(menu)
         setHargaMenu(Rp(harga))
         setIsiMenu(isiMenu)
     }
-
     function isChooseMenu() {
         if (selectedMenu.id) {
             return true
@@ -127,7 +123,6 @@ export default function Catering() {
             return false
         }
     }
-
     function toCheckout(idPackage, idMenu, idUser = 0) {
         if (!isLoggedIn) {
             setOpenQuestion(true)
@@ -143,7 +138,6 @@ export default function Catering() {
             setOpenAlert(true)
         }
     }
-
     function Ulasan() {
         return (
             <>

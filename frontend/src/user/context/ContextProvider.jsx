@@ -8,7 +8,7 @@ function ContextProvider({ children }) {
     const [packageIdSelected, setPackageIdSelected] = useState()
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [loadData, setLoadData] = useState(true)
-    const [token, setToken] = useState()
+    const [token, setToken] = useState({})
     const userData = localStorage.getItem("token")
 
     useEffect(() => {

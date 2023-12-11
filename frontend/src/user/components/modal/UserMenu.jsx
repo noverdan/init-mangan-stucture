@@ -1,14 +1,30 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../context/ContextProvider';
 import { Icon } from '@iconify/react';
 import { useNavigate } from 'react-router-dom';
 import { PopUpQuestion } from '../PopUp';
+import emptyProfile from '../../../assets/empty-profile.png'
+import axios from 'axios';
+
+const urlUser = import.meta.env.VITE_URL_USER
 
 function UserMenu({ isOpen }) {
-    const { isLoggedIn, setIsLoggedIn } = useContext(DataContext)
+    const { isLoggedIn, setIsLoggedIn, token } = useContext(DataContext)
     const [isSubPesanan, setSubPesanan] = useState(false)
     const [isPopUp, setPopUp] = useState(false)
     const navigate = useNavigate()
+    const [dataUser, setDataUser] = useState({})
+
+    useEffect(() => {
+        axios.get(`${urlUser}/${token.id}`)
+            .then((res) => {
+                console.log(res);
+                setDataUser(res.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, [isLoggedIn])
 
     function openSubPesanan() {
         if (isSubPesanan) {
@@ -32,9 +48,10 @@ function UserMenu({ isOpen }) {
                             <button onClick={() => navigate("/login")} className='bg-primary-100 text-white w-full py-1 rounded hover:bg-opacity-75'>Login</button>
                         </div>
                         <div className={isLoggedIn ? 'flex gap-4 items-center mb-3 w-full cursor-pointer' : 'hidden'}> {/* Profile */}
-                            <div className='bg-gray-300 w-12 h-12 rounded-full'></div>
-                            <div className='w-40'>
-                                <p className='select-none text-primary-100 font-semibold overflow-hidden text-ellipsis whitespace-nowrap'>John Doe Sumanggala Putrsa Samsudin</p>
+                            <div className='flex justify-center bg-gray-200 items-end bg-cover bg-center w-12 h-12 rounded-full' style={{ backgroundImage: `url(${dataUser.foto ? dataUser.foto : emptyProfile})` }}>
+                            </div>
+                            <div onClick={() => navigate("/profile")} className='w-40'>
+                                <p className='select-none text-primary-100 font-semibold overflow-hidden text-ellipsis whitespace-nowrap'>{dataUser.nama}</p>
                                 <div className='flex items-center gap-2'>
                                     <p className='select-none text-primary-100 text-xs'>Profil</p>
                                     <Icon icon="ooui:next-ltr" className='text-primary-100' width={8} />
@@ -65,7 +82,7 @@ function UserMenu({ isOpen }) {
                             </div>
                         </div>
                         <hr className={isLoggedIn ? 'block my-2 border-primary-100 border-opacity-30' : 'hidden'} />
-                        <div onClick={() => console.log("Contact Us")} className='cursor-pointer'>{/* Hubungi Kami */}
+                        <div onClick={() => navigate("/contact-us")} className='cursor-pointer'>{/* Hubungi Kami */}
                             <div className='flex items-center gap-4'>
                                 <Icon icon="tdesign:service" className='text-primary-100' width={18} />
                                 <p className='select-none text-primary-100 font-medium'>Hubungi Kami</p>
