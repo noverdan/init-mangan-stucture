@@ -8,7 +8,7 @@ function PaketList() {
     const [isOpen, setIsOpen] = useState(true);
     const { product } = useContext(ProductContext)
 
-    // Sort products by the minimum price of the menus
+
     const sortedProducts = [...product].sort((a, b) => {
         const minPriceA = Math.min(...a.menu.map(menu => menu.price));
         const minPriceB = Math.min(...b.menu.map(menu => menu.price));
@@ -40,7 +40,7 @@ function PaketList() {
                                 <p className="text-xs">{`${paket.menu.length} menu`}</p>
                             </div>
                             <div className="flex justify-between">
-                                <button className=" w-16  bg-red-900 text-white  transition-colors h-7 rounded-xl">Hapus</button>
+                                <button className=" w-16 bg-red-600  hover:bg-red-900 text-white  transition-colors h-7 rounded-xl">Hapus</button>
                                 <button className="bg-accent-200 text-white hover:bg-[#00454f]  w-16    h-7  rounded-xl  ">Edit</button>
                             </div>
                         </div>

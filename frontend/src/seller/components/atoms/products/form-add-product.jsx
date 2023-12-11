@@ -7,6 +7,7 @@ import InputMenuTambahan from './input-menu-tambahan';
 import { ProductContext } from '../../../context/product-provider';
 
 function FormAdd() {
+    const { addMenuToPaket } = useContext(ProductContext);
     const { product, setProduct } = useContext(ProductContext);
 
     const [img, setImg] = useState(null);
@@ -44,7 +45,6 @@ function FormAdd() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const newMenu = {
             id: new Date(),
             image: img,
@@ -56,6 +56,8 @@ function FormAdd() {
             tambahan1: formData.tambahan1,
         };
 
+        const paketId = 1;
+        addMenuToPaket(paketId, newMenu);
 
         setProduct((prevProduct) => {
             const updatedProduct = [...prevProduct];
