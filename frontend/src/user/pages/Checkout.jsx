@@ -14,11 +14,11 @@ import getPaymentLink from '../../utils/getPaymentLink';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../components/Loader';
 
-const urlPackages = "http://localhost:3000/packages"
-const urlMenus = "http://localhost:3000/menus"
-const urlUser = "http://localhost:3000/user"
-const urlSellers = "http://localhost:3000/sellers"
-const urlPesanan = "http://localhost:3000/pesanan"
+const urlPackages = import.meta.env.VITE_URL_PACKAGES
+const urlMenus = import.meta.env.VITE_URL_MENUS
+const urlUser = import.meta.env.VITE_URL_USER
+const urlSellers = import.meta.env.VITE_URL_SELLERS
+const urlPesanan = import.meta.env.VITE_URL_ORDERS
 
 export default function Checkout() {
     const stateCheckout = JSON.parse(sessionStorage.getItem("stateCheckout"))
@@ -93,19 +93,12 @@ export default function Checkout() {
             .then(function (res) {
                 const data = res.data
                 setUserData(data)
-                setInitialInput(data.nama, data.hp)
+                setInputUser({ ...inputUser, nama: data.nama, hp: data.hp, alamat: data.alamat })
             })
             .catch(function (err) {
                 const errMessage = err.message
                 console.log(errMessage);
             });
-    }
-    function setInitialInput(nama, hp) {
-        setInputUser((prev) => ({
-            ...prev,
-            nama: nama,
-            hp: hp
-        }))
     }
 
     function validateInput() {
@@ -199,27 +192,16 @@ export default function Checkout() {
     }
 
     function getDateNow() {
-        // Membuat objek Date yang merepresentasikan waktu saat ini
         const sekarang = new Date();
-
-        // Mengambil tanggal, bulan, dan tahun
         const tanggal = sekarang.getDate();
-        const bulan = sekarang.getMonth() + 1; // Bulan dimulai dari 0, sehingga perlu ditambahkan 1
+        const bulan = sekarang.getMonth() + 1;
         const tahun = sekarang.getFullYear();
-
-        // Mengambil jam, menit, dan detik
         const jam = sekarang.getHours();
         const menit = sekarang.getMinutes();
-        const detik = sekarang.getSeconds();
-
-        // Membuat string untuk menampilkan tanggal dan jam
         const tanggalJamString = tahun + "-" + padZero(bulan) + "-" + padZero(tanggal) + " " + padZero(jam) + ":" + padZero(menit) + " +0700";
-
-        // Fungsi untuk menambahkan nol pada angka tunggal (1 digit)
         function padZero(n) {
             return (n < 10) ? "0" + n : n;
         }
-
         return tanggalJamString
     }
 

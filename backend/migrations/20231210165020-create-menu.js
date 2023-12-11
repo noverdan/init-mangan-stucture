@@ -12,11 +12,20 @@ module.exports = {
       nama_menu: {
         type: Sequelize.STRING
       },
-      harga_menu: {
+      makanan_pokok: {
         type: Sequelize.STRING
       },
-      keterangan_menu: {
+      sayur: {
         type: Sequelize.STRING
+      },
+      lauk: {
+        type: Sequelize.STRING
+      },
+      tambahan: {
+        type: Sequelize.STRING
+      },
+      harga_menu: {
+        type: Sequelize.INTEGER
       },
       id_paket: {
         type: Sequelize.INTEGER,
@@ -27,6 +36,9 @@ module.exports = {
           key: 'id'
         },
         allowNull: false
+      },
+      image_url: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

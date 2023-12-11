@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   ulasan.init({
     id_user: DataTypes.INTEGER,
-    ulasan: DataTypes.STRING
+    ulasan: DataTypes.STRING,
+    id_paket: DataTypes.INTEGER,
+    tanggal: DataTypes.DATE,
+    bintang: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'ulasan',
