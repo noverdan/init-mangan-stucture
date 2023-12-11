@@ -20,6 +20,7 @@ export default function Profile() {
         alamat: "",
         foto: ""
     })
+    console.log(userInput);
     const [isLoading, setIsLoading] = useState(false)
     const [isPop, setPop] = useState({ alert: false, success: false, question: false })
 
@@ -30,7 +31,7 @@ export default function Profile() {
                 const data = res.data
                 console.log(res);
                 setDataUser(data)
-                setUserInput({ nama: data.nama, email: data.email, hp: data.hp, alamat: data.alamat, foto: data.foto })
+                setUserInput({ nama: data.nama, email: data.email, hp: data.hp, alamat: data.alamat, foto: data.foto ? data.foto : emptyProfile })
                 setIsLoading(false)
             })
             .catch((err) => {
@@ -59,6 +60,14 @@ export default function Profile() {
                 setIsLoading(false)
             })
     }
+    function setImage(event) {
+        const foto = URL.createObjectURL(event.target.files[0])
+        if (foto.length == 0) {
+            console.log("no file")
+        } else {
+            setUserInput({ ...userInput, foto: foto })
+        }
+    }
 
     return (
         <>
@@ -72,8 +81,13 @@ export default function Profile() {
             <main>
                 {/* Foto Profile */}
                 <section>
-                    <div className='flex relative justify-center mx-auto bg-gray-200 items-end bg-cover bg-center w-24 h-24 rounded-full' style={{ backgroundImage: `url(${dataUser.foto ? dataUser.foto : emptyProfile})` }}>
-                        <button className='absolute top-1 right-2'><Icon icon="fa-solid:edit" className='text-primary-100 hover:text-opacity-60' width={20} /></button>
+                    <div className='flex relative justify-center mx-auto shadow-lg bg-gray-200 items-end bg-cover bg-center w-24 h-24 rounded-full' style={{ backgroundImage: `url(${userInput.foto})` }}>
+                        <div className='absolute right-1 top-1'>
+                            <div className='w-5 bg-transparent flex relative overflow-hidden'>
+                                <input onChange={setImage} className='opacity-0 absolute' type="file" accept="image/*" />
+                                <Icon icon="fa-solid:edit" className='text-primary-100 hover:text-opacity-60' width={20} />
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <section className=' w-[360px] mx-auto mb-5'>
