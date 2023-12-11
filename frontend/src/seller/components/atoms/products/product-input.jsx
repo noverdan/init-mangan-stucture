@@ -32,11 +32,16 @@ function ProductInput() {
     return (
         <div className="space-y-3" >
             <div className='space-y-2 flex flex-col '>
-                <h1 className='font-semibold md:text-base text-accent-200'>Nama Paket </h1>
-                <input placeholder='masukan nama menu'
+                <label className='font-semibold md:text-base text-accent-200'>Nama Paket </label>
+                <input placeholder='masukan nama paket'
                     value={inputPaket}
                     onChange={(e) => setInputPaket(e.target.value)}
-                    className='w-56  border-[0.5px] md:w-[700px]  border-accent-200  px-3 py-3 md:py-6 h-7 rounded-lg shadow-[6px_6px_7px_-1px_rgba(0,0,0,0.15)]' />
+                    className='w-56  border-[0.5px] md:w-[700px] placeholder:italic placeholder:text-slate-400  border-accent-200  px-3 py-3 md:py-6 h-7 rounded-lg shadow-[6px_6px_7px_-1px_rgba(0,0,0,0.15)]' />
+                <label className='font-semibold md:text-base  text-accent-200'>Deskripsi </label>
+                <input placeholder='masukan deskripsi paket'
+
+                    className='w-56  border-[0.5px] md:w-[700px] placeholder:italic placeholder:text-slate-400 border-accent-200  px-3 py-3 md:py-6 h-7 rounded-lg shadow-[6px_6px_7px_-1px_rgba(0,0,0,0.15)]' />
+
             </div>
 
             <div className='space-y-2 '>
