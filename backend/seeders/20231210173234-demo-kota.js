@@ -3,20 +3,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('kategori_menus', [
+    return queryInterface.bulkInsert('kotas', [
       {
-        kategori: "kitanan"
+        nama_kota: "Jakarta"
       },
       {
-        kategori: "rice box"
+        nama_kota: "Bogor"
       },
       {
-        kategori: "pernikahan"
+        nama_kota: "Depok"
       }
     ])
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('kategori_menus', null, {});
+    return queryInterface.bulkDelete('kotas', null, {});
   }
 };
