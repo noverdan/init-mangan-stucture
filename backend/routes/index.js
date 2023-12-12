@@ -4,8 +4,10 @@ const route = express.Router()
 const userRoute = require('./user-route')
 
 route.get("/", (req, res) => {
-    res.json("selamat datang di mangan")
+    res.json("selamat datang di mangan API")
 })
+
+
 
 route.use("/users", userRoute)
 
