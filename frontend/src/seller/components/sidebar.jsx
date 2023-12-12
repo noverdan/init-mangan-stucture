@@ -21,9 +21,9 @@ function Sidebar() {
                 <div>
                     <PaketSidebar />
                 </div>
-                <NavLink to="/products">
+                <div >
                     <PesananSidebar />
-                </NavLink>
+                </div>
                 <NavLink to="/products">
                     <PelangganSidebar />
                 </NavLink>

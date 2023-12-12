@@ -5,6 +5,7 @@ import ProductProvider from "../context/product-provider"
 import PaketList from "./paket-list"
 import RegistesSeller from "./registerSeller"
 import Keuangan from "./keuangan"
+import PesananMasuk from "./pesanan-masuk"
 
 
 function Seller() {
@@ -16,6 +17,7 @@ function Seller() {
                 <Route path="/list-products" element={<PaketList />} />
                 <Route path="/register-seller" element={<RegistesSeller />} />
                 <Route path="/payment" element={<Keuangan />} />
+                <Route path="/pesanan-masuk" element={<PesananMasuk />} />
             </Routes>
         </ProductProvider>
     )
