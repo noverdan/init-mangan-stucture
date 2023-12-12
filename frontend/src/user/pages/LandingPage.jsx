@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Hero from '../components/landing-page/Hero';
@@ -9,9 +9,10 @@ import TopCatering from '../components/landing-page/TopCatering';
 import Join from '../components/landing-page/Join';
 import { DataContext } from '../context/ContextProvider';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function LandingPage() {
-    const { isLoggedIn, setIsLoggedIn } = useContext(DataContext)
+    const { isLoggedIn } = useContext(DataContext)
     const navigate = useNavigate()
 
     if (isLoggedIn) {
@@ -22,17 +23,17 @@ function LandingPage() {
     return (
         <>
             <Navbar />
-            <main className='bg-[url("https://svgshare.com/i/xpr.svg")] w-full bg-repeat-y' style={{ backgroundPositionY: '76%' }}>
+            <main className='lg:bg-[url("https://svgshare.com/i/xpr.svg")] bg-white max-w-full w-full bg-repeat-y' style={{ backgroundPositionY: '76%' }}>
                 <Hero />
-                <hr className='mx-72 border border-bg-300 border-opacity-70' />
+                <hr className=' mx-auto w-[360px] lg:w-full border border-bg-300 border-opacity-70' />
                 <EaseOrdering />
-                <hr className='mx-72 border border-bg-300 border-opacity-70' />
+                <hr className=' mx-auto w-[360px] lg:w-full border border-bg-300 border-opacity-70' />
                 <AboutUs />
-                <hr className='mx-72 border border-bg-300 border-opacity-70 mb-10' />
+                <hr className=' mx-auto w-[360px] lg:w-full border border-bg-300 border-opacity-70 mb-10' />
                 <Area />
-                <hr className='mx-72 border border-bg-300 border-opacity-70' />
+                <hr className=' mx-auto w-[360px] lg:w-full border border-bg-300 border-opacity-70' />
                 <TopCatering />
-                <hr className='mx-72 border border-bg-300 border-opacity-70' />
+                <hr className=' mx-auto w-[360px] lg:w-full border border-bg-300 border-opacity-70' />
                 <Join />
             </main>
             <Footer />
