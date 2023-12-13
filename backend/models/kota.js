@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      kota.hasMany(models.paket, { foreignKey: 'id_kota' });
+      kota.hasMany(models.usaha, { foreignKey: 'id_kota' });
     }
   }
   kota.init({

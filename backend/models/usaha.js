@@ -11,12 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      usaha.hasMany(models.paket, { foreignKey: 'id_usaha' });
+      usaha.belongsTo(models.user, { foreignKey: 'id_seller' });
+      usaha.belongsTo(models.kota, { foreignKey: 'id_kota' });
     }
   }
   usaha.init({
     nama_usaha: DataTypes.STRING,
-    alamat: DataTypes.STRING,
-    id_seller: DataTypes.INTEGER
+    id_seller: DataTypes.INTEGER,
+    id_kota: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'usaha',

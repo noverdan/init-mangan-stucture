@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      kategori_produk.hasMany(models.paket, { foreignKey: 'id_kategori' });
     }
   }
   kategori_produk.init({
