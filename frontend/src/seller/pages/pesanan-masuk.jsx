@@ -18,17 +18,15 @@ function PesananMasuk() {
                 </button>
             </div>
             <div className='flex flex-col'>
-                <div className=' '>
-                    <div className=' md:gap-[800px] gap-40 items-center  flex mt-[10px]'>
-                        <h1 className='text-accent-200 font-semibold text-lg'>Keuangan</h1>
-                        <button className='flex items-center gap-1 text-accent-200 font-semibold text-lg'>
-                            <p>user view</p>
-                            <Icon icon="line-md:clipboard-arrow-twotone" />
-                        </button>
-                    </div>
+                <div className='mt-[10px] ml-7'>
+                    <button className='flex items-center gap-1 text-accent-200 font-semibold text-lg'>
+                        <p>user view</p>
+                        <Icon icon="line-md:clipboard-arrow-twotone" />
+                    </button>
                 </div>
 
-                <div className='flex  w-full gap-5 md:gap-44 mt-8 md:mr-8 bg-white p-3 md:p-6 rounded-xl shadow-xl md:text-base text-[8px]'>
+
+                <div className='flex  ml-6 w-full gap-5 md:gap-44 mt-8 md:mr-8 bg-white p-3 md:p-6 rounded-xl shadow-xl md:text-base text-[8px]'>
                     <div className='flex items-center gap-2'>
                         <div className='md:w-32 md:h-32 w-14 h-16 shadow-xl bg-slate-950 rounded-[10px]  overflow-hidden'>
                             <img src='' alt="Uploaded" className="w-full h-full object-cover" />
