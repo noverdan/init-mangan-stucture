@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     ulasan: DataTypes.STRING,
     id_paket: DataTypes.INTEGER,
     tanggal: DataTypes.DATE,
-    bintang: DataTypes.STRING
+    bintang: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'ulasan',
