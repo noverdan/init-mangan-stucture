@@ -21,12 +21,12 @@ function Sidebar() {
                 <div>
                     <PaketSidebar />
                 </div>
-                <div >
+                <div>
                     <PesananSidebar />
                 </div>
-                <NavLink to="/products">
+                <div >
                     <PelangganSidebar />
-                </NavLink>
+                </div>
                 <NavLink to="/payment">
                     <PaymentSidebar />
                 </NavLink>
