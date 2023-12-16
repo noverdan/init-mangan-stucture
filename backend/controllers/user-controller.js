@@ -84,20 +84,20 @@ module.exports = {
             if (!getUser) {
                 res.status(404).json({
                     code: "NOTFOUND",
-                    message: "user not found"
+                    message: "User Not Found"
                 })
             } else {
                 let isPwdCorrect = bcrypt.compareSync(data.password, getUser.password)
                 if (!isPwdCorrect) {
                     res.status(406).json({
                         code: "WRPWD",
-                        message: "wrong-password"
+                        message: "Wrong Password"
                     })
                 } else if (isPwdCorrect) {
-                    const token = jwt.sign({ id: getUser.id, id_level: getUser.id_level, email: getUser.email }, SECRET, { expiresIn: '1d' })
+                    const token = jwt.sign({ id: getUser.id, id_level: getUser.id_level, email: getUser.email }, SECRET, { expiresIn: '2d' })
                     res.json({
                         code: "SUCCESS",
-                        message: "login-successful",
+                        message: "Login Berhasil",
                         token
                     })
                 } else {

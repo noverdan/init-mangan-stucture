@@ -13,9 +13,7 @@ import Loader from "../components/Loader";
 
 
 export default function Homepage() {
-    const { isLoggedIn, setIsLoggedIn, loadData, setLoadData } = useContext(DataContext)
-    console.log("Load : " + loadData);
-    console.log("isLoggedIn : " + isLoggedIn);
+    const { loadData } = useContext(DataContext)
     const { filter, setFilter } = useContext(FilterContext)
     const kota = [
         { id: 1, nama_kota: "Jakarta" },
@@ -58,7 +56,7 @@ export default function Homepage() {
                         <Dropdown.Divider />
                         {
                             kota.map(item => {
-                                return <Dropdown.Item className="text-black" onClick={() => setSelectedKota(item.nama_kota)} >{item.nama_kota}</Dropdown.Item>
+                                return <Dropdown.Item key={item.id} className="text-black" onClick={() => setSelectedKota(item.nama_kota)} >{item.nama_kota}</Dropdown.Item>
                             })
                         }
                     </Dropdown>
@@ -67,7 +65,7 @@ export default function Homepage() {
                         <Dropdown.Divider />
                         {
                             kategori.map(item => {
-                                return <Dropdown.Item className="text-black" onClick={() => setSelectedKategori(item.kategori)} >{item.kategori}</Dropdown.Item>
+                                return <Dropdown.Item key={item.id} className="text-black" onClick={() => setSelectedKategori(item.kategori)} >{item.kategori}</Dropdown.Item>
                             })
                         }
                     </Dropdown>

@@ -51,7 +51,7 @@ module.exports = {
                         const rating = avgBintang.toFixed(1);
                         return rating
                     } else {
-                        return 0
+                        return ""
                     }
                 }
                 const packageData = {
@@ -131,7 +131,7 @@ module.exports = {
             res.status(200).json({
                 code: "SUCCESS",
                 message: "Berhasil mengambil data paket",
-                data: {
+                package: {
                     ...package,
                     harga: rangeHarga(),
                     rating: rating(),

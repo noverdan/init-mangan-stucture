@@ -1,47 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Icon } from '@iconify/react';
 import Mascot from '../../assets/mascot-sip.png'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { PopUpAlert, PopUpSucces } from '../components/PopUp';
 import Loader from '../components/Loader';
-
-const urlUser = import.meta.env.VITE_URL_USER
+import { DataContext } from '../context/ContextProvider';
 
 function Login() {
+    const auth = localStorage.getItem("authorization")
+    const { setIsLoggedIn } = useContext(DataContext)
     const [inputUser, setInputUser] = useState({ email: "", pass: "" })
     const [isPopUpAlert, setPopUpAlert] = useState(false)
     const [isPopUpSuccess, setPopUpSuccess] = useState(false)
     const [popUpMessage, setPopUpMessage] = useState("")
     const [isLoading, setLoading] = useState(false)
-    const [userData, setUserData] = useState({ id: "" })
+    const [authorization, setAuthorization] = useState("")
     const navigate = useNavigate()
+    if (auth) {
+        navigate("/homepage", { replace: true })
+    }
     function goBack() {
         navigate(-1)
-    }
-    function fetchData() {
-        axios.get(`${urlUser}?email=${inputUser.email}`)
-            .then((res) => {
-                const data = res.data[0]
-                if (data) {
-                    if (data.password === inputUser.pass) {
-                        setUserData({ id: data.id })
-                        setPopUpMessage("Berhasil Login.")
-                        setPopUpSuccess(true)
-                    } else {
-                        setPopUpMessage("Password Salah.")
-                        setPopUpAlert(true)
-                    }
-                } else {
-                    setPopUpMessage("Email Tidak Ditemukan.")
-                    setPopUpAlert(true)
-                }
-                setLoading(false)
-            })
-            .catch((err) => {
-                console.log(err);
-                setLoading(false)
-            })
     }
     function validation() {
         if (inputUser.email && inputUser.pass) {
@@ -51,7 +31,42 @@ function Login() {
                     setPopUpAlert(true)
                 } else {
                     setLoading(true)
-                    fetchData()
+                    tryLogin(inputUser.email, inputUser.pass)
+                        .then((res) => {
+                            const code = res.data.code
+                            if (code === "SUCCESS") {
+                                setAuthorization(res.data.token)
+                                setPopUpSuccess(true)
+                                setLoading(false)
+                                setPopUpMessage("Login Berhasil")
+                            }
+                            else {
+                                setPopUpAlert(true)
+                                setPopUpMessage(
+                                    <>
+                                        <p>{res.data.message}</p>
+                                        <p className='text-xs'>code:{res.data.code}</p>
+                                    </>
+                                )
+                                console.log(res.data);
+                                setLoading(false)
+                            }
+                        })
+                        .catch((err) => {
+                            const $ = {
+                                code: err.response.data.code,
+                                message: err.response.data.message,
+                                error: err.response.data.error
+                            }
+                            setPopUpAlert(true)
+                            setPopUpMessage(
+                                <>
+                                    <p>{$.message}</p>
+                                    <p className='text-xs'>{$.error}</p>
+                                </>
+                            )
+                            setLoading(false)
+                        })
                 }
             } else {
                 setPopUpMessage("Masukan Email dengan benar.")
@@ -68,11 +83,10 @@ function Login() {
         }
     }
     function loggenIn() {
-        const simulateToken = JSON.stringify(userData)
-        localStorage.setItem("token", simulateToken)
+        localStorage.setItem("authorization", "Bearier " + authorization)
+        setIsLoggedIn(true)
         navigate("/homepage", { replace: true })
     }
-
     return (
         <>
             <main className="mx-auto w-[360px] py-5">
@@ -116,3 +130,18 @@ function Login() {
     )
 }
 export default Login
+
+function tryLogin(email, password) {
+    const config = {
+        method: "POST",
+        url: "http://localhost:3000/users/login",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: {
+            "email": email,
+            "password": password
+        }
+    }
+    return axios.request(config)
+}

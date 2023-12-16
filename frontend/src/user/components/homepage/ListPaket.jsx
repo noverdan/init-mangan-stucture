@@ -5,49 +5,51 @@ import { SearchContext } from '../../context/SearchProvider';
 import { PackagesContext } from '../../context/PackagesProvider';
 import { Icon } from '@iconify/react';
 import { FilterContext } from '../../context/FilterProvider';
+import { DataContext } from '../../context/ContextProvider';
 
 export default function ListPaket() {
+    const { dataPackages } = useContext(DataContext)
     const { packages, menus, reviews, errStatus } = useContext(PackagesContext);
     const { filter, setFilter } = useContext(FilterContext)
 
-    const [packagesList, setPackagesList] = useState([])
+    const [packagesList, setPackagesList] = useState(dataPackages)
     const { searchParam } = useContext(SearchContext)
 
     useEffect(() => {
         if (searchParam) {
             const searchInput = searchParam.split(" ")
             const searchWords = searchInput.filter(item => item !== "")
-            const searchResult = packages.filter(packageItem => {
-                let namaLower = packageItem.namaPaket.toLowerCase()
+            const searchResult = dataPackages.filter(packageItem => {
+                let namaLower = packageItem.nama_produk.toLowerCase()
                 return searchWords.every(keyword => namaLower.includes(keyword.toLowerCase()));
             });
             setPackagesList(searchResult);
         } else {
-            setPackagesList(packages)
+            setPackagesList(dataPackages)
         }
-    }, [packages, searchParam])
+    }, [dataPackages, searchParam])
 
     useEffect(() => {
         let kota = filter.kota
         let kategori = filter.kategori
 
         if (kota && kategori) {
-            const filteredPackages = packages.filter(packageItem =>
-                packageItem.lokasiPaket.toLowerCase() === kota.toLowerCase() && packageItem.kategori.toLowerCase() === kategori.toLowerCase()
+            const filteredPackages = dataPackages.filter(packageItem =>
+                packageItem["kotum.nama_kota"].toLowerCase() === kota.toLowerCase() && packageItem["kategori_produk.kategori"].toLowerCase() === kategori.toLowerCase()
             );
             setPackagesList(filteredPackages)
         } else if (kota) {
-            const filteredPackages = packages.filter(packageItem =>
-                packageItem.lokasiPaket.toLowerCase() === kota.toLowerCase()
+            const filteredPackages = dataPackages.filter(packageItem =>
+                packageItem["kotum.nama_kota"].toLowerCase() === kota.toLowerCase()
             );
             setPackagesList(filteredPackages)
         } else if (kategori) {
-            const filteredPackages = packages.filter(packageItem =>
-                packageItem.kategori.toLowerCase() === kategori.toLowerCase()
+            const filteredPackages = dataPackages.filter(packageItem =>
+                packageItem["kategori_produk.kategori"].toLowerCase() === kategori.toLowerCase()
             );
             setPackagesList(filteredPackages)
         } else {
-            setPackagesList(packages)
+            setPackagesList(dataPackages)
         }
 
     }, [filter])
@@ -58,37 +60,8 @@ export default function ListPaket() {
                 <div className="w-[360px] mx-auto grid gap-2 grid-cols-2 md:grid-cols-3 md:px-32 md:w-full lg:px-20 lg:grid-cols-5 lg:gap-3">
                     {
                         packagesList.map(packageItem => {
-                            const rangeHarga = () => {
-                                const menu = menus.filter(packageMenu => packageMenu.idPaket == packageItem.id);
-                                const hargaTertinggi = Math.max(...menu.map(menu => menu.hargaMenu));
-                                const hargaTerendah = Math.min(...menu.map(menu => menu.hargaMenu));
-                                return `${Rp(hargaTerendah)} - ${Rp(hargaTertinggi)}`
-                            }
-
-                            const totalMenu = () => {
-                                const menu = menus.filter(packageMenu => packageMenu.idPaket == packageItem.id);
-                                const total = menu.length
-                                return `${total} Menu`
-                            }
-
-                            const rating = () => {
-                                const review = reviews.filter(packageReview => packageReview.idPaket == packageItem.id);
-                                const bintang = review.map(review => review.bintang);
-                                const jumlahBintang = bintang.length
-                                if (jumlahBintang) {
-                                    const totalBintang = bintang.reduce((acc, nilai) => acc + nilai, 0);
-                                    const rataBintang = totalBintang / jumlahBintang
-                                    const rating = rataBintang.toFixed(1);
-                                    return rating
-                                } else if (!jumlahBintang) {
-                                    return ""
-                                } else {
-                                    return ""
-                                }
-                            }
-
                             return (
-                                <Card key={packageItem.id} packageId={packageItem.id} image={packageItem.gambarPaket} title={packageItem.namaPaket} priceRange={rangeHarga()} menuTotal={totalMenu()} rating={rating()} sold={packageItem.paketTerjual} city={packageItem.lokasiPaket} />
+                                <Card key={packageItem.id} packageId={packageItem.id} image={packageItem.image_url} title={packageItem.nama_produk} priceRange={packageItem.range_harga} menuTotal={packageItem.total_menu} rating={packageItem.rating} sold={packageItem.terjual} city={packageItem["kotum.nama_kota"]} />
                             )
                         })
                     }

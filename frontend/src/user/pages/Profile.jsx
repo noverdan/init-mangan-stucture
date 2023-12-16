@@ -11,8 +11,7 @@ const urlUser = import.meta.env.VITE_URL_USER
 
 export default function Profile() {
     const navigate = useNavigate()
-    const { isLoggedIn, token } = useContext(DataContext)
-    const [dataUser, setDataUser] = useState({})
+    const { isLoggedIn, token, authorization } = useContext(DataContext)
     const [userInput, setUserInput] = useState({
         nama: "",
         email: "",
@@ -26,12 +25,11 @@ export default function Profile() {
 
     useEffect(() => {
         setIsLoading(true)
-        axios.get(`${urlUser}/${token.id}`)
+        fetchProfileUser(authorization)
             .then((res) => {
-                const data = res.data
-                console.log(res);
-                setDataUser(data)
-                setUserInput({ nama: data.nama, email: data.email, hp: data.hp, alamat: data.alamat, foto: data.foto ? data.foto : emptyProfile })
+                const data = res.data.user
+                console.log(res.data.message);
+                setUserInput({ nama: data.nama, email: data.email, hp: data.no_hp, alamat: data.alamat ? data.alamat : "", foto: data.image_url ? data.image_url : emptyProfile })
                 setIsLoading(false)
             })
             .catch((err) => {
@@ -130,7 +128,7 @@ export default function Profile() {
             <Loader show={isLoading} />
             <PopUpQuestion
                 isOpen={isPop.question} message={"Yakin ingin menyimpan perubahan pada Profil anda?"}
-                onProcess={updateData} onCancel={() => setPop({ ...isPop, question: false })}
+                onProcess={() => {/*updateData*/ }} onCancel={() => setPop({ ...isPop, question: false })}
                 onClose={() => setPop({ ...isPop, question: false })}
             />
             <PopUpSucces
@@ -139,4 +137,15 @@ export default function Profile() {
             />
         </>
     )
+}
+
+function fetchProfileUser(auth) {
+    let config = {
+        method: 'get',
+        url: 'http://localhost:3000/users',
+        headers: {
+            'Authorization': auth
+        }
+    };
+    return axios.request(config)
 }

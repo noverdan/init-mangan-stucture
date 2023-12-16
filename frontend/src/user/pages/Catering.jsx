@@ -15,6 +15,7 @@ import axios from 'axios';
 import Rp from '../../utils/Rupiah';
 import { DataContext } from '../context/ContextProvider';
 import { PopUpAlert, PopUpQuestion } from '../components/PopUp';
+import Loader from '../components/Loader';
 const urlPackages = import.meta.env.VITE_URL_PACKAGES
 const urlMenus = import.meta.env.VITE_URL_MENUS
 const urlReviews = import.meta.env.VITE_URL_REVIEWS
@@ -22,19 +23,17 @@ const urlSellers = import.meta.env.VITE_URL_SELLERS
 
 export default function Catering() {
     const { packageId } = useParams()
-    const { isLoggedIn } = useContext(DataContext)
-    const [packageItem, setPackageItem] = useState({})
-    const [menuItems, setMenuItems] = useState([])
-    const [reviewItems, setReviewItems] = useState([])
-    const [sellerItem, setSellerItem] = useState({})
+    const { isLoggedIn, authorization } = useContext(DataContext)
     const [token, setToken] = useState({})
 
-    const [selectedMenu, setSelectedMenu] = useState({
-        id: null,
-        nama: ""
-    })
-    const [hargaMenu, setHargaMenu] = useState("")
-    const [isiMenu, setIsiMenu] = useState([])
+    const [paket, setPaket] = useState({})
+    const [menu, setMenu] = useState([])
+    const [ulasan, setUlasan] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+    console.log(paket);
+    console.log(menu);
+
+    const [selectedMenu, setSelectedMenu] = useState({})
     const [openModal, setOpenModal] = useState(false);
     const [openAlert, setOpenAlert] = useState(false)
     const [openQuestion, setOpenQuestion] = useState(false)
@@ -42,98 +41,53 @@ export default function Catering() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        getPackageById()
-        getMenus()
-        getReviews()
-        setToken(JSON.parse(localStorage.getItem("token")))
+        setIsLoading(true)
+        fetchMenu(packageId)
+            .then((res) => {
+                setPaket(res.data.package)
+                setMenu(res.data.package.menu)
+            })
+            .then(() => {
+                fetchUlasan(packageId)
+                    .then((res) => {
+                        console.log(res.data.message);
+                        setUlasan(res.data.ulasan)
+                        setIsLoading(false)
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            })
+            .catch((err) => {
+                console.log(err);
+                setIsLoading(false)
+            })
     }, [])
 
-    async function getPackageById() {
-        await axios.get(`${urlPackages}/${packageId}`)
-            .then(function (res) {
-                setPackageItem(res.data)
-                getSeller(res.data.idPenjual)
-            })
-            .catch(function (err) {
-                const errMessage = err.message
-                console.log(errMessage);
-            });
-    }
-    async function getMenus() {
-        await axios.get(`${urlMenus}?idPaket=${packageId}`)
-            .then(function (res) {
-                setMenuItems(res.data)
-                rangeHarga(res.data)
-            })
-            .catch(function (err) {
-                const errMessage = err.message
-                console.log(errMessage);
-            });
-    }
-    async function getSeller(idSeller) {
-        await axios.get(`${urlSellers}/${idSeller}`)
-            .then(function (res) {
-                setSellerItem(res.data)
-            })
-            .catch(function (err) {
-                const errMessage = err.message
-                console.log(errMessage);
-            });
-    }
-    async function getReviews() {
-        await axios.get(`${urlReviews}?idPaket=${packageId}`)
-            .then(function (res) {
-                setReviewItems(res.data)
-            })
-            .catch(function (err) {
-                const errMessage = err.message
-                console.log(errMessage);
-            });
-    }
-    function rangeHarga(menus) {
-        const hargaTertinggi = Math.max(...menus.map(menu => menu.hargaMenu));
-        const hargaTerendah = Math.min(...menus.map(menu => menu.hargaMenu));
-        const harga = `${Rp(hargaTerendah)} - ${Rp(hargaTertinggi)}`
-        setHargaMenu(harga)
-    }
-    function rating(review) {
-        const bintang = review.map(review => review.bintang);
-        const jumlahBintang = bintang.length
-        if (jumlahBintang) {
-            const totalBintang = bintang.reduce((acc, nilai) => acc + nilai, 0);
-            const rataBintang = totalBintang / jumlahBintang
-            const rating = rataBintang.toFixed(1);
-            return rating
-        } else if (!jumlahBintang) {
-            return ""
-        } else {
-            return ""
-        }
-    }
-    function setListMenu(id, nama, harga, isiMenu) {
-        const menu = { id: id, nama: nama }
-        setSelectedMenu(menu)
-        setHargaMenu(Rp(harga))
-        setIsiMenu(isiMenu)
-    }
-    function isChooseMenu() {
+    function toCheckout() {
         if (selectedMenu.id) {
-            return true
-        } else {
-            return false
-        }
-    }
-    function toCheckout(idPackage, idMenu, idUser = 0) {
-        if (!isLoggedIn) {
-            setOpenQuestion(true)
-            return
-        }
-        if (isChooseMenu()) {
-            const data = { idPackage: idPackage, idMenu: idMenu, idUser: idUser }
-            const dataString = JSON.stringify(data)
-            sessionStorage.setItem("stateCheckout", dataString)
-            navigate('/checkout')
-            window.scrollTo(0, 0)
+            setIsLoading(true)
+            fetchUser(authorization)
+                .then((res) => {
+                    if (res.data.code === "SUCCESS") {
+                        console.log("Berhasil ke CHECKOUT");
+                        setIsLoading(false)
+                    }
+                    else {
+                        setIsLoading(false)
+                        setOpenQuestion(true)
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setIsLoading(false)
+                    setOpenQuestion(true)
+                })
+            // const data = { idPackage: idPackage, idMenu: idMenu, idUser: idUser }
+            // const dataString = JSON.stringify(data)
+            // sessionStorage.setItem("stateCheckout", dataString)
+            // navigate('/checkout')
+            // window.scrollTo(0, 0)
         } else {
             setOpenAlert(true)
         }
@@ -144,7 +98,7 @@ export default function Catering() {
                 <Modal size={"sm"} position={"center"} show={openModal} onClose={() => setOpenModal(false)}>
                     <Modal.Header>Ulasan</Modal.Header>
                     <Modal.Body>
-                        {reviewItems.map(item => {
+                        {ulasan.map(item => {
                             return (
                                 <ReviewContent key={item.id} user={item.user} tanggal={item.tanggal} bintang={item.bintang} ulasan={item.ulasan} />
                             )
@@ -168,58 +122,57 @@ export default function Catering() {
                     </button>
                     <div className="w-full h-auto aspect-square">
                         <Carousel slide={false}>
-                            <CarouselImage image={packageItem.gambarPaket} name='' />
-                            {menuItems.map(item => {
-                                const id = item.id
-                                const name = item.namaMenu
-                                const image = item.gambarMenu
+                            <CarouselImage  image={paket.image_url} name='' />
+                            {menu.map(item => {
                                 return (
-                                    <CarouselImage key={id} image={image} name={name} />
+                                    <CarouselImage key={menu.id} image={item.image_url} name={item.nama_menu} />
                                 )
                             })}
                         </Carousel>
                     </div>
                 </section>
                 <section id='details' className='mt-2'>
-                    <h1 id='title' className='font-bold text-xl text-primary-100 leading-6'>{packageItem.namaPaket}</h1>{/* Nama Paket */}
+                    <h1 id='title' className='font-bold text-xl text-primary-100 leading-6'>{paket.nama_produk}</h1>{/* Nama Paket */}
                     <div className='flex gap-1 items-center font-semibold text-accent-200 my-1'>
                         <Icon icon="entypo:shop" width={18} />
-                        <h4 id='seller' className=' '>{sellerItem.nama}</h4>{/* Nama Toko */}
-                        <p className='font-medium ml-auto text-sm flex items-center '>{packageItem.lokasiPaket}<Icon icon="mdi:location" /></p>{/* Lokasi Paket */}
+                        <h4 id='seller' className=' '>{paket["usaha.nama_usaha"]}</h4>{/* Nama Toko */}
+                        <p className='font-medium ml-auto text-sm flex items-center '>{paket["kotum.nama_kota"]}<Icon icon="mdi:location" /></p>{/* Lokasi Paket */}
                     </div>
-                    <h1 id='title' className='font-bold text-lg text-accent-200 '>{hargaMenu}</h1> {/* Harga Paket */}
+                    <h1 id='title' className='font-bold text-lg text-accent-200 '>{selectedMenu.harga_menu ? Rp(selectedMenu.harga_menu) : paket.harga}</h1> {/* Harga Paket */}
                     <div className='flex items-center mb-2'>
                         <Icon icon="ph:star-fill" className='text-yellow-300' width={20} />
-                        <p className='text-accent-200 font-medium ml-1'>{rating(reviewItems)}</p> {/* Rating Paket */}
-                        <p className='text-accent-200 text-sm font-medium ml-3'>{packageItem.paketTerjual} Terjual</p> {/* Paket Terjual */}
+                        <p className='text-accent-200 font-medium ml-1'>{paket.rating}</p> {/* Rating Paket */}
+                        <p className='text-accent-200 text-sm font-medium ml-3'>{paket.terjual} Terjual</p> {/* Paket Terjual */}
                     </div>
-                    <Dropdown label="" renderTrigger={() => DownTrigger("Pilih Menu", selectedMenu.nama)}> {/* Pilihan Menu */}
-                        {menuItems.map(item => {
-                            const id = item.id
-                            const name = item.namaMenu
-                            const harga = item.hargaMenu
-                            const isiMenu = item.isiMenu
+                    <Dropdown label="" renderTrigger={() => DownTrigger("Pilih Menu", selectedMenu.nama_menu)}> {/* Pilihan Menu */}
+                        {menu.map(item => {
                             return (
-                                <Dropdown.Item key={id} className="text-black" onClick={() => setListMenu(id, name, harga, isiMenu)}>{name}</Dropdown.Item>
+                                <Dropdown.Item key={item.id} className="text-black" onClick={() => setSelectedMenu(menu.find(m => m.id == item.id))}>{item.nama_menu}</Dropdown.Item>
                             )
                         })}
                     </Dropdown>
                     <div className=''>{/* List isi Menu */}
                         <h1 className='text-accent-200 font-semibold mt-4'>Isi Menunya :</h1>
                         <ul className='grid grid-cols-2 ml-4 list-disc text-accent-200'>
-                            {!isiMenu.length == 0 ? isiMenu.map((item, index) => <li key={index}>{item}</li>) : <li>Pilih menu dulu...</li>}
+                            {selectedMenu.id ?
+                                <>
+                                    <li>{selectedMenu.makanan_pokok}</li>
+                                    <li>{selectedMenu.lauk}</li>
+                                    <li>{selectedMenu.sayur}</li>
+                                    <li>{selectedMenu.tambahan}</li>
+                                </> : <li>Pilih Menu dulu...</li>}
                         </ul>
                     </div>
                     <div className='group'>{/* Deskripsi Paket */}
                         <h1 className='flex items-center gap-1 font-semibold text-accent-200 mt-4 cursor-pointer'>Deskripsi Paket :</h1>
-                        <p className='text-sm text-justify text-accent-200'>{packageItem.deskripsi}</p>
+                        <p className='text-sm text-justify text-accent-200'>{paket.deskripsi}</p>
                     </div>
                 </section>
                 <hr className='my-5 border-gray-300' />
                 <section id='ulasan' className='mb-4'>
                     <div className='w-full p-4 border-gray-300 border rounded'>
-                        <h1 className='text-center text-accent-200 font-medium'>{reviewItems.length} Ulasan</h1>
-                        {reviewItems.slice(0, 2).map(item => {
+                        <h1 className='text-center text-accent-200 font-medium'>{ulasan.length} Ulasan</h1>
+                        {ulasan.slice(0, 2).map(item => {
                             return (
                                 <ReviewContent key={item.id} user={item.user} tanggal={item.tanggal} bintang={item.bintang} ulasan={item.ulasan} />
                             )
@@ -234,10 +187,11 @@ export default function Catering() {
                 <div className='w-full h-16 bg-white shadow-[0px_0px_10px_-5px_#000000] fixed bottom-0 z-[20]'>
                     <div className='w-[360px] h-full mx-auto flex gap-4 items-center'>
                         <button className='w-full bg-white text-primary-100 border border-primary-100 py-1 font-medium rounded hover:bg-gray-100 active:bg-white'>Hubungi Penjual</button>
-                        <button onClick={() => toCheckout(packageId, selectedMenu.id, token ? token.id : 0)} className='w-full bg-primary-100 border-primary-100 border text-white py-1 font-medium rounded hover:bg-opacity-70 active:bg-opacity-100 '>Beli</button>
+                        <button onClick={() => toCheckout()} className='w-full bg-primary-100 border-primary-100 border text-white py-1 font-medium rounded hover:bg-opacity-70 active:bg-opacity-100 '>Beli</button>
                     </div>
                 </div>
             </footer>
+            <Loader show={isLoading} />
             <PopUpAlert isOpen={openAlert} message={"Pilih menu terlebih dahulu."} onClose={() => setOpenAlert(false)} onProcess={() => setOpenAlert(false)} />
             <PopUpQuestion isOpen={openQuestion} message={"Login Terlebih Dahulu."} onProcess={() => navigate("/login")} onCancel={() => setOpenQuestion(false)} onClose={() => setOpenQuestion(false)} />
         </>
@@ -295,5 +249,30 @@ function CarouselImage({ image, name = "" }) {
             <p className='absolute top-2 right-2 bg-white px-2 py-1 rounded-md shadow-md text-accent-200 font-medium select-none border border-gray-300'>{name}</p>
         </div>
     )
+}
+
+function fetchMenu(idPaket) {
+    const config = {
+        method: 'GET',
+        url: `http://localhost:3000/packages/${idPaket}`,
+    }
+    return axios.request(config)
+}
+function fetchUlasan(idPaket) {
+    let config = {
+        method: 'GET',
+        url: `http://localhost:3000/ulasan/${idPaket}`
+    };
+    return axios.request(config)
+}
+function fetchUser(authorization) {
+    const config = {
+        method: 'GET',
+        url: 'http://localhost:3000/users',
+        headers: {
+            'Authorization': `${authorization}`
+        }
+    };
+    return axios.request(config)
 }
 

@@ -6,36 +6,29 @@ const DataContext = createContext()
 function ContextProvider({ children }) {
     const [isModalOpen, setModalOpen] = useState(false)
     const [packageIdSelected, setPackageIdSelected] = useState()
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState()
     const [loadData, setLoadData] = useState(true)
-    const [token, setToken] = useState({})
-    const userData = localStorage.getItem("token")
+    const [authorization, setAuthorization] = useState("")
+    const [dataPackages, setDataPackages] = useState({})
 
     useEffect(() => {
-        if (userData) {
-            setIsLoggedIn(true)
-            simulateAuth()
-            setToken(JSON.parse(userData))
-        }
-        setLoadData(false)
-    }, [userData])
-
-    function simulateAuth() {
-        const data = JSON.parse(userData)
-        const urlUser = import.meta.env.VITE_URL_USER
-        axios.get(`${urlUser}/${data.id}`)
+        setLoadData(true)
+        fetchPackages()
             .then((res) => {
-                if (res.data) {
-                    setIsLoggedIn(true)
-                    setLoadData(false)
-                }
+                setDataPackages(res.data.package)
+                console.log(res.data.message);
+            })
+            .then(() => {
+                setLoadData(false)
             })
             .catch((err) => {
                 console.log(err);
-                setIsLoggedIn(false)
                 setLoadData(false)
             })
-    }
+    }, [])
+    useEffect(() => {
+        setAuthorization(localStorage.getItem("authorization"))
+    }, [isLoggedIn])
 
     return (
         <DataContext.Provider value={{
@@ -43,10 +36,19 @@ function ContextProvider({ children }) {
             packageIdSelected, setPackageIdSelected,
             isLoggedIn, setIsLoggedIn,
             loadData, setLoadData,
-            token, setToken
+            authorization,
+            dataPackages, setDataPackages
         }}>
             {children}
         </DataContext.Provider>
     )
 }
 export { ContextProvider, DataContext }
+
+function fetchPackages() {
+    const config = {
+        method: "GET",
+        url: "http://localhost:3000/packages"
+    }
+    return axios.request(config)
+}

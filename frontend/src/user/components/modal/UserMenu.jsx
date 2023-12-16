@@ -8,23 +8,27 @@ import axios from 'axios';
 
 const urlUser = import.meta.env.VITE_URL_USER
 
-function UserMenu({ isOpen }) {
-    const { isLoggedIn, setIsLoggedIn, token } = useContext(DataContext)
+export default function UserMenu({ isOpen }) {
+    const { setIsLoggedIn, authorization } = useContext(DataContext)
+    const auth = localStorage.getItem("authorization")
     const [isSubPesanan, setSubPesanan] = useState(false)
     const [isPopUp, setPopUp] = useState(false)
     const navigate = useNavigate()
     const [dataUser, setDataUser] = useState({})
+    const [isLogin, setIsLogin] = useState(true)
 
     useEffect(() => {
-        axios.get(`${urlUser}/${token.id}`)
+        fetchUser(authorization)
             .then((res) => {
-                console.log(res);
-                setDataUser(res.data)
+                console.log(res.data.message);
+                setDataUser(res.data.user)
+                setIsLogin(true)
             })
             .catch((err) => {
                 console.log(err);
+                setIsLogin(false)
             })
-    }, [isLoggedIn])
+    }, [authorization])
 
     function openSubPesanan() {
         if (isSubPesanan) {
@@ -34,7 +38,8 @@ function UserMenu({ isOpen }) {
         }
     }
     function loggedOut() {
-        localStorage.removeItem("token")
+        localStorage.removeItem("authorization")
+        setIsLoggedIn(false)
         navigate("/login", { replace: true })
     }
 
@@ -43,12 +48,12 @@ function UserMenu({ isOpen }) {
             <div className={isOpen ? 'flex h-screen w-full bg-black bg-opacity-20 overflow-y-hidden fixed top-0 z-[19]' : 'hidden'}>
                 <div className='w-[360px] mx-auto md:w-full md:px-20'>
                     <div className='w-72 h-fit bg-white p-6 mt-20 ml-auto rounded-md z-[21]'>{/* Container Menu */}
-                        <div className={isLoggedIn ? 'hidden' : 'flex gap-4'}>
+                        <div className={isLogin ? 'hidden' : 'flex gap-4'}>
                             <button onClick={() => navigate("/register")} className='bg-white text-primary-100 font-semibold border border-primary-100 w-full py-1 rounded hover:bg-gray-200'>Daftar</button>
                             <button onClick={() => navigate("/login")} className='bg-primary-100 text-white w-full py-1 rounded hover:bg-opacity-75'>Login</button>
                         </div>
-                        <div className={isLoggedIn ? 'flex gap-4 items-center mb-3 w-full cursor-pointer' : 'hidden'}> {/* Profile */}
-                            <div className='flex justify-center bg-gray-200 items-end bg-cover bg-center w-12 h-12 rounded-full' style={{ backgroundImage: `url(${dataUser.foto ? dataUser.foto : emptyProfile})` }}>
+                        <div className={isLogin ? 'flex gap-4 items-center mb-3 w-full cursor-pointer' : 'hidden'}> {/* Profile */}
+                            <div className='flex justify-center bg-gray-200 items-end bg-cover bg-center w-12 h-12 rounded-full' style={{ backgroundImage: `url(${dataUser.image_url ? dataUser.image_url : emptyProfile})` }}>
                             </div>
                             <div onClick={() => navigate("/profile")} className='w-40'>
                                 <p className='select-none text-primary-100 font-semibold overflow-hidden text-ellipsis whitespace-nowrap'>{dataUser.nama}</p>
@@ -66,7 +71,7 @@ function UserMenu({ isOpen }) {
                             </div>
                         </div>
                         <hr className='my-2 border-primary-100 border-opacity-30' />
-                        <div className={isLoggedIn ? 'block cursor-pointer' : 'hidden'}>{/* Pesanan */}
+                        <div className={isLogin ? 'block cursor-pointer' : 'hidden'}>{/* Pesanan */}
                             <div className='flex items-center gap-4' onClick={openSubPesanan}>
                                 <Icon icon="gridicons:product" className='text-primary-100' width={18} />
                                 <p className='select-none text-primary-100 font-medium'>Pesanan</p>
@@ -74,14 +79,14 @@ function UserMenu({ isOpen }) {
                             </div>
                         </div>
                         <SubPesanan isClick={isSubPesanan} />
-                        <hr className={isLoggedIn ? 'block my-2 border-primary-100 border-opacity-30' : 'hidden'} />
-                        <div onClick={() => console.log("Chat")} className={isLoggedIn ? 'block cursor-pointer' : 'hidden'}>{/* Chat */}
+                        <hr className={isLogin ? 'block my-2 border-primary-100 border-opacity-30' : 'hidden'} />
+                        <div onClick={() => console.log("Chat")} className={isLogin ? 'block cursor-pointer' : 'hidden'}>{/* Chat */}
                             <div className='flex items-center gap-4'>
                                 <Icon icon="bx:chat" className='text-primary-100' width={19} />
                                 <p className='select-none text-primary-100 font-medium'>Chat</p>
                             </div>
                         </div>
-                        <hr className={isLoggedIn ? 'block my-2 border-primary-100 border-opacity-30' : 'hidden'} />
+                        <hr className={isLogin ? 'block my-2 border-primary-100 border-opacity-30' : 'hidden'} />
                         <div onClick={() => navigate("/contact-us")} className='cursor-pointer'>{/* Hubungi Kami */}
                             <div className='flex items-center gap-4'>
                                 <Icon icon="tdesign:service" className='text-primary-100' width={18} />
@@ -89,7 +94,7 @@ function UserMenu({ isOpen }) {
                             </div>
                         </div>
                         <hr className='my-2 border-primary-100 border-opacity-30' />
-                        <div onClick={() => setPopUp(true)} className={isLoggedIn ? 'block cursor-pointer' : 'hidden'}>{/* Logout */}
+                        <div onClick={() => setPopUp(true)} className={isLogin ? 'block cursor-pointer' : 'hidden'}>{/* Logout */}
                             <div className='flex items-center gap-4'>
                                 <Icon icon="material-symbols:logout-sharp" className='text-primary-100' width={19} />
                                 <p className='select-none text-primary-100 font-medium'>Logout</p>
@@ -104,7 +109,6 @@ function UserMenu({ isOpen }) {
 }
 
 function SubPesanan({ isClick }) {
-    // const [isClick, setClick] = useState(false)
     const navigate = useNavigate()
 
     if (isClick) {
@@ -134,5 +138,13 @@ function SubPesanan({ isClick }) {
     }
 }
 
-export default UserMenu
-
+function fetchUser(authorization) {
+    const config = {
+        method: 'GET',
+        url: 'http://localhost:3000/users',
+        headers: {
+            'Authorization': `${authorization}`
+        }
+    };
+    return axios.request(config)
+}
