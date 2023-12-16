@@ -10,18 +10,25 @@ import Join from '../components/landing-page/Join';
 import { DataContext } from '../context/ContextProvider';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Loader from '../components/Loader';
 
 function LandingPage() {
-    const { isLoggedIn } = useContext(DataContext)
+    const { loadData, authorization } = useContext(DataContext)
     const navigate = useNavigate()
 
-    if (isLoggedIn) {
-        navigate("/homepage", { replace: true })
-        return
-    }
+    useEffect(() => {
+        fetchProfileUser(authorization)
+            .then(() => {
+                navigate("/homepage", { replace: true })
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, [authorization])
 
     return (
         <>
+            <Loader show={loadData} />
             <Navbar />
             <main className='lg:bg-[url("https://svgshare.com/i/xpr.svg")] bg-white max-w-full w-full bg-repeat-y' style={{ backgroundPositionY: '76%' }}>
                 <Hero />
@@ -41,3 +48,13 @@ function LandingPage() {
     )
 }
 export default LandingPage
+function fetchProfileUser(auth) {
+    let config = {
+        method: 'get',
+        url: 'http://localhost:3000/users',
+        headers: {
+            'Authorization': auth
+        }
+    };
+    return axios.request(config)
+}

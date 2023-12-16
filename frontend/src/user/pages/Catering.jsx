@@ -122,7 +122,7 @@ export default function Catering() {
                     </button>
                     <div className="w-full h-auto aspect-square">
                         <Carousel slide={false}>
-                            <CarouselImage  image={paket.image_url} name='' />
+                            <CarouselImage key={paket.id} image={paket.image_url} name='' />
                             {menu.map(item => {
                                 return (
                                     <CarouselImage key={menu.id} image={item.image_url} name={item.nama_menu} />
