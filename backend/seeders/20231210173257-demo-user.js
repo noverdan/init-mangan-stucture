@@ -7,26 +7,29 @@ module.exports = {
       {
         Nama: "Firman",
         email: "firman@mangan.com",
-        nohp: "08746864688",
+        no_hp: "08746864688",
         alamat: "indonesia",
         password: "123",
-        id_level: "10"
+        id_level: "1",
+        image_url: "xxxxxxx"
       },
       {
         Nama: "jalil",
         email: "jalil@mangan.com",
-        nohp: "08746864688",
+        no_hp: "08746864688",
         alamat: "indonesia",
         password: "123",
-        id_level: "11"
+        id_level: "2",
+        image_url: "xxxxxxx"
       },
       {
         Nama: "galang",
         email: "galang@mangan.com",
-        nohp: "08746864688",
+        no_hp: "08746864688",
         alamat: "indonesia",
         password: "123",
-        id_level: "12"
+        id_level: "3",
+        image_url: "xxxxxxx"
       }
     ])
   },

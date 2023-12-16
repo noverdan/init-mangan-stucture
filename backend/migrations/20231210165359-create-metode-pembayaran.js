@@ -2,37 +2,27 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('metode_pembayarans', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nama: {
+      metode: {
         type: Sequelize.STRING
       },
-      email: {
+      batas_bayar: {
+        type: Sequelize.DATE
+      },
+      status_bayar: {
         type: Sequelize.STRING
       },
-      nohp: {
-        type: Sequelize.STRING
+      tanggal_bayar: {
+        type: Sequelize.DATE
       },
-      alamat: {
+      link_pembayaran: {
         type: Sequelize.STRING
-      },
-      password: {
-        type: Sequelize.STRING
-      },
-      id_level: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'level_users'
-          },
-          key: 'id'
-        },
-        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -47,6 +37,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('metode_pembayarans');
   }
 };

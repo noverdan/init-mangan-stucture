@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Icon } from '@iconify/react';
+import { NavLink } from 'react-router-dom';
 
 function PesananSidebar() {
 
@@ -31,8 +32,8 @@ function PesananSidebar() {
             {/* dropdown */}
             <div className={`ml-3 w-full transition-all duration-300 overflow-hidden 
                         ${isOpen ? 'opacity-100 py-4 max-h-[100vh] translate-y-1 ' : 'opacity-0 max-h-0 -translate-y-2'}`}>
-                <p className='py-2 text-[10px] md:text-base transition-colors duration-300  hover:font-bold cursor-pointer border-b-[1px] border-white'>
-                    Pesanan Masuk</p>
+                <NavLink to="/pesanan-masuk" className='py-2 text-[10px] md:text-base transition-colors duration-300  hover:font-bold cursor-pointer border-b-[1px] border-white'>
+                    Pesanan Masuk</NavLink>
                 <p className='py-2 text-[10px] md:text-base transition-colors duration-300  hover:font-bold cursor-pointer border-b-[1px] border-white'>
                     Pesanan Diproses</p>
                 <p className='py-2 text-[10px] md:text-base transition-colors duration-300  hover:font-bold cursor-pointer border-b-[1px] border-white'>

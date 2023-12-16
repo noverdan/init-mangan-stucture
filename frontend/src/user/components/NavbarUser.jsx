@@ -1,5 +1,5 @@
 import LogoMangan from '/logo-mangan.svg'
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import Hamburger from 'hamburger-react'
 import { DataContext } from '../context/ContextProvider';
@@ -7,16 +7,34 @@ import UserMenu from './modal/UserMenu';
 import { SearchContext } from '../context/SearchProvider';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { PopUpQuestion } from './PopUp';
+import axios from 'axios';
+import emptyProfile from '../../assets/empty-profile.png'
 
+const urlUser = import.meta.env.VITE_URL_USER
 
 function NavbarUser() {
-    const { isLoggedIn, setIsLoggedIn } = useContext(DataContext)
+    const { setIsLoggedIn, authorization } = useContext(DataContext)
     const [isOpenMenu, setOpenMenu] = useState(false)
     const { isSearch, setSearch, setSearchParam } = useContext(SearchContext)
     const [isPopUp, setPopUp] = useState(false)
+    const [dataUser, setDataUser] = useState({})
+    const [isLogin, setIslogin] = useState()
 
     const [inputSearch, setInputSearch] = useState("")
     const navigate = useNavigate()
+
+    useEffect(() => {
+        fetchUser(authorization)
+            .then((res) => {
+                console.log(res.data.message);
+                setDataUser(res.data.user)
+                setIslogin(true)
+            })
+            .catch((err) => {
+                console.log(err);
+                setIslogin(false)
+            })
+    }, [authorization])
 
     function openMenu() {
         if (isOpenMenu) {
@@ -43,7 +61,8 @@ function NavbarUser() {
         }
     };
     function loggedOut() {
-        localStorage.removeItem("token")
+        localStorage.removeItem("authorization")
+        setIsLoggedIn(false)
         navigate("/login", { replace: true })
     }
 
@@ -62,8 +81,7 @@ function NavbarUser() {
                                 to={'/homepage'}
                                 className={({ isActive }) => (isActive ? navActiveStyle : navInActiveStyle)}
                             >Homepage</NavLink>
-
-                            <span className={isLoggedIn ? "block" : "hidden"}>
+                            <span className={isLogin ? "block" : "hidden"}>
                                 <div className='group'>
                                     <div className='flex gap-1 items-center cursor-pointer'>
                                         <NavLink
@@ -115,14 +133,14 @@ function NavbarUser() {
                             <button onClick={goSearch}
                                 className='bg-primary-100 h-9 rounded-r-md px-2 hover:bg-primary-200 active:bg-primary-100'><Icon icon="ooui:next-ltr" className='text-white' /></button>
                         </div>
-                        <div className={isLoggedIn ? "block" : "hidden"}>
-                            <div className='hidden group xl:flex bg-cover bg-center w-10 aspect-square rounded-full cursor-pointer group hover:ring-2 hover:ring-primary-100 hover:ring-opacity-75' style={{ backgroundImage: `url(${'https://img.freepik.com/psd-premium/avatar-dessin-anime-homme-arabe-rendu-3d-fond-bleu-icone-3d-illustration-isolee_460336-1948.jpg'})` }}>
+                        <div className={isLogin ? "block" : "hidden"}>
+                            <div className='hidden group xl:flex bg-cover bg-center w-10 aspect-square rounded-full cursor-pointer group hover:ring-2 hover:ring-primary-100 hover:ring-opacity-75' style={{ backgroundImage: `url(${dataUser.image_url ? dataUser.image_url : emptyProfile})` }}>
                                 <div className='hidden group-hover:block absolute py-11 right-20'>
                                     <div className='w-64 bg-white border border-primary-200 shadow-lg p-4 rounded-md'>
                                         <div className='flex gap-4 items-center mb-3 w-full cursor-pointer text-primary-100 hover:text-opacity-60'> {/* Profile */}
-                                            <div className='bg-gray-300 w-12 h-12 rounded-full'></div>
-                                            <div className='w-40'>
-                                                <p className='select-none font-semibold overflow-hidden text-ellipsis whitespace-nowrap hover:text-opacity-50'>John Doe Sumanggala Putrsa Samsudin</p>
+                                            <div className='bg-gray-300 w-12 h-12 rounded-full bg-cover bg-center' style={{ backgroundImage: `url(${dataUser.image_url ? dataUser.image_url : emptyProfile})` }}></div>
+                                            <div onClick={() => navigate("/profile")} className='w-40'>
+                                                <p className='select-none font-semibold overflow-hidden text-ellipsis whitespace-nowrap hover:text-opacity-50'>{dataUser.nama}</p>
                                                 <div className='flex items-center gap-2'>
                                                     <p className='select-none text-xs hover:text-opacity-50'>Profil</p>
                                                     <Icon icon="ooui:next-ltr" className='hover:text-opacity-50' width={8} />
@@ -147,7 +165,7 @@ function NavbarUser() {
                                 </div>
                             </div>
                         </div>
-                        <div className={isLoggedIn ? "hidden" : "gap-2 w-40 hidden xl:flex"}>
+                        <div className={isLogin ? "hidden" : "gap-2 w-40 hidden xl:flex"}>
                             <button onClick={() => navigate("/register")} className=' bg-white text-primary-100 font-semibold border border-primary-100 w-full py-1 rounded hover:bg-gray-200'>Daftar</button>
                             <button onClick={() => navigate("/login")} className=' bg-primary-100 text-white w-full py-1 rounded hover:bg-opacity-75'>Login</button>
                         </div>
@@ -165,6 +183,17 @@ function NavbarUser() {
     )
 }
 export default NavbarUser
+
+function fetchUser(authorization) {
+    const config = {
+        method: 'GET',
+        url: 'http://localhost:3000/users',
+        headers: {
+            'Authorization': `${authorization}`
+        }
+    };
+    return axios.request(config)
+}
 
 function SearchInput() {
     const { isSearch, setSearch, setSearchParam } = useContext(SearchContext)

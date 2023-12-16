@@ -6,21 +6,28 @@ import { Icon } from '@iconify/react';
 import { Dropdown } from 'flowbite-react';
 import Footer from "../components/Footer";
 import ListPaket from "../components/homepage/ListPaket";
-import { PackagesProvider } from "../context/PackagesProvider";
 import HomepageImage from '../../assets/homepage-image.jpg'
 import axios from "axios";
-import { useAsyncError } from "react-router-dom";
 import { DataContext } from "../context/ContextProvider";
 import Loader from "../components/Loader";
 
 
 export default function Homepage() {
-    const { isLoggedIn, setIsLoggedIn, loadData, setLoadData } = useContext(DataContext)
-    console.log("Load : " + loadData);
-    console.log("isLoggedIn : " + isLoggedIn);
+    const { loadData } = useContext(DataContext)
     const { filter, setFilter } = useContext(FilterContext)
-    const image = "https://source.unsplash.com/random/500x500/?food"
-
+    const kota = [
+        { id: 1, nama_kota: "Jakarta" },
+        { id: 2, nama_kota: "Bekasi" },
+        { id: 3, nama_kota: "Bandung" },
+        { id: 4, nama_kota: "Purwokerto" },
+        { id: 5, nama_kota: "Semarang" },
+        { id: 6, nama_kota: "Yogyakarta" },
+        { id: 7, nama_kota: "Surabaya" }
+    ]
+    const kategori = [
+        { id: 1, kategori: "Nasi Box" },
+        { id: 2, kategori: "Prasmanan" }
+    ]
     const [selectedKota, setSelectedKota] = useState("")
     const [selectedKategori, setSelectedKategori] = useState("")
 
@@ -34,7 +41,6 @@ export default function Homepage() {
     return (
         <SearchProvider>
             <NavbarUser />
-
             <main className="pt-16">
                 <section className="hidden lg:flex">
                     <div className="w-full h-[300px] bg-cover bg-center" style={{ backgroundImage: `url(${HomepageImage})` }}>
@@ -48,19 +54,20 @@ export default function Homepage() {
                     <Dropdown label="" renderTrigger={() => DownTrigger("Kota", selectedKota)}>
                         <Dropdown.Item className="text-black" onClick={() => setSelectedKota("")} >Kosongkan</Dropdown.Item>
                         <Dropdown.Divider />
-                        <Dropdown.Item className="text-black" onClick={() => setSelectedKota("Jakarta")} >Jakarta</Dropdown.Item>
-                        <Dropdown.Item className="text-black" onClick={() => setSelectedKota("Bekasi")} >Bekasi</Dropdown.Item>
-                        <Dropdown.Item className="text-black" onClick={() => setSelectedKota("Bandung")}>Bandung</Dropdown.Item>
-                        <Dropdown.Item className="text-black" onClick={() => setSelectedKota("Purwokerto")} >Purwokerto</Dropdown.Item>
-                        <Dropdown.Item className="text-black" onClick={() => setSelectedKota("Semarang")} >Semarang</Dropdown.Item>
-                        <Dropdown.Item className="text-black" onClick={() => setSelectedKota("Yogyakarta")} >Yogyakarta</Dropdown.Item>
-                        <Dropdown.Item className="text-black" onClick={() => setSelectedKota("Surabaya")} >Surabaya</Dropdown.Item>
+                        {
+                            kota.map(item => {
+                                return <Dropdown.Item key={item.id} className="text-black" onClick={() => setSelectedKota(item.nama_kota)} >{item.nama_kota}</Dropdown.Item>
+                            })
+                        }
                     </Dropdown>
                     <Dropdown label="" renderTrigger={() => DownTrigger("Kategori", selectedKategori)}>
                         <Dropdown.Item className="text-black" onClick={() => setSelectedKategori("")} >Kosongkan</Dropdown.Item>
                         <Dropdown.Divider />
-                        <Dropdown.Item className="text-black" onClick={() => setSelectedKategori("Prasmanan")} >Prasmanan</Dropdown.Item>
-                        <Dropdown.Item className="text-black" onClick={() => setSelectedKategori("Box")}>Box</Dropdown.Item>
+                        {
+                            kategori.map(item => {
+                                return <Dropdown.Item key={item.id} className="text-black" onClick={() => setSelectedKategori(item.kategori)} >{item.kategori}</Dropdown.Item>
+                            })
+                        }
                     </Dropdown>
                     <button onClick={terapkanFilter} className="font-semibold text-sm underline text-primary-100">Terapkan</button>
                 </section>

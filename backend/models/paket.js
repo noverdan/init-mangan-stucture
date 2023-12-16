@@ -11,13 +11,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      paket.belongsTo(models.kategori_produk, { foreignKey: 'id_kategori' });
+      paket.belongsTo(models.kota, { foreignKey: 'id_kota' });
+      paket.belongsTo(models.usaha, { foreignKey: 'id_usaha' });
     }
   }
   paket.init({
-    nama_paket: DataTypes.STRING,
-    id_kategori: DataTypes.STRING,
-    id_ulasan: DataTypes.STRING,
-    id_seller: DataTypes.STRING
+    nama_produk: DataTypes.STRING,
+    id_kategori: DataTypes.INTEGER,
+    id_usaha: DataTypes.INTEGER,
+    id_kota: DataTypes.INTEGER,
+    image_url: DataTypes.STRING,
+    deskripsi: DataTypes.STRING,
+    terjual: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'paket',

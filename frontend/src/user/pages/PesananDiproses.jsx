@@ -34,6 +34,7 @@ export default function PesananDiproses() {
     const [popUpQuestion, setPopUpQuestion] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const navigate = useNavigate()
+    console.log("terjual:" + packageData.paketTerjual);
 
     console.log(settlements[0]);
 
@@ -142,6 +143,7 @@ export default function PesananDiproses() {
                 console.log(res.status);
                 setIsLoading(false)
                 setPopUpQuestion(false)
+                axios.patch(`${urlPackages}/${packageData.id}`, { paketTerjual: packageData.paketTerjual + 1 })
                 navigate("/pesanan/selesai")
             })
             .catch((err) => {
@@ -288,7 +290,7 @@ export default function PesananDiproses() {
                 <section className='flex flex-col gap-2 mt-4 w-full p-4 border-2 rounded border-primary-100'>
                     <h1 className='text-primary-100 font-semibold'>Ada masalah terkait pesanan anda?</h1>
                     <p className='leading-5 font-medium text-accent-200'>Hubungi kami untuk mendapatkan bantuan terkait permasalahan anda.</p>
-                    <button className='w-full py-2 bg-primary-100 text-white rounded hover:bg-opacity-75 active:bg-opacity-100'>Hubungi Kami</button>
+                    <button onClick={() => navigate("/contact-us")} className='w-full py-2 bg-primary-100 text-white rounded hover:bg-opacity-75 active:bg-opacity-100'>Hubungi Kami</button>
                 </section>
             </main>
             <PopUpQuestion

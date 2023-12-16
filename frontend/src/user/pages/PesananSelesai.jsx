@@ -287,7 +287,7 @@ export default function PesananSelesai() {
                     </div>
                 </section>
                 <section className='flex items-center gap-2 mt-4'>
-                    <button onClick={() => ""} className={'w-1/2 ml-auto bg-primary-100 rounded border border-primary-200 py-2 font-semibold text-white hover:bg-gray-200 transition-all hover:text-primary-100 active:bg-white'}>Ulas Pesanan</button>
+                    <button onClick={() => navigate(`/pesanan/ulas/${idPesanan}`)} className={'w-1/2 ml-auto bg-primary-100 rounded border border-primary-200 py-2 font-semibold text-white hover:bg-gray-200 transition-all hover:text-primary-100 active:bg-white'}>Ulas Pesanan</button>
                 </section>
             </main>
             <Loader show={isLoading} />
